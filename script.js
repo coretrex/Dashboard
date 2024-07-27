@@ -6,6 +6,10 @@ function updateOrganicValue(value) {
     document.getElementById('organicValue').innerText = value + '%';
 }
 
+function updateAdsConversionValue(value) {
+    document.getElementById('adsConversionValue').innerText = parseFloat(value).toFixed(2) + '%';
+}
+
 function toggleMetrics() {
     const metrics = document.getElementById('marketingMetrics');
     const subtext = document.getElementById('metricsSubtext');
@@ -26,7 +30,8 @@ function calculatePageViews() {
     let aov = parseFloat(document.getElementById('aov').value.replace(/[^\d.-]/g, ''));
     const conversionRate = parseFloat(document.getElementById('conversionRate').value) / 100;
     const organicRate = parseFloat(document.getElementById('organicRate').value) / 100;
-    let cpc = parseFloat(document.getElementById('cpc').value.replace(/[^\d.-]/g, ''));
+    const adsConversionRate = parseFloat(document.getElementById('adsConversionRate').value) / 100;
+    let cpc = parseFloat(document.getElementById('cpc').value);
 
     // Set default values if inputs are empty
     if (isNaN(revenueGoal)) {
@@ -45,7 +50,7 @@ function calculatePageViews() {
     const requiredPageViewsMonthly = requiredPageViewsAnnually / 12;
 
     const nonOrganicRate = 1 - organicRate;
-    const requiredNonOrganicPageViewsAnnually = requiredPageViewsAnnually * nonOrganicRate;
+    const requiredNonOrganicPageViewsAnnually = revenueGoal / (aov * adsConversionRate) * nonOrganicRate;
     const requiredNonOrganicPageViewsDaily = requiredNonOrganicPageViewsAnnually / 365;
     const requiredNonOrganicPageViewsWeekly = requiredNonOrganicPageViewsAnnually / 52;
     const requiredNonOrganicPageViewsMonthly = requiredNonOrganicPageViewsAnnually / 12;
