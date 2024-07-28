@@ -436,31 +436,46 @@ input[type="text"] {
 
 /*KPIs Tab */
 
-
 .kpi-container {
     padding: 20px;
 }
 
-table {
+.kpi-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
 
-th, td {
-    padding: 10px;
+.kpi-table th, .kpi-table td {
+    padding: 5px; /* Reduced padding for smaller cells */
     border: 1px solid #ddd;
     text-align: left;
+    color: #000; /* Black text */
 }
 
-th {
+.kpi-table th {
     background: #007bff;
     color: white;
 }
 
-td[contenteditable="true"] {
+.kpi-table td[contenteditable="true"] {
     background: #f9f9f9;
     cursor: text;
 }
+
+.kpi-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.kpi-button:hover {
+    background: #0056b3;
+}
+
 
 
