@@ -202,3 +202,40 @@ document.addEventListener('click', function(event) {
         hideAddTaskModal();
     }
 });
+
+// Function to add a new week column to the KPI table
+function addWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const headerRow = table.rows[0];
+    const newWeekNum = headerRow.cells.length - 1; // Calculate the new week number
+    const newHeaderCell = headerRow.insertCell(-1);
+    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum}</th>`;
+
+    // Add a new editable cell to each row for the new week
+    for (let i = 1; i < table.rows.length; i++) {
+        const newRowCell = table.rows[i].insertCell(-1);
+        newRowCell.contentEditable = "true";
+    }
+}
+
+// Function to add a new KPI row to the KPI table
+function addKpiRow() {
+    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+    
+    const kpiCell = newRow.insertCell(0);
+    kpiCell.contentEditable = "true";
+    kpiCell.innerText = "New KPI";
+
+    const goalCell = newRow.insertCell(1);
+    goalCell.contentEditable = "true";
+    goalCell.innerText = "New Goal";
+
+    // Add editable cells for existing weeks
+    for (let i = 2; i < table.rows[0].cells.length; i++) {
+        const newCell = newRow.insertCell(i);
+        newCell.contentEditable = "true";
+        newCell.innerText = "New Value";
+    }
+}
+
