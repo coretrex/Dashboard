@@ -256,10 +256,10 @@ function deleteColumn(index) {
 // Function to update table width and add scroll bar if necessary
 function updateTableWidth() {
     const tableContainer = document.querySelector('.kpi-table-container');
-    const table = document.getElementById('kpi-table');
-    tableContainer.style.overflowX = table.rows[0].cells.length > 8 ? 'auto' : 'hidden';
+    tableContainer.style.overflowX = 'auto';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     updateTableWidth();
 });
+
