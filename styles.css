@@ -1,40 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+/* General Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    background: linear-gradient(to right, #004085, #001f3f);
-    color: white;
+    background-color: #f4f4f4;
+}
+
+.header {
+    text-align: center;
+    margin: 20px 0;
 }
 
 .sidebar {
-    width: 250px;
+    background-color: #002244;
+    color: white;
     height: 100vh;
-    background-color: #001f3f;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+    width: 200px;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
 }
 
 .sidebar-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 20px;
 }
 
-.logo {
-    max-width: 200px;
-    height: auto;
+.sidebar .logo {
+    width: 150px;
 }
 
 .sidebar-menu {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     width: 100%;
 }
@@ -44,150 +46,25 @@ body {
 }
 
 .sidebar-menu li a {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
+    display: block;
     color: white;
+    padding: 15px 20px;
     text-decoration: none;
+    font-size: 18px;
     width: 100%;
     box-sizing: border-box;
 }
 
-.sidebar-menu li a i {
-    margin-right: 10px;
-}
-
 .sidebar-menu li a:hover {
-    background-color: #007bff;
+    background-color: #004080;
 }
 
 .main-content {
-    margin-left: 250px;
+    margin-left: 200px;
     padding: 20px;
-    width: calc(100% - 250px);
 }
 
-.header {
-    margin-top: 20px;
-}
-
-.header h1 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.header h2 {
-    font-size: 20px;
-    font-weight: normal;
-    margin-bottom: 30px;
-}
-
-.container {
-    width: 100%;
-    max-width: 1000px;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.input-container {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    gap: 20px;
-}
-
-.input-box {
-    background-color: transparent;
-    padding: 15px;
-    border-radius: 8px;
-    width: 32%;
-}
-
-.input-box label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.input-box input, .input-box input[type="range"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #ffffff;
-    border-radius: 0;
-    background: transparent;
-    font-size: 14px;
-    color: #ffffff;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-}
-
-.input-box input::placeholder {
-    color: #cccccc;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-}
-
-.input-box input:focus::placeholder {
-    color: transparent;
-}
-
-.input-box .range-value {
-    margin-top: 10px;
-    color: #ffffff;
-}
-
-.toggle-container {
-    cursor: pointer;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.toggle-text {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.toggle-icon {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.metrics-subtext {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #cccccc;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.results {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 4px;
-    color: #ffffff;
-
+/* Checklist Styles */
 body.modal-open {
     overflow: hidden;
     filter: blur(5px);
@@ -197,13 +74,20 @@ body.modal-open {
     display: flex;
     gap: 20px;
     justify-content: space-between;
+    padding: 20px;
 }
 
 .checklist-container .task-bucket {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.checklist-container .task-bucket:hover {
+    background-color: #f0f0f0;
 }
 
 .checklist-container .bucket-header {
@@ -238,6 +122,7 @@ body.modal-open {
 .checklist-container .task-list {
     list-style-type: none;
     padding: 0;
+    min-height: 100px; /* Add minimum height for better visual */
 }
 
 .checklist-container .task-item {
@@ -248,6 +133,8 @@ body.modal-open {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: move; /* Indicate that the item is draggable */
 }
 
 .checklist-container .task-item.completed {
@@ -286,6 +173,7 @@ body.modal-open {
     border-radius: 8px;
     text-align: center;
     position: relative;
+    width: 300px;
 }
 
 .close-btn {
@@ -294,4 +182,77 @@ body.modal-open {
     right: 10px;
     cursor: pointer;
     font-size: 20px;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Specific Page Styles */
+/* KPIs Page */
+.kpis-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Quarterly Goals Page */
+.quarterly-goals-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Meeting Dashboard Page */
+.meeting-dashboard-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Annual Plan Page */
+.annual-plan-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Consumer Profile Page */
+.consumer-profile-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* File Manager Page */
+.file-manager-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Settings Page */
+.settings-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Page */
+.profile-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
