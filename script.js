@@ -216,6 +216,8 @@ function addWeekColumn() {
         const newRowCell = table.rows[i].insertCell(-1);
         newRowCell.contentEditable = "true";
     }
+
+    updateTableWidth();
 }
 
 // Function to add a new KPI row to the KPI table
@@ -239,3 +241,37 @@ function addKpiRow() {
     }
 }
 
+// Function to delete the last week column from the KPI table
+function deleteLastWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const columnCount = table.rows[0].cells.length;
+
+    if (columnCount > 2) { // Ensure at least two columns remain (KPI and Goal)
+        for (let i = 0; i < table.rows.length; i++) {
+            table.rows[i].deleteCell(-1);
+        }
+    }
+
+    updateTableWidth();
+}
+
+// Function to delete the last KPI row from the KPI table
+function deleteLastKpiRow() {
+    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
+    const rowCount = table.rows.length;
+
+    if (rowCount > 1) { // Ensure at least one row remains
+        table.deleteRow(-1);
+    }
+}
+
+// Function to update table width and add scroll bar if necessary
+function updateTableWidth() {
+    const tableContainer = document.querySelector('.kpi-table-container');
+    const table = document.getElementById('kpi-table');
+    tableContainer.style.width = table.rows[0].cells.length > 10 ? '1000px' : 'auto';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateTableWidth();
+});
