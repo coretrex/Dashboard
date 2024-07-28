@@ -11,39 +11,43 @@
         <h1>KPI Tracking</h1>
     </div>
     <div class="kpi-container">
-        <table id="kpi-table" class="kpi-table">
-            <thead>
-                <tr>
-                    <th>KPI</th>
-                    <th>Goal</th>
-                    <th>Week 1</th>
-                    <th>Week 2</th>
-                    <th>Week 3</th>
-                    <!-- Add more weeks as needed -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td contenteditable="true">KPI 1</td>
-                    <td contenteditable="true">Goal 1</td>
-                    <td contenteditable="true">Value 1</td>
-                    <td contenteditable="true">Value 2</td>
-                    <td contenteditable="true">Value 3</td>
-                    <!-- Add more weeks as needed -->
-                </tr>
-                <tr>
-                    <td contenteditable="true">KPI 2</td>
-                    <td contenteditable="true">Goal 2</td>
-                    <td contenteditable="true">Value 1</td>
-                    <td contenteditable="true">Value 2</td>
-                    <td contenteditable="true">Value 3</td>
-                    <!-- Add more weeks as needed -->
-                </tr>
-                <!-- Add more KPI rows as needed -->
-            </tbody>
-        </table>
-        <button class="kpi-button" onclick="addWeekColumn()">Add Week</button>
-        <button class="kpi-button" onclick="addKpiRow()">Add KPI</button>
+        <div class="kpi-buttons">
+            <button class="kpi-button" onclick="addWeekColumn()">Add Week</button>
+            <button class="kpi-button" onclick="addKpiRow()">Add KPI</button>
+        </div>
+        <div class="kpi-table-container">
+            <table id="kpi-table" class="kpi-table">
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Goal</th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                        <th>Week 3</th>
+                        <!-- Add more weeks as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td contenteditable="true">KPI 1</td>
+                        <td contenteditable="true">Goal 1</td>
+                        <td contenteditable="true">Value 1</td>
+                        <td contenteditable="true">Value 2</td>
+                        <td contenteditable="true">Value 3</td>
+                        <!-- Add more weeks as needed -->
+                    </tr>
+                    <tr>
+                        <td contenteditable="true">KPI 2</td>
+                        <td contenteditable="true">Goal 2</td>
+                        <td contenteditable="true">Value 1</td>
+                        <td contenteditable="true">Value 2</td>
+                        <td contenteditable="true">Value 3</td>
+                        <!-- Add more weeks as needed -->
+                    </tr>
+                    <!-- Add more KPI rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="script.js"></script>
