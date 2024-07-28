@@ -436,8 +436,31 @@ input[type="text"] {
 
 /*KPIs Tab */
 
+
 .kpi-container {
     padding: 20px;
+}
+
+.kpi-buttons {
+    margin-bottom: 20px;
+}
+
+.kpi-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.kpi-button:hover {
+    background: #0056b3;
+}
+
+.kpi-table-container {
+    overflow-x: auto;
 }
 
 .kpi-table {
@@ -463,19 +486,6 @@ input[type="text"] {
     cursor: text;
 }
 
-.kpi-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.kpi-button:hover {
-    background: #0056b3;
-}
 
 
 
