@@ -207,5 +207,6 @@ document.addEventListener('click', function(event) {
     const modal = document.getElementById('add-task-modal');
     if (event.target === modal) {
         hideAddTaskModal();
-
+   }
+}
   
