@@ -3,7 +3,7 @@
     <h1>Checklist</h1>
     <h2>Manage your tasks and ensure everything is on track.</h2>
 </div>
-<div class="container">
+<div class="checklist-container">
     <div class="task-bucket" id="active-tasks">
         <div class="bucket-header">
             <h3>Active Tasks</h3>
@@ -35,7 +35,7 @@
 
 <script>
 function showAddTaskModal() {
-    document.getElementById('add-task-modal').style.display = 'block';
+    document.getElementById('add-task-modal').style.display = 'flex';
     document.body.classList.add('modal-open');
 }
 
@@ -78,13 +78,5 @@ function markAsCompleted(button) {
     const taskItem = button.parentElement.parentElement;
     taskItem.classList.add('completed');
     document.getElementById('completed-task-list').appendChild(taskItem);
-}
-
-function addNewTask() {
-    const taskList = document.querySelector('.checklist');
-    const newTask = document.createElement('li');
-    const taskId = `task${taskList.children.length + 1}`;
-    newTask.innerHTML = `<input type="checkbox" id="${taskId}"><label for="${taskId}"> New Task</label>`;
-    taskList.appendChild(newTask);
 }
 </script>
