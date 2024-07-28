@@ -254,7 +254,7 @@ body.modal-open {
 }
 
 .checklist-container .task-item {
-    background-color: white;
+    background-color: #f9f9f9;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 4px;
@@ -264,6 +264,8 @@ body.modal-open {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     cursor: move; /* Indicate that the item is draggable */
     color: #000000;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #e0e0e0;
 }
 
 .checklist-container .task-item.completed {
@@ -320,7 +322,8 @@ input[type="text"] {
     margin: 10px 0;
     border: none;
     border-bottom: 2px solid #ffffff;
-    color: #ffffff;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Specific Page Styles */
