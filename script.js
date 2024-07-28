@@ -37,10 +37,17 @@ function addTask(taskText) {
     taskItem.innerHTML = `
         <span>${taskText}</span>
         <div class="task-actions">
+            <button onclick="moveToOnHold(this)"><i class="fas fa-hand-paper"></i></button>
             <button onclick="markAsCompleted(this)"><i class="fas fa-check"></i></button>
         </div>
     `;
     taskList.appendChild(taskItem);
+}
+
+// Function to move a task to the on-hold list
+function moveToOnHold(button) {
+    const taskItem = button.parentElement.parentElement;
+    document.getElementById('onhold-task-list').appendChild(taskItem);
 }
 
 // Function to mark a task as completed
