@@ -256,7 +256,7 @@ body.modal-open {
 .checklist-container .task-item {
     background-color: #f9f9f9;
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 5px 10px; /* Reduced padding */
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
@@ -302,6 +302,11 @@ body.modal-open {
     color: #dc3545;
 }
 
+.checklist-container .task-actions .icon.delete {
+    color: #ff0000;
+    font-size: 18px;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -342,6 +347,7 @@ input[type="text"] {
     color: #000000;
     font-family: 'Poppins', sans-serif;
 }
+
 
 /* Specific Page Styles */
 /* KPIs Page */
