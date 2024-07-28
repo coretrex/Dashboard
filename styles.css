@@ -255,8 +255,8 @@ body.modal-open {
 
 .checklist-container .task-item {
     background-color: #f9f9f9;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
@@ -273,7 +273,12 @@ body.modal-open {
     text-decoration: line-through;
 }
 
-.checklist-container .task-actions button {
+.checklist-container .task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.checklist-container .task-actions .icon {
     background: none;
     border: none;
     cursor: pointer;
@@ -281,8 +286,20 @@ body.modal-open {
     margin-left: 5px;
 }
 
-.checklist-container .task-actions button:hover {
+.checklist-container .task-actions .icon:hover {
     color: #007bff;
+}
+
+.checklist-container .task-actions .icon.yellow {
+    color: #ffc107;
+}
+
+.checklist-container .task-actions .icon.green {
+    color: #28a745;
+}
+
+.checklist-container .task-actions .icon.red {
+    color: #dc3545;
 }
 
 .modal {
