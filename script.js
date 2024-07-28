@@ -155,16 +155,9 @@ function addTask(taskText) {
         <div class="task-actions">
             <button onclick="moveToOnHold(this)"><i class="fas fa-hand-paper"></i></button>
             <button onclick="markAsCompleted(this)"><i class="fas fa-check"></i></button>
-            <button onclick="deleteTask(this)"><i class="fas fa-times"></i></button>
         </div>
     `;
     taskList.appendChild(taskItem);
-}
-
-// Function to delete a task
-function deleteTask(button) {
-    const taskItem = button.parentElement.parentElement;
-    taskItem.remove();
 }
 
 // Function to move a task to the on-hold list
@@ -207,6 +200,5 @@ document.addEventListener('click', function(event) {
     const modal = document.getElementById('add-task-modal');
     if (event.target === modal) {
         hideAddTaskModal();
-   }
-}
-  
+    }
+});
