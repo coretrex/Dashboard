@@ -257,7 +257,7 @@ function deleteColumn(index) {
 function updateTableWidth() {
     const tableContainer = document.querySelector('.kpi-table-container');
     const table = document.getElementById('kpi-table');
-    tableContainer.style.width = table.rows[0].cells.length > 9 ? 'auto' : 'auto';
+    tableContainer.style.overflowX = table.rows[0].cells.length > 8 ? 'auto' : 'hidden';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
