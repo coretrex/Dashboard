@@ -59,6 +59,7 @@ function addTask(taskText) {
     const taskItem = document.createElement('li');
     taskItem.className = 'task-item';
     taskItem.draggable = true;
+    taskItem.id = `task-${new Date().getTime()}`; // unique id
     taskItem.ondragstart = drag;
     taskItem.innerHTML = `
         <span>${taskText}</span>
@@ -93,6 +94,10 @@ function drop(event) {
     event.preventDefault();
     const data = event.dataTransfer.getData("text");
     const taskItem = document.getElementById(data);
-    event.target.appendChild(taskItem);
+    if (event.target.tagName === 'UL') {
+        event.target.appendChild(taskItem);
+    } else if (event.target.closest('.task-bucket')) {
+        event.target.closest('.task-bucket').querySelector('.task-list').appendChild(taskItem);
+    }
 }
 </script>
