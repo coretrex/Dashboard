@@ -433,3 +433,34 @@ input[type="text"] {
     color: #ff0000;
     font-size: 18px;
 }
+
+/*KPIs Tab */
+
+
+.kpi-container {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+td[contenteditable="true"] {
+    background: #f9f9f9;
+    cursor: text;
+}
+
+
