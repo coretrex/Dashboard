@@ -11,7 +11,7 @@
         <h1>KPI Tracking</h1>
     </div>
     <div class="kpi-container">
-        <table id="kpi-table">
+        <table id="kpi-table" class="kpi-table">
             <thead>
                 <tr>
                     <th>KPI</th>
@@ -42,7 +42,8 @@
                 <!-- Add more KPI rows as needed -->
             </tbody>
         </table>
-        <button onclick="addWeekColumn()">Add Week</button>
+        <button class="kpi-button" onclick="addWeekColumn()">Add Week</button>
+        <button class="kpi-button" onclick="addKpiRow()">Add KPI</button>
     </div>
 
     <script src="script.js"></script>
