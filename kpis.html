@@ -11,19 +11,15 @@
         <h1>KPI Tracking</h1>
     </div>
     <div class="kpi-container">
-        <div class="kpi-buttons">
-            <button class="kpi-button" onclick="addWeekColumn()">Add Week</button>
-            <button class="kpi-button" onclick="addKpiRow()">Add KPI</button>
-        </div>
         <div class="kpi-table-container">
             <table id="kpi-table" class="kpi-table">
                 <thead>
                     <tr>
                         <th>KPI</th>
                         <th>Goal</th>
-                        <th>Week 1</th>
-                        <th>Week 2</th>
-                        <th>Week 3</th>
+                        <th>Week 1 <button class="delete-button" onclick="deleteColumn(2)">X</button></th>
+                        <th>Week 2 <button class="delete-button" onclick="deleteColumn(3)">X</button></th>
+                        <th>Week 3 <button class="delete-button" onclick="deleteColumn(4)">X</button></th>
                         <!-- Add more weeks as needed -->
                     </tr>
                 </thead>
@@ -47,6 +43,10 @@
                     <!-- Add more KPI rows as needed -->
                 </tbody>
             </table>
+        </div>
+        <div class="kpi-buttons">
+            <button class="kpi-button" onclick="addWeekColumn()">Add Week</button>
+            <button class="kpi-button" onclick="addKpiRow()">Add KPI</button>
         </div>
     </div>
 
