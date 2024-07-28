@@ -379,7 +379,7 @@ input[type="text"] {
 }
 
 .kpi-table-container {
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .kpi-table {
@@ -401,21 +401,23 @@ input[type="text"] {
     position: relative;
 }
 
-.kpi-table td[contenteditable="true"] {
-    background: #f9f9f9;
-    cursor: text;
-}
-
-.delete-button {
-    background: red;
+.kpi-table th .delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
     color: white;
     border: none;
     cursor: pointer;
-    margin-left: 5px;
-    padding: 2px 5px;
     font-size: 12px;
+    padding: 2px 5px;
 }
 
-.delete-button:hover {
-    background: darkred;
+.kpi-table th .delete-button:hover {
+    color: red;
+}
+
+.kpi-table td[contenteditable="true"] {
+    background: #f9f9f9;
+    cursor: text;
 }
