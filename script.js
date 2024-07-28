@@ -207,5 +207,21 @@ document.addEventListener('click', function(event) {
     const modal = document.getElementById('add-task-modal');
     if (event.target === modal) {
         hideAddTaskModal();
+
+        // Function to add a new week column to the KPI table
+function addWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const headerRow = table.rows[0];
+    const newWeekNum = headerRow.cells.length - 1; // Calculate the new week number
+    const newHeaderCell = headerRow.insertCell(-1);
+    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum}</th>`;
+
+    // Add a new editable cell to each row for the new week
+    for (let i = 1; i < table.rows.length; i++) {
+        const newRowCell = table.rows[i].insertCell(-1);
+        newRowCell.contentEditable = "true";
+    }
+}
+
     }
 });
