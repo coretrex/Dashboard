@@ -1,0 +1,24 @@
+<!-- checklist.html -->
+<div class="header">
+    <h1>Checklist</h1>
+    <h2>Manage your tasks and ensure everything is on track.</h2>
+</div>
+<div class="container">
+    <ul class="checklist">
+        <li><input type="checkbox" id="task1"><label for="task1"> Task 1</label></li>
+        <li><input type="checkbox" id="task2"><label for="task2"> Task 2</label></li>
+        <li><input type="checkbox" id="task3"><label for="task3"> Task 3</label></li>
+        <li><input type="checkbox" id="task4"><label for="task4"> Task 4</label></li>
+        <li><input type="checkbox" id="task5"><label for="task5"> Task 5</label></li>
+    </ul>
+    <button onclick="addNewTask()">Add New Task</button>
+</div>
+<script>
+function addNewTask() {
+    const taskList = document.querySelector('.checklist');
+    const newTask = document.createElement('li');
+    const taskId = `task${taskList.children.length + 1}`;
+    newTask.innerHTML = `<input type="checkbox" id="${taskId}"><label for="${taskId}"> New Task</label>`;
+    taskList.appendChild(newTask);
+}
+</script>

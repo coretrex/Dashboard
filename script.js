@@ -1,3 +1,29 @@
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+    
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
+
+// Load the default page (e.g., KPIs) on initial load
+document.addEventListener('DOMContentLoaded', function() {
+    loadContent(new Event('load'), 'kpis.html');
+});
+
+// Growth Calculator functions
 function updateRangeValue(value) {
     document.getElementById('rangeValue').innerText = parseFloat(value).toFixed(2) + '%';
 }
@@ -33,15 +59,14 @@ function calculatePageViews() {
     const adsConversionRate = parseFloat(document.getElementById('adsConversionRate').value) / 100;
     let cpc = parseFloat(document.getElementById('cpc').value);
 
-    // Set default values if inputs are empty
     if (isNaN(revenueGoal)) {
-        revenueGoal = 1000000; // Default annual revenue goal
+        revenueGoal = 1000000; 
     }
     if (isNaN(aov)) {
-        aov = 50; // Default average order value
+        aov = 50; 
     }
     if (isNaN(cpc)) {
-        cpc = 1.00; // Default cost per click
+        cpc = 1.00; 
     }
 
     const requiredPageViewsAnnually = revenueGoal / (aov * conversionRate);
@@ -80,10 +105,8 @@ function calculatePageViews() {
 }
 
 function formatCurrency(input) {
-    // Remove all characters except digits and decimal point
     let value = input.value.replace(/[^\d.-]/g, '');
 
-    // Format value with commas
     if (!isNaN(value) && value !== '') {
         input.value = '$' + parseFloat(value).toLocaleString();
     } else {
