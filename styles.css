@@ -354,95 +354,15 @@ input[type="text"] {
 
 /* Specific Page Styles */
 /* KPIs Page */
-.kpis-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Quarterly Goals Page */
-.quarterly-goals-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Meeting Dashboard Page */
-.meeting-dashboard-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Annual Plan Page */
-.annual-plan-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Consumer Profile Page */
-.consumer-profile-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* File Manager Page */
-.file-manager-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Settings Page */
-.settings-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-/* Profile Page */
-.profile-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #000000;
-}
-
-.checklist-container .task-actions .icon.red {
-    color: #dc3545;
-}
-
-.checklist-container .task-actions .icon.delete {
-    color: #ff0000;
-    font-size: 18px;
-}
-
-/*KPIs Tab */
-
 
 .kpi-container {
     padding: 20px;
 }
 
 .kpi-buttons {
-    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
 }
 
 .kpi-button {
@@ -452,7 +372,6 @@ input[type="text"] {
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    margin-right: 10px;
 }
 
 .kpi-button:hover {
@@ -479,6 +398,7 @@ input[type="text"] {
 .kpi-table th {
     background: #007bff;
     color: white;
+    position: relative;
 }
 
 .kpi-table td[contenteditable="true"] {
@@ -486,6 +406,16 @@ input[type="text"] {
     cursor: text;
 }
 
+.delete-button {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 2px 5px;
+    font-size: 12px;
+}
 
-
-
+.delete-button:hover {
+    background: darkred;
+}
