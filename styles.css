@@ -318,9 +318,9 @@ input[type="text"] {
     width: calc(100% - 20px);
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #000000;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
 }
 
 /* Specific Page Styles */
