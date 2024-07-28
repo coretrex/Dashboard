@@ -1,25 +1,24 @@
 <!-- checklist.html -->
 <div class="header">
-    <h1>Checklist</h1>
-    <h2>Manage your tasks and ensure everything is on track.</h2>
+    <h1>Task Checklist</h1>
 </div>
 <div class="checklist-container">
-    <div class="task-bucket" id="active-tasks">
+    <div class="task-bucket" id="active-tasks" ondrop="drop(event)" ondragover="allowDrop(event)">
         <div class="bucket-header">
             <h3>Active Tasks</h3>
             <button class="add-task-btn" onclick="showAddTaskModal()">+</button>
         </div>
         <ul class="task-list" id="active-task-list"></ul>
     </div>
-    <div class="task-bucket" id="onhold-tasks">
+    <div class="task-bucket" id="onhold-tasks" ondrop="drop(event)" ondragover="allowDrop(event)">
         <div class="bucket-header">
-            <h3>On-Hold Tasks</h3>
+            <h3>On-Hold</h3>
         </div>
         <ul class="task-list" id="onhold-task-list"></ul>
     </div>
-    <div class="task-bucket" id="completed-tasks">
+    <div class="task-bucket" id="completed-tasks" ondrop="drop(event)" ondragover="allowDrop(event)">
         <div class="bucket-header">
-            <h3>Completed Tasks</h3>
+            <h3>Completed</h3>
         </div>
         <ul class="task-list" id="completed-task-list"></ul>
     </div>
@@ -59,6 +58,8 @@ function addTask(taskText) {
     const taskList = document.getElementById('active-task-list');
     const taskItem = document.createElement('li');
     taskItem.className = 'task-item';
+    taskItem.draggable = true;
+    taskItem.ondragstart = drag;
     taskItem.innerHTML = `
         <span>${taskText}</span>
         <div class="task-actions">
@@ -78,5 +79,20 @@ function markAsCompleted(button) {
     const taskItem = button.parentElement.parentElement;
     taskItem.classList.add('completed');
     document.getElementById('completed-task-list').appendChild(taskItem);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const taskItem = document.getElementById(data);
+    event.target.appendChild(taskItem);
 }
 </script>
