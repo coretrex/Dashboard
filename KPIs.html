@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>KPI Tracking</h1>
+    </div>
+    <div class="kpi-container">
+        <table id="kpi-table">
+            <thead>
+                <tr>
+                    <th>KPI</th>
+                    <th>Goal</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <!-- Add more weeks as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td contenteditable="true">KPI 1</td>
+                    <td contenteditable="true">Goal 1</td>
+                    <td contenteditable="true">Value 1</td>
+                    <td contenteditable="true">Value 2</td>
+                    <td contenteditable="true">Value 3</td>
+                    <!-- Add more weeks as needed -->
+                </tr>
+                <tr>
+                    <td contenteditable="true">KPI 2</td>
+                    <td contenteditable="true">Goal 2</td>
+                    <td contenteditable="true">Value 1</td>
+                    <td contenteditable="true">Value 2</td>
+                    <td contenteditable="true">Value 3</td>
+                    <!-- Add more weeks as needed -->
+                </tr>
+                <!-- Add more KPI rows as needed -->
+            </tbody>
+        </table>
+        <button onclick="addWeekColumn()">Add Week</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
