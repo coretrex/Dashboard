@@ -415,3 +415,13 @@ input[type="text"] {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: #000000;
 }
+
+.checklist-container .task-actions .icon.red {
+    color: #dc3545;
+}
+
+.checklist-container .task-actions .icon.delete {
+    color: #ff0000;
+    font-size: 18px;
+}
+
