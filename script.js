@@ -265,9 +265,11 @@ function deleteColumn(index) {
 function updateTableWidth() {
     const tableContainer = document.querySelector('.kpi-table-container');
     tableContainer.style.overflowX = 'auto';
+    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     updateTableWidth();
 });
+
 

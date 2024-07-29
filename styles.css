@@ -382,27 +382,10 @@ input[type="text"] {
 
 /* Specific Page Styles */
 /* KPIs Page */
-.kpi-container {
-    padding: 20px;
-}
 
-.kpi-buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.kpi-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.kpi-button:hover {
-    background: #0056b3;
+/* Reduced width for first column */
+.kpi-table th:first-child, .kpi-table td:first-child {
+    width: 150px;
 }
 
 .kpi-table-container {
@@ -413,13 +396,14 @@ input[type="text"] {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    table-layout: auto;
 }
 
 .kpi-table th, .kpi-table td {
-    padding: 5px; /* Reduced padding for smaller cells */
+    padding: 5px;
     border: 1px solid #ddd;
     text-align: left;
-    color: #000; /* Black text */
+    color: #000;
 }
 
 .kpi-table th {
@@ -428,11 +412,14 @@ input[type="text"] {
     position: relative;
 }
 
-.kpi-table th .delete-button {
+.kpi-table th .delete-container {
     position: absolute;
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
+}
+
+.kpi-table th .delete-button {
     background: none;
     color: white;
     border: none;
@@ -449,6 +436,7 @@ input[type="text"] {
     background: #f9f9f9;
     cursor: text;
 }
+
 
 /* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
