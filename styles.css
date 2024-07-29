@@ -381,7 +381,7 @@ input[type="text"] {
 
 
 /* Specific Page Styles */
-/* KPIs Page */
+/* styles.css */
 
 .kpi-container {
     padding: 20px;
@@ -407,7 +407,7 @@ input[type="text"] {
 }
 
 .kpi-table th {
-    background: #007bff;
+    background: #0056b3; /* Darker blue for header */
     color: white;
     position: relative;
 }
@@ -437,6 +437,11 @@ input[type="text"] {
     cursor: text;
 }
 
+/* Add padding to the right of the text in the first column */
+.kpi-table td:first-child {
+    padding-right: 10px;
+}
+
 .kpi-buttons {
     margin-top: 20px;
     display: flex;
@@ -455,6 +460,7 @@ input[type="text"] {
 .kpi-button:hover {
     background: #0056b3;
 }
+
 
 
 

@@ -224,6 +224,7 @@ function addWeekColumn() {
     for (let i = 1; i < table.rows.length; i++) {
         const newRowCell = table.rows[i].insertCell(-1);
         newRowCell.contentEditable = "true";
+        newRowCell.innerText = ""; // Ensure the new cell is blank
     }
 
     updateTableWidth();
