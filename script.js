@@ -179,11 +179,13 @@ function markAsCompleted(button) {
     const taskItem = button.parentElement.parentElement;
     taskItem.classList.add('completed');
     document.getElementById('completed-task-list').appendChild(taskItem);
+    console.log('Task marked as completed, launching confetti...');
     launchConfetti();
 }
 
 // Function to launch confetti explosion
 function launchConfetti() {
+    console.log('Launching confetti...');
     confetti({
         particleCount: 100,
         spread: 70,
