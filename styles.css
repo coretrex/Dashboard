@@ -380,8 +380,13 @@ input[type="text"] {
 }
 
 
-/* Specific Page Styles */
-/* styles.css */
+/* KPI Specific Page Styles */
+.header .subtext {
+    font-size: 14px;
+    font-weight: 300; /* Thin text */
+    margin-top: -10px;
+    color: #cccccc; /* Light color for contrast */
+}
 
 .kpi-container {
     padding: 20px;
