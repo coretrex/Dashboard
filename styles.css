@@ -383,20 +383,19 @@ input[type="text"] {
 /* Specific Page Styles */
 /* KPIs Page */
 
-/* Reduced width for first column */
-.kpi-table th:first-child, .kpi-table td:first-child {
-    width: 150px;
+.kpi-container {
+    padding: 20px;
 }
 
 .kpi-table-container {
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 .kpi-table {
-    width: 100%;
+    width: max-content; /* This ensures the table does not shrink */
     border-collapse: collapse;
     margin: 20px 0;
-    table-layout: auto;
 }
 
 .kpi-table th, .kpi-table td {
@@ -404,6 +403,7 @@ input[type="text"] {
     border: 1px solid #ddd;
     text-align: left;
     color: #000;
+    min-width: 120px; /* Fixed width for each cell */
 }
 
 .kpi-table th {
@@ -436,6 +436,26 @@ input[type="text"] {
     background: #f9f9f9;
     cursor: text;
 }
+
+.kpi-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.kpi-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.kpi-button:hover {
+    background: #0056b3;
+}
+
 
 
 /* Media queries to adjust the input sizes */

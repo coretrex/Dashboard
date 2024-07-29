@@ -211,13 +211,14 @@ document.addEventListener('click', function(event) {
     }
 });
 
+/* script.js */
 // Function to add a new week column to the KPI table
 function addWeekColumn() {
     const table = document.getElementById('kpi-table');
     const headerRow = table.rows[0];
     const newWeekNum = headerRow.cells.length - 1; // Calculate the new week number
     const newHeaderCell = headerRow.insertCell(-1);
-    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum} <button class="delete-button" onclick="deleteColumn(${headerRow.cells.length - 1})">X</button></th>`;
+    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum} <div class="delete-container"><button class="delete-button" onclick="deleteColumn(${headerRow.cells.length - 1})">X</button></div></th>`;
 
     // Add a new editable cell to each row for the new week
     for (let i = 1; i < table.rows.length; i++) {
@@ -227,6 +228,19 @@ function addWeekColumn() {
 
     updateTableWidth();
 }
+
+// Function to update table width and add scroll bar if necessary
+function updateTableWidth() {
+    const tableContainer = document.querySelector('.kpi-table-container');
+    tableContainer.style.overflowX = 'auto';
+    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateTableWidth();
+});
+
+
 
 // Function to add a new KPI row to the KPI table
 function addKpiRow() {
