@@ -211,6 +211,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
+/* script.js */
 // Function to add a new week column to the KPI table
 function addWeekColumn() {
     const table = document.getElementById('kpi-table');
@@ -237,10 +238,13 @@ function addKpiRow() {
     const kpiCell = newRow.insertCell(0);
     kpiCell.contentEditable = "true";
     kpiCell.innerText = "New KPI";
+    kpiCell.style.fontWeight = "bold"; // Set the text to bold
+    kpiCell.style.backgroundColor = "#F1F1F1"; // Set background color
 
     const goalCell = newRow.insertCell(1);
     goalCell.contentEditable = "true";
     goalCell.innerText = "New Goal";
+    goalCell.style.backgroundColor = "#F1F1F1"; // Set background color
 
     // Add editable cells for existing weeks and ensure they are blank
     for (let i = 2; i < table.rows[0].cells.length; i++) {

@@ -444,7 +444,13 @@ input[type="text"] {
 
 /* Add padding to the right of the text in the first column */
 .kpi-table td:first-child {
-    padding-right: 10px;
+    padding-right: 25px;
+    font-weight: bold;
+    background-color: #F1F1F1;
+}
+
+.kpi-table td:nth-child(2) {
+    background-color: #F1F1F1;
 }
 
 .kpi-buttons {
@@ -465,8 +471,6 @@ input[type="text"] {
 .kpi-button:hover {
     background: #0056b3;
 }
-
-
 
 
 /* Media queries to adjust the input sizes */
