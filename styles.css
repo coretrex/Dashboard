@@ -89,11 +89,11 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .input-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 20px;
     gap: 20px;
@@ -103,8 +103,8 @@ body {
     background-color: transparent;
     padding: 15px;
     border-radius: 8px;
-    width: 100%;
-    max-width: 32%;
+    flex: 1;
+    min-width: 0;
     box-sizing: border-box;
 }
 
@@ -426,20 +426,25 @@ input[type="text"] {
     cursor: text;
 }
 
+/* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
-    .main-content {
-        margin-left: 0;
-        padding: 10px;
-        width: 100%;
+    .input-container {
+        gap: 10px;
     }
 
     .input-box {
-        max-width: 48%;
+        padding: 10px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
+    .input-container {
+        gap: 5px;
+    }
+
     .input-box {
-        max-width: 100%;
+        padding: 8px;
+        font-size: 12px;
     }
 }
