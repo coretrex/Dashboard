@@ -179,6 +179,16 @@ function markAsCompleted(button) {
     const taskItem = button.parentElement.parentElement;
     taskItem.classList.add('completed');
     document.getElementById('completed-task-list').appendChild(taskItem);
+    launchConfetti();
+}
+
+// Function to launch confetti explosion
+function launchConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 }
 
 // Function to allow dropping elements
