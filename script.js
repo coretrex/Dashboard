@@ -153,13 +153,14 @@ function addTask(taskText) {
     taskItem.innerHTML = `
         <span>${taskText}</span>
         <div class="task-actions">
-            <button onclick="moveToOnHold(this)"><i class="fas fa-hand-paper"></i></button>
-            <button onclick="markAsCompleted(this)"><i class="fas fa-check"></i></button>
+            <button class="on-hold-btn" onclick="moveToOnHold(this)"><i class="fas fa-hand-paper"></i></button>
+            <button class="done-btn" onclick="markAsCompleted(this)"><i class="fas fa-check"></i></button>
             <button class="delete-task-btn" onclick="deleteTask(this)"><i class="fas fa-times"></i></button>
         </div>
     `;
     taskList.appendChild(taskItem);
 }
+
 
 // Function to delete a task
 function deleteTask(button) {
