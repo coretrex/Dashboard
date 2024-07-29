@@ -89,11 +89,11 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 .input-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 20px;
     gap: 20px;
@@ -103,8 +103,8 @@ body {
     background-color: transparent;
     padding: 15px;
     border-radius: 8px;
-    flex: 1;
-    min-width: 0;
+    width: 100%;
+    max-width: 32%;
     box-sizing: border-box;
 }
 
@@ -220,6 +220,30 @@ body.modal-open {
     transition: background-color 0.3s ease;
     color: #000000;
 }
+
+.delete-task-btn {
+    background-color: #007bff; /* Blue background */
+    color: white;              /* White text */
+    border: none;
+    border-radius: 4px;        /* Optional: rounded corners */
+    width: 30px;               /* Fixed width */
+    height: 30px;              /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;           /* Font size for the "x" */
+    cursor: pointer;
+    margin-left: 5px;          /* Space between buttons */
+}
+
+.delete-task-btn i {
+    pointer-events: none;      /* Prevent click events on the icon */
+}
+
+.delete-task-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
 
 .checklist-container .task-bucket:hover {
     background-color: #f0f0f0;
@@ -426,25 +450,20 @@ input[type="text"] {
     cursor: text;
 }
 
-/* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
-    .input-container {
-        gap: 10px;
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+        width: 100%;
     }
 
     .input-box {
-        padding: 10px;
-        font-size: 14px;
+        max-width: 48%;
     }
 }
 
 @media (max-width: 480px) {
-    .input-container {
-        gap: 5px;
-    }
-
     .input-box {
-        padding: 8px;
-        font-size: 12px;
+        max-width: 100%;
     }
 }
