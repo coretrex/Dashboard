@@ -1,3 +1,4 @@
+// Function to load content dynamically
 function loadContent(event, page) {
     event.preventDefault();
     console.log(`Loading content from ${page}`);
@@ -161,7 +162,6 @@ function addTask(taskText) {
     taskList.appendChild(taskItem);
 }
 
-
 // Function to delete a task
 function deleteTask(button) {
     const taskItem = button.parentElement.parentElement;
@@ -211,7 +211,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-/* script.js */
 // Function to add a new week column to the KPI table
 function addWeekColumn() {
     const table = document.getElementById('kpi-table');
@@ -230,19 +229,6 @@ function addWeekColumn() {
     updateTableWidth();
 }
 
-// Function to update table width and add scroll bar if necessary
-function updateTableWidth() {
-    const tableContainer = document.querySelector('.kpi-table-container');
-    tableContainer.style.overflowX = 'auto';
-    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    updateTableWidth();
-});
-
-
-
 // Function to add a new KPI row to the KPI table
 function addKpiRow() {
     const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
@@ -256,11 +242,11 @@ function addKpiRow() {
     goalCell.contentEditable = "true";
     goalCell.innerText = "New Goal";
 
-    // Add editable cells for existing weeks
+    // Add editable cells for existing weeks and ensure they are blank
     for (let i = 2; i < table.rows[0].cells.length; i++) {
         const newCell = newRow.insertCell(i);
         newCell.contentEditable = "true";
-        newCell.innerText = "New Value";
+        newCell.innerText = ""; // Ensure the new cell is blank
     }
 }
 
@@ -286,5 +272,3 @@ function updateTableWidth() {
 document.addEventListener('DOMContentLoaded', function() {
     updateTableWidth();
 });
-
-
