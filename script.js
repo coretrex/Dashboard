@@ -231,8 +231,7 @@ function addWeekColumn() {
 
     // Insert new header cell after 'Goal' column
     const newHeaderCell = headerRow.insertCell(2);
-    const newWeekNum = headerRow.cells.length - 2; // Calculate the new week number based on header cells count
-    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum} <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>`;
+    newHeaderCell.outerHTML = `<th contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>`;
 
     // Add a new editable cell to each row for the new week
     for (let i = 1; i < table.rows.length; i++) {
