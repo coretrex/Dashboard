@@ -107,7 +107,6 @@
 
         function initializeFlatpickr() {
             document.querySelectorAll(".date-cell").forEach(cell => {
-                cell.textContent = "MM/DD/YY"; // Ensure placeholder text is correct
                 flatpickr(cell, {
                     dateFormat: "m/d/y",
                     allowInput: true,
