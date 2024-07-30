@@ -245,7 +245,7 @@ function addWeekColumn() {
 
     // Insert new header cell after 'Goal' column
     const newHeaderCell = headerRow.insertCell(2);
-    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>`;
+    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
 
     // Add a new editable cell to each row for the new week
     for (let i = 1; i < table.rows.length; i++) {
@@ -256,18 +256,6 @@ function addWeekColumn() {
 
     updateTableWidth();
     initializeFlatpickr();
-}
-
-// Function to delete a column from the KPI table
-function deleteColumn(index) {
-    const table = document.getElementById('kpi-table');
-    const rowCount = table.rows.length;
-
-    for (let i = 0; i < rowCount; i++) {
-        table.rows[i].deleteCell(index);
-    }
-
-    updateTableWidth();
 }
 
 // Function to update table width and add scroll bar if necessary
