@@ -224,6 +224,23 @@ document.addEventListener('click', function(event) {
 });
 
 /* script.js */
+document.addEventListener('DOMContentLoaded', function() {
+    initializeFlatpickr();
+});
+
+function initializeFlatpickr() {
+    document.querySelectorAll(".date-cell").forEach(cell => {
+        flatpickr(cell, {
+            dateFormat: "m/d/y",
+            allowInput: true,
+            clickOpens: true,
+            onClose: function(selectedDates, dateStr, instance) {
+                instance.input.innerText = dateStr;
+            }
+        });
+    });
+}
+
 // Function to add a new week column to the KPI table
 function addWeekColumn() {
     const table = document.getElementById('kpi-table');
@@ -261,20 +278,4 @@ function updateTableWidth() {
     const tableContainer = document.querySelector('.kpi-table-container');
     tableContainer.style.overflowX = 'auto';
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    updateTableWidth();
-    initializeFlatpickr();
-});
-
-function initializeFlatpickr() {
-    flatpickr(".date-cell", {
-        dateFormat: "m/d/y",
-        allowInput: true,
-        clickOpens: true,
-        onClose: function(selectedDates, dateStr, instance) {
-            instance.input.innerText = dateStr;
-        }
-    });
 }
