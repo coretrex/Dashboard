@@ -125,7 +125,7 @@ body {
 .container {
     width: 100%;
     max-width: 1000px;
-    padding: 20px;
+    padding: 0px;
     border-radius: 10px;
     box-sizing: border-box;
     overflow: hidden;
