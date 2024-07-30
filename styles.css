@@ -425,12 +425,26 @@ input[type="text"] {
 .file-manager-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
 }
 
 .upload-container {
     margin-bottom: 20px;
+    width: 100%;
+}
+
+.file-manager-container h1 {
+    margin-bottom: 5px;
+}
+
+.file-manager-container p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    color: #cccccc;
 }
 
 .folders {
@@ -438,34 +452,35 @@ input[type="text"] {
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    max-width: 600px;
     margin-bottom: 20px;
 }
 
 .folder, .uncategorized {
-    border: 2px dashed #ffffff;
+    border: 2px solid #ffffff;
     padding: 10px;
     border-radius: 4px;
     width: 100%;
-    min-height: 50px;
+    min-height: 40px;
     background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .folder h2, .uncategorized h2 {
     margin: 0;
     padding: 5px;
-    text-align: left;
     background-color: #004085;
     color: white;
     border-radius: 4px;
+    width: 100%;
 }
 
 .file-list {
     list-style-type: none;
     padding: 0;
     margin: 5px 0 0 0;
+    width: 100%;
 }
 
 .file-list li {
@@ -475,8 +490,9 @@ input[type="text"] {
     margin-bottom: 5px;
     border-radius: 4px;
     cursor: move;
-    text-align: center;
+    text-align: left;
 }
+
 
 
 
