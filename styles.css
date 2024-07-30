@@ -19,7 +19,13 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    overflow-y: auto; /* Add vertical scroll if needed */
+    overflow-y: auto; /* Allow vertical scroll if needed */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
 }
 
 .sidebar-logo {
@@ -39,7 +45,13 @@ body {
     padding: 0;
     width: 100%;
     flex: 1;
-    overflow-y: auto; /* Add vertical scroll if needed */
+    overflow-y: auto; /* Allow vertical scroll if needed */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.sidebar-menu::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
 }
 
 .sidebar-menu li {
