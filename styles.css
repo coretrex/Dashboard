@@ -19,6 +19,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    overflow-y: auto; /* Add vertical scroll if needed */
 }
 
 .sidebar-logo {
@@ -37,6 +38,8 @@ body {
     list-style-type: none;
     padding: 0;
     width: 100%;
+    flex: 1;
+    overflow-y: auto; /* Add vertical scroll if needed */
 }
 
 .sidebar-menu li {
@@ -59,6 +62,27 @@ body {
 
 .sidebar-menu li a:hover {
     background-color: #007bff;
+}
+
+.analytics-hub-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    width: calc(100% - 40px); /* Ensure the button doesn't take up the entire width */
+    margin: 10px auto; /* Center it within the sidebar with margins */
+    box-sizing: border-box;
+}
+
+.analytics-hub-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .main-content {
@@ -244,7 +268,6 @@ body.modal-open {
     background-color: #0056b3; /* Darker blue on hover */
 }
 
-
 .checklist-container .task-bucket:hover {
     background-color: #f0f0f0;
 }
@@ -379,7 +402,6 @@ input[type="text"] {
     font-family: 'Poppins', sans-serif;
 }
 
-
 /* KPI Specific Page Styles */
 .header .subtext {
     font-size: 14px;
@@ -472,32 +494,6 @@ input[type="text"] {
     background: #0056b3;
 }
 
-.analytics-hub-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    color: white;
-    text-decoration: none;
-    border: 2px solid white;
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    background-color: transparent;
-    width: calc(100% - 40px); /* Ensure the button doesn't take up the entire width */
-    margin: 10px 20px; /* Center it within the sidebar with margins */
-    box-sizing: border-box;
-}
-
-.analytics-hub-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-
-
-
-
-
 /* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
     .input-container {
@@ -518,5 +514,17 @@ input[type="text"] {
     .input-box {
         padding: 8px;
         font-size: 12px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-height: 768px) {
+    .sidebar {
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .sidebar-menu {
+        overflow-y: auto;
     }
 }
