@@ -1,4 +1,3 @@
-<!-- kpis.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KPI Tracking</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <div class="header">
@@ -19,10 +19,10 @@
                     <tr>
                         <th>KPI</th>
                         <th>Goal</th>
-                        <th contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>
-                        <th contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(3)">X</button></div></th>
-                        <th contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(4)">X</button></div></th>
-                        <th contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(5)">X</button></div></th>
+                        <th class="date-cell" contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>
+                        <th class="date-cell" contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(3)">X</button></div></th>
+                        <th class="date-cell" contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(4)">X</button></div></th>
+                        <th class="date-cell" contenteditable="true">MM/DD/YY <div class="delete-container"><button class="delete-button" onclick="deleteColumn(5)">X</button></div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,6 +99,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
 </html>
