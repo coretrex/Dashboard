@@ -50,11 +50,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .file-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-
         .image-display {
             display: none;
             position: relative;
@@ -103,8 +98,14 @@
             max-height: 90%;
         }
 
-        #lightbox.zoomed-in img {
-            transform: scale(2);
+        #lightbox.magnify img {
+            cursor: zoom-out;
+            position: absolute;
+            transition: transform 0.1s ease;
+        }
+
+        #lightbox.magnify {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -137,8 +138,6 @@
             const fileLabel = document.querySelector('.file-label');
             const fileLabelText = fileLabel.querySelector('p');
 
-            let isZoomedIn = false;
-
             if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel && fileLabelText) {
                 console.log('All elements found');
 
@@ -163,16 +162,27 @@
                     console.log('Image clicked');
                     lightboxImg.src = uploadedImage.src;
                     lightbox.style.display = 'flex';
+                    lightbox.classList.add('magnify');
                 });
 
-                lightbox.addEventListener('click', function() {
-                    console.log('Lightbox clicked');
-                    if (isZoomedIn) {
-                        lightbox.classList.remove('zoomed-in');
-                        isZoomedIn = false;
-                    } else {
-                        lightbox.classList.add('zoomed-in');
-                        isZoomedIn = true;
+                lightbox.addEventListener('mousemove', function(e) {
+                    if (lightbox.classList.contains('magnify')) {
+                        const img = lightboxImg;
+                        const rect = img.getBoundingClientRect();
+                        const offsetX = e.clientX - rect.left;
+                        const offsetY = e.clientY - rect.top;
+                        const xPercent = offsetX / rect.width;
+                        const yPercent = offsetY / rect.height;
+                        img.style.transform = `translate(-${xPercent * 50}%, -${yPercent * 50}%) scale(2)`;
+                    }
+                });
+
+                lightbox.addEventListener('click', function(e) {
+                    if (!lightboxImg.contains(e.target)) {
+                        console.log('Lightbox clicked outside of image');
+                        lightbox.style.display = 'none';
+                        lightbox.classList.remove('magnify');
+                        lightboxImg.style.transform = 'none';
                     }
                 });
 
