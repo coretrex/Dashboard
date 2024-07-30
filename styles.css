@@ -110,6 +110,10 @@ body {
     margin-top: 20px;
 }
 
+.header p.subtext {
+    margin-left:20px;
+}
+
 .header h1 {
     font-size: 36px;
     font-weight: bold;
@@ -641,6 +645,8 @@ input[type="text"] {
     margin-top: -10px;
     color: #cccccc; /* Light color for contrast */
 }
+
+
 
 .kpi-container {
     padding: 20px;
