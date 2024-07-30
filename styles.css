@@ -472,6 +472,27 @@ input[type="text"] {
     background: #0056b3;
 }
 
+.analytics-hub-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    margin: 10px 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+.analytics-hub-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
 
 /* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
