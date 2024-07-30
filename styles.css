@@ -422,6 +422,23 @@ input[type="text"] {
 }
 
 /*File Manager */
+.header {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    text-align: left;
+}
+
+.header h1 {
+    margin-bottom: 5px;
+}
+
+.header p.subtext {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    color: #cccccc;
+}
+
 .file-manager-container {
     display: flex;
     flex-direction: column;
@@ -436,16 +453,6 @@ input[type="text"] {
 .upload-container {
     margin-bottom: 20px;
     width: 100%;
-}
-
-.file-manager-container h1 {
-    margin-bottom: 5px;
-}
-
-.file-manager-container p {
-    margin: 0 0 20px 0;
-    font-size: 14px;
-    color: #cccccc;
 }
 
 .file-label {
@@ -475,7 +482,7 @@ input[type="text"] {
     margin-bottom: 20px;
 }
 
-.folder, .uncategorized {
+.folder {
     border: 2px solid #ffffff;
     padding: 10px;
     border-radius: 4px;
@@ -515,6 +522,11 @@ input[type="text"] {
     border-bottom: 1px solid #ffffff;
 }
 
+.uncategorized {
+    width: 100%;
+    margin-top: 20px;
+}
+
 .file-list {
     list-style-type: none;
     padding: 0;
@@ -544,6 +556,7 @@ input[type="text"] {
     cursor: move;
     text-align: left;
 }
+
 
 
 
