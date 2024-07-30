@@ -474,17 +474,17 @@ input[type="text"] {
 
 .analytics-hub-button {
     display: block;
-    padding: 15px 20px;
+    padding: 10px 15px;
     color: white;
     text-decoration: none;
     border: 2px solid white;
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: 22px;
     background-color: transparent;
     text-align: center;
     box-sizing: border-box;
-    width: calc(100% - 40px); /* Ensure it fits within the sidebar */
+    width: calc(100% - 30px); /* Ensure it fits within the sidebar */
     margin: 10px auto; /* Center it within the sidebar */
 }
 
