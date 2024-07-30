@@ -11,24 +11,57 @@ function initializePage() {
 
 // Function to handle file uploads
 function initializeFileUploads() {
-    const fileInput = document.getElementById('file-input');
-    const uncategorizedFiles = document.getElementById('uncategorized-files');
+    const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
+    const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
+    const uploadedImages = document.querySelectorAll('#uploaded-image, #uploaded-image-annual, #uploaded-image-consumer');
+    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, #lightbox-consumer');
+    const lightboxImgs = document.querySelectorAll('#lightbox-img, #lightbox-img-annual, #lightbox-img-consumer');
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const fileLabels = document.querySelectorAll('.file-label');
 
-    if (fileInput && uncategorizedFiles) {
-        fileInput.addEventListener('change', function(event) {
-            const files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const listItem = document.createElement('li');
-                listItem.textContent = `${file.name} (${file.type})`;
-                listItem.draggable = true;
-                listItem.id = `file-${new Date().getTime()}`;
-                listItem.ondragstart = drag;
-                uncategorizedFiles.appendChild(listItem);
-                uncategorizedFiles.classList.remove('empty');
-            }
-        });
-    }
+    fileInputs.forEach((fileInput, index) => {
+        const imageDisplay = imageDisplays[index];
+        const uploadedImage = uploadedImages[index];
+        const lightbox = lightboxes[index];
+        const lightboxImg = lightboxImgs[index];
+        const deleteButton = deleteButtons[index];
+        const fileLabel = fileLabels[index];
+
+        if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel) {
+            fileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        imageDisplay.style.display = 'flex';
+                        fileLabel.style.display = 'none';
+                        deleteButton.style.display = 'flex';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            uploadedImage.addEventListener('click', function() {
+                lightboxImg.src = uploadedImage.src;
+                lightbox.style.display = 'flex';
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target !== lightboxImg) {
+                    lightbox.style.display = 'none';
+                }
+            });
+
+            deleteButton.addEventListener('click', function() {
+                uploadedImage.src = '#';
+                imageDisplay.style.display = 'none';
+                fileLabel.style.display = 'flex';
+                deleteButton.style.display = 'none';
+                fileInput.value = ''; // Reset the file input
+            });
+        }
+    });
 }
 
 // Function to allow dropping elements
