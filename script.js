@@ -13,6 +13,7 @@ function loadContent(event, page) {
         .then(data => {
             console.log(`Content loaded from ${page}`);
             document.getElementById('main-content').innerHTML = data;
+            initializePage(); // Initialize the newly loaded content
         })
         .catch(error => {
             console.error('Error loading the page:', error);
@@ -223,28 +224,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Function to load content dynamically
-function loadContent(event, page) {
-    event.preventDefault();
-    console.log(`Loading content from ${page}`);
-    
-    fetch(page)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log(`Content loaded from ${page}`);
-            document.getElementById('main-content').innerHTML = data;
-            initializeFlatpickr(); // Initialize Flatpickr after loading content
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-        });
-}
-
 // Function to initialize Flatpickr
 function initializeFlatpickr() {
     document.querySelectorAll(".date-cell").forEach(cell => {
@@ -298,58 +277,7 @@ function updateTableWidth() {
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadContent(new Event('load'), 'kpis.html'); // Load the default page (KPIs) on initial load
-});
-
 // Function for strategic roadmap & Consumer Profile
-
-// Function to load content dynamically
-function loadContent(event, page) {
-    event.preventDefault();
-    console.log(`Loading content from ${page}`);
-    
-    fetch(page)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log(`Content loaded from ${page}`);
-            document.getElementById('main-content').innerHTML = data;
-            initializePage(); // Initialize the newly loaded content
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-        });
-}
-
-// Initialize page-specific scripts
-// Function to load content dynamically
-function loadContent(event, page) {
-    event.preventDefault();
-    console.log(`Loading content from ${page}`);
-    
-    fetch(page)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log(`Content loaded from ${page}`);
-            document.getElementById('main-content').innerHTML = data;
-            initializePage(); // Initialize the newly loaded content
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-        });
-}
-
-// Initialize page-specific scripts
 function initializePage() {
     const fileInput = document.getElementById('file-input');
     const imageDisplay = document.getElementById('image-display');
@@ -403,15 +331,11 @@ function initializePage() {
     } else {
         console.error('One or more elements not found');
     }
+
+    initializeFlatpickr(); // Initialize Flatpickr for date inputs
 }
 
-// Load the default page (e.g., KPIs) on initial load
+// Reinitialize page-specific scripts when new content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
-
-
-
-
-
-
