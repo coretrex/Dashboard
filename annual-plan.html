@@ -50,11 +50,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .file-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-
         .image-display {
             display: none;
             position: relative;
@@ -102,10 +97,6 @@
             max-width: 90%;
             max-height: 90%;
         }
-
-        #lightbox.zoomed-in img {
-            transform: scale(2);
-        }
     </style>
 </head>
 <body>
@@ -135,11 +126,8 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const deleteButton = document.querySelector('.delete-button');
             const fileLabel = document.querySelector('.file-label');
-            const fileLabelText = fileLabel.querySelector('p');
 
-            let isZoomedIn = false;
-
-            if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel && fileLabelText) {
+            if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel) {
                 console.log('All elements found');
 
                 fileInput.addEventListener('change', function(event) {
@@ -165,14 +153,10 @@
                     lightbox.style.display = 'flex';
                 });
 
-                lightbox.addEventListener('click', function() {
-                    console.log('Lightbox clicked');
-                    if (isZoomedIn) {
-                        lightbox.classList.remove('zoomed-in');
-                        isZoomedIn = false;
-                    } else {
-                        lightbox.classList.add('zoomed-in');
-                        isZoomedIn = true;
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target !== lightboxImg) {
+                        console.log('Lightbox clicked outside of image');
+                        lightbox.style.display = 'none';
                     }
                 });
 
