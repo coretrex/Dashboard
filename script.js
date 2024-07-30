@@ -228,42 +228,20 @@ document.addEventListener('click', function(event) {
 function addWeekColumn() {
     const table = document.getElementById('kpi-table');
     const headerRow = table.rows[0];
-    const newWeekNum = headerRow.cells.length - 1; // Calculate the new week number
-    const newHeaderCell = headerRow.insertCell(-1);
-    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum} <div class="delete-container"><button class="delete-button" onclick="deleteColumn(${headerRow.cells.length - 1})">X</button></div></th>`;
+
+    // Insert new header cell after 'Goal' column
+    const newHeaderCell = headerRow.insertCell(2);
+    const newWeekNum = headerRow.cells.length - 2; // Calculate the new week number based on header cells count
+    newHeaderCell.outerHTML = `<th contenteditable="true">Week ${newWeekNum} <div class="delete-container"><button class="delete-button" onclick="deleteColumn(2)">X</button></div></th>`;
 
     // Add a new editable cell to each row for the new week
     for (let i = 1; i < table.rows.length; i++) {
-        const newRowCell = table.rows[i].insertCell(-1);
+        const newRowCell = table.rows[i].insertCell(2);
         newRowCell.contentEditable = "true";
         newRowCell.innerText = ""; // Ensure the new cell is blank
     }
 
     updateTableWidth();
-}
-
-// Function to add a new KPI row to the KPI table
-function addKpiRow() {
-    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
-    
-    const kpiCell = newRow.insertCell(0);
-    kpiCell.contentEditable = "true";
-    kpiCell.innerText = "New KPI";
-    kpiCell.style.fontWeight = "bold"; // Set the text to bold
-    kpiCell.style.backgroundColor = "#F1F1F1"; // Set background color
-
-    const goalCell = newRow.insertCell(1);
-    goalCell.contentEditable = "true";
-    goalCell.innerText = "New Goal";
-    goalCell.style.backgroundColor = "#F1F1F1"; // Set background color
-
-    // Add editable cells for existing weeks and ensure they are blank
-    for (let i = 2; i < table.rows[0].cells.length; i++) {
-        const newCell = newRow.insertCell(i);
-        newCell.contentEditable = "true";
-        newCell.innerText = ""; // Ensure the new cell is blank
-    }
 }
 
 // Function to delete a column from the KPI table
