@@ -19,7 +19,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    overflow-y: auto; /* Allow vertical scroll if needed */
+    overflow-y: auto; /* Add vertical scroll if needed */
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 }
@@ -45,7 +45,7 @@ body {
     padding: 0;
     width: 100%;
     flex: 1;
-    overflow-y: auto; /* Allow vertical scroll if needed */
+    overflow-y: auto; /* Add vertical scroll if needed */
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 }
@@ -88,7 +88,6 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     background-color: transparent;
-    width: calc(100% - 20px); /* Full width minus 20px for the margins */
     margin: 10px; /* 10px margin on all sides */
     box-sizing: border-box;
 }
@@ -96,7 +95,6 @@ body {
 .analytics-hub-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
-
 
 .main-content {
     margin-left: 250px;
