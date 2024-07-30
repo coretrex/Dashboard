@@ -333,8 +333,11 @@ function initializePage() {
     const uploadedImage = document.getElementById('uploaded-image');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
+    const deleteButton = document.querySelector('.delete-button');
+    const fileLabel = document.querySelector('.file-label');
+    const fileLabelText = fileLabel.querySelector('p');
 
-    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg) {
+    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel && fileLabelText) {
         console.log('All elements found');
 
         fileInput.addEventListener('change', function(event) {
@@ -347,6 +350,8 @@ function initializePage() {
                     console.log('File read successfully');
                     uploadedImage.src = e.target.result;
                     imageDisplay.style.display = 'flex';
+                    fileLabel.style.display = 'none';
+                    deleteButton.style.display = 'flex';
                 };
                 reader.readAsDataURL(file);
             }
@@ -362,6 +367,15 @@ function initializePage() {
             console.log('Lightbox clicked');
             lightbox.style.display = 'none';
         });
+
+        deleteButton.addEventListener('click', function() {
+            console.log('Delete button clicked');
+            uploadedImage.src = '#';
+            imageDisplay.style.display = 'none';
+            fileLabel.style.display = 'flex';
+            deleteButton.style.display = 'none';
+            fileInput.value = ''; // Reset the file input
+        });
     } else {
         console.error('One or more elements not found');
     }
@@ -371,5 +385,6 @@ function initializePage() {
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
+
 
 

@@ -57,6 +57,7 @@
 
         .image-display {
             display: none;
+            position: relative; /* Make the container position relative */
             justify-content: center;
             align-items: center;
             margin-top: 20px;
@@ -66,6 +67,22 @@
             max-width: 100%;
             max-height: 80vh;
             cursor: zoom-in;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
 
         #lightbox {
@@ -86,7 +103,6 @@
             max-height: 90%;
         }
     </style>
-    <!-- No script tag here -->
 </head>
 <body>
     <div class="container">
@@ -98,6 +114,7 @@
             </label>
         </div>
         <div id="image-display" class="image-display">
+            <button class="delete-button" style="display: none;">&times;</button>
             <img id="uploaded-image" src="#" alt="Uploaded Image">
         </div>
     </div>
