@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html'); // Load the default page (KPIs) on initial load
 });
 
-// Function for strategic roadmap
+// Function for strategic roadmap & Consumer Profile
 
 // Function to load content dynamically
 function loadContent(event, page) {
@@ -337,6 +337,8 @@ function initializePage() {
     const fileLabel = document.querySelector('.file-label');
     const fileLabelText = fileLabel.querySelector('p');
 
+    let isZoomedIn = false;
+
     if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel && fileLabelText) {
         console.log('All elements found');
 
@@ -365,7 +367,13 @@ function initializePage() {
 
         lightbox.addEventListener('click', function() {
             console.log('Lightbox clicked');
-            lightbox.style.display = 'none';
+            if (isZoomedIn) {
+                lightbox.classList.remove('zoomed-in');
+                isZoomedIn = false;
+            } else {
+                lightbox.classList.add('zoomed-in');
+                isZoomedIn = true;
+            }
         });
 
         deleteButton.addEventListener('click', function() {
@@ -385,6 +393,7 @@ function initializePage() {
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
+
 
 
 
