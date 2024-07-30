@@ -277,6 +277,29 @@ function updateTableWidth() {
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
 
+// Function to add a new KPI row to the table
+function addKpiRow() {
+    const table = document.getElementById('kpi-table');
+    const newRow = table.insertRow();
+
+    const nameCell = newRow.insertCell(0);
+    nameCell.contentEditable = "true";
+    nameCell.innerText = "New KPI";
+
+    const goalCell = newRow.insertCell(1);
+    goalCell.contentEditable = "true";
+    goalCell.innerText = "Goal";
+
+    for (let i = 2; i < table.rows[0].cells.length; i++) {
+        const newCell = newRow.insertCell(i);
+        newCell.contentEditable = "true";
+        newCell.innerText = "";
+    }
+
+    updateTableWidth();
+    initializeFlatpickr();
+}
+
 // Function for strategic roadmap & Consumer Profile
 function initializePage() {
     const fileInput = document.getElementById('file-input');
