@@ -110,9 +110,8 @@
                 flatpickr(cell, {
                     dateFormat: "m/d/y",
                     allowInput: true,
-                    clickOpens: true,
-                    onClose: function(selectedDates, dateStr, instance) {
-                        instance.input.innerText = dateStr;
+                    onChange: function(selectedDates, dateStr, instance) {
+                        cell.textContent = dateStr;
                     }
                 });
             });
