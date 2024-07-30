@@ -430,6 +430,7 @@ input[type="text"] {
     width: 100%;
     max-width: 600px;
     margin: auto;
+    color: white;
 }
 
 .upload-container {
@@ -464,6 +465,7 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: transparent;
 }
 
 .folder-title, .uncategorized-title {
@@ -477,11 +479,11 @@ input[type="text"] {
 }
 
 .folder-title {
-    background-color: #004085;
+    color: #004085;
 }
 
 .uncategorized-title {
-    background-color: #444444;
+    color: #444444;
 }
 
 .file-list {
@@ -500,6 +502,7 @@ input[type="text"] {
     cursor: move;
     text-align: left;
 }
+
 
 
 
