@@ -107,6 +107,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
             const fileInput = document.getElementById('file-input');
             const imageDisplay = document.getElementById('image-display');
             const uploadedImage = document.getElementById('uploaded-image');
@@ -114,10 +115,13 @@
             const lightboxImg = document.getElementById('lightbox-img');
 
             fileInput.addEventListener('change', function(event) {
+                console.log('File input changed');
                 const file = event.target.files[0];
+                console.log('Selected file:', file);
                 if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
+                        console.log('File read successfully');
                         uploadedImage.src = e.target.result;
                         imageDisplay.style.display = 'flex';
                     };
@@ -126,11 +130,13 @@
             });
 
             uploadedImage.addEventListener('click', function() {
+                console.log('Image clicked');
                 lightboxImg.src = uploadedImage.src;
                 lightbox.style.display = 'flex';
             });
 
             lightbox.addEventListener('click', function() {
+                console.log('Lightbox clicked');
                 lightbox.style.display = 'none';
             });
         });
