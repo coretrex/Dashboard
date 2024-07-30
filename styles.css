@@ -484,7 +484,7 @@ input[type="text"] {
     background-color: transparent;
     text-align: center;
     box-sizing: border-box;
-    width: calc(100% - 30px); /* Ensure it fits within the sidebar */
+    width: 90%;
     margin: 10px auto; /* Center it within the sidebar */
 }
 
