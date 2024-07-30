@@ -223,19 +223,37 @@ document.addEventListener('click', function(event) {
     }
 });
 
-/* script.js */
-document.addEventListener('DOMContentLoaded', function() {
-    initializeFlatpickr();
-});
+// Function to load content dynamically
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+    
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+            initializeFlatpickr(); // Initialize Flatpickr after loading content
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
 
+// Function to initialize Flatpickr
 function initializeFlatpickr() {
     document.querySelectorAll(".date-cell").forEach(cell => {
         flatpickr(cell, {
             dateFormat: "m/d/y",
             allowInput: true,
             clickOpens: true,
-            onClose: function(selectedDates, dateStr, instance) {
-                instance.input.innerText = dateStr;
+            onChange: function(selectedDates, dateStr, instance) {
+                cell.textContent = dateStr;
             }
         });
     });
@@ -279,3 +297,7 @@ function updateTableWidth() {
     tableContainer.style.overflowX = 'auto';
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadContent(new Event('load'), 'kpis.html'); // Load the default page (KPIs) on initial load
+});
