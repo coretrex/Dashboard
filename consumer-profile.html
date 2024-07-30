@@ -90,7 +90,6 @@
             background-color: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
-            cursor: zoom-out;
         }
 
         #lightbox img {
@@ -98,14 +97,20 @@
             max-height: 90%;
         }
 
-        #lightbox.magnify img {
-            cursor: zoom-out;
+        #magnifier {
             position: absolute;
-            transition: transform 0.1s ease;
+            display: none;
+            border: 3px solid white;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
         }
 
-        #lightbox.magnify {
-            overflow: hidden;
+        #magnifier img {
+            position: absolute;
         }
     </style>
 </head>
@@ -124,6 +129,9 @@
     </div>
 
     <div id="lightbox">
+        <div id="magnifier">
+            <img id="magnifier-img" src="#">
+        </div>
         <img id="lightbox-img" src="#" alt="Lightbox Image">
     </div>
 
@@ -134,6 +142,8 @@
             const uploadedImage = document.getElementById('uploaded-image');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const magnifier = document.getElementById('magnifier');
+            const magnifierImg = document.getElementById('magnifier-img');
             const deleteButton = document.querySelector('.delete-button');
             const fileLabel = document.querySelector('.file-label');
             const fileLabelText = fileLabel.querySelector('p');
@@ -161,28 +171,31 @@
                 uploadedImage.addEventListener('click', function() {
                     console.log('Image clicked');
                     lightboxImg.src = uploadedImage.src;
+                    magnifierImg.src = uploadedImage.src;
                     lightbox.style.display = 'flex';
-                    lightbox.classList.add('magnify');
                 });
 
                 lightbox.addEventListener('mousemove', function(e) {
-                    if (lightbox.classList.contains('magnify')) {
-                        const img = lightboxImg;
-                        const rect = img.getBoundingClientRect();
-                        const offsetX = e.clientX - rect.left;
-                        const offsetY = e.clientY - rect.top;
-                        const xPercent = offsetX / rect.width;
-                        const yPercent = offsetY / rect.height;
-                        img.style.transform = `translate(-${xPercent * 50}%, -${yPercent * 50}%) scale(2)`;
-                    }
+                    const rect = lightboxImg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const imgWidth = lightboxImg.naturalWidth;
+                    const imgHeight = lightboxImg.naturalHeight;
+                    const elemWidth = rect.width;
+                    const elemHeight = rect.height;
+                    const magnifierSize = magnifier.offsetWidth / 2;
+
+                    magnifier.style.left = `${x - magnifierSize}px`;
+                    magnifier.style.top = `${y - magnifierSize}px`;
+                    magnifier.style.display = 'block';
+                    magnifierImg.style.transform = `translate(-${(x / elemWidth) * imgWidth - magnifierSize}px, -${(y / elemHeight) * imgHeight - magnifierSize}px) scale(2)`;
                 });
 
                 lightbox.addEventListener('click', function(e) {
-                    if (!lightboxImg.contains(e.target)) {
+                    if (e.target !== lightboxImg) {
                         console.log('Lightbox clicked outside of image');
                         lightbox.style.display = 'none';
-                        lightbox.classList.remove('magnify');
-                        lightboxImg.style.transform = 'none';
+                        magnifier.style.display = 'none';
                     }
                 });
 
