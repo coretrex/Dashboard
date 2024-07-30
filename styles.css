@@ -487,7 +487,7 @@ input[type="text"] {
     position: relative;
 }
 
-.folder-title, .uncategorized-title {
+.folder-title {
     margin: 0;
     padding: 5px;
     color: #333;
@@ -500,9 +500,19 @@ input[type="text"] {
     cursor: pointer;
 }
 
-.folder-title::after, .uncategorized-title::after {
+.folder-title::after {
     content: '▼';
     font-size: 12px;
+}
+
+.uncategorized-title {
+    margin: 0;
+    padding: 5px 0;
+    color: #ffffff;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ffffff;
 }
 
 .file-list {
@@ -534,6 +544,7 @@ input[type="text"] {
     cursor: move;
     text-align: left;
 }
+
 
 
 

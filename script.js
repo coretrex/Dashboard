@@ -391,6 +391,12 @@ function drop(event) {
     const fileList = event.target.closest('.folder').querySelector('.file-list');
     fileList.appendChild(fileItem);
     fileList.classList.remove('empty');
+
+    // Check if "Uncategorized" is now empty
+    const uncategorizedFiles = document.getElementById('uncategorized-files');
+    if (uncategorizedFiles.children.length === 0) {
+        uncategorizedFiles.classList.add('empty');
+    }
 }
 
 // Function to toggle folder expansion
@@ -408,4 +414,5 @@ function toggleFolder(folderId) {
 function initializePage() {
     // Initialize any specific functionality for this page if needed
 }
+
 
