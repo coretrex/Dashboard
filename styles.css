@@ -422,22 +422,6 @@ input[type="text"] {
 }
 
 /*File Manager */
-.header {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    text-align: left;
-}
-
-.header h1 {
-    margin-bottom: 5px;
-}
-
-.header p.subtext {
-    margin: 0 0 20px 0;
-    font-size: 14px;
-    color: #cccccc;
-}
 
 .file-manager-container {
     display: flex;
