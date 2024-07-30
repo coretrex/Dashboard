@@ -448,6 +448,25 @@ input[type="text"] {
     color: #cccccc;
 }
 
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px dashed #fff;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.file-label:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .folders {
     display: flex;
     flex-direction: column;
@@ -461,29 +480,29 @@ input[type="text"] {
     padding: 10px;
     border-radius: 4px;
     width: 100%;
-    min-height: 40px;
+    background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: transparent;
+    position: relative;
 }
 
 .folder-title, .uncategorized-title {
     margin: 0;
     padding: 5px;
-    color: white;
-    border-radius: 4px;
+    color: #333;
     width: 100%;
     font-size: 16px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
 
-.folder-title {
-    color: #004085;
-}
-
-.uncategorized-title {
-    color: #444444;
+.folder-title::after, .uncategorized-title::after {
+    content: '▼';
+    font-size: 12px;
 }
 
 .file-list {
@@ -491,6 +510,19 @@ input[type="text"] {
     padding: 0;
     margin: 5px 0 0 0;
     width: 100%;
+    display: none;
+}
+
+.file-list.expanded {
+    display: block;
+}
+
+.file-list.empty::before {
+    content: 'No files available.';
+    display: block;
+    padding: 5px;
+    color: #999;
+    text-align: center;
 }
 
 .file-list li {
@@ -502,6 +534,7 @@ input[type="text"] {
     cursor: move;
     text-align: left;
 }
+
 
 
 

@@ -18,22 +18,22 @@
             </label>
         </div>
         <div class="folders">
-            <div class="folder" id="general-folder" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="folder-title">General</div>
-                <ul id="general-files" class="file-list"></ul>
+            <div class="folder" id="general-folder">
+                <div class="folder-title" onclick="toggleFolder('general-files')">General</div>
+                <ul id="general-files" class="file-list empty"></ul>
             </div>
-            <div class="folder" id="media-folder" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="folder-title">Media</div>
-                <ul id="media-files" class="file-list"></ul>
+            <div class="folder" id="media-folder">
+                <div class="folder-title" onclick="toggleFolder('media-files')">Media</div>
+                <ul id="media-files" class="file-list empty"></ul>
             </div>
-            <div class="folder" id="data-worksheets-folder" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="folder-title">Data Worksheets</div>
-                <ul id="data-worksheets-files" class="file-list"></ul>
+            <div class="folder" id="data-worksheets-folder">
+                <div class="folder-title" onclick="toggleFolder('data-worksheets-files')">Data Worksheets</div>
+                <ul id="data-worksheets-files" class="file-list empty"></ul>
             </div>
         </div>
         <div class="uncategorized">
-            <div class="uncategorized-title">Uncategorized</div>
-            <ul id="uncategorized-files" class="file-list"></ul>
+            <div class="uncategorized-title" onclick="toggleFolder('uncategorized-files')">Uncategorized</div>
+            <ul id="uncategorized-files" class="file-list empty"></ul>
         </div>
     </div>
 </body>

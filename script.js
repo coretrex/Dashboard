@@ -368,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
             listItem.id = `file-${new Date().getTime()}`;
             listItem.ondragstart = drag;
             uncategorizedFiles.appendChild(listItem);
+            uncategorizedFiles.classList.remove('empty');
         }
     });
 });
@@ -387,10 +388,24 @@ function drop(event) {
     event.preventDefault();
     const data = event.dataTransfer.getData("text");
     const fileItem = document.getElementById(data);
-    event.target.closest('.folder').querySelector('.file-list').appendChild(fileItem);
+    const fileList = event.target.closest('.folder').querySelector('.file-list');
+    fileList.appendChild(fileItem);
+    fileList.classList.remove('empty');
+}
+
+// Function to toggle folder expansion
+function toggleFolder(folderId) {
+    const folder = document.getElementById(folderId);
+    folder.classList.toggle('expanded');
+    if (folder.children.length === 0) {
+        folder.classList.add('empty');
+    } else {
+        folder.classList.remove('empty');
+    }
 }
 
 // Function to initialize the page
 function initializePage() {
     // Initialize any specific functionality for this page if needed
 }
+
