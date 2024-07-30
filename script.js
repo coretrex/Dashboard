@@ -352,3 +352,4 @@ function openLightbox(imageSrc) {
         document.body.removeChild(lightbox);
     });
 }
+
