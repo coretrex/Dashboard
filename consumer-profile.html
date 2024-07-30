@@ -56,7 +56,7 @@
         }
 
         .image-display {
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
@@ -69,17 +69,16 @@
         }
 
         #lightbox {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
-            display: none;
         }
 
         #lightbox img {
@@ -97,12 +96,12 @@
                 <p>Click Here to add Your Brand's Consumer Profile</p>
             </label>
         </div>
-        <div id="image-display" class="image-display" style="display: none;">
+        <div id="image-display" class="image-display">
             <img id="uploaded-image" src="#" alt="Uploaded Image">
         </div>
     </div>
 
-    <div id="lightbox" onclick="this.style.display='none'">
+    <div id="lightbox">
         <img id="lightbox-img" src="#" alt="Lightbox Image">
     </div>
 
@@ -120,7 +119,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         uploadedImage.src = e.target.result;
-                        imageDisplay.style.display = 'block';
+                        imageDisplay.style.display = 'flex';
                     };
                     reader.readAsDataURL(file);
                 }
@@ -129,6 +128,10 @@
             uploadedImage.addEventListener('click', function() {
                 lightboxImg.src = uploadedImage.src;
                 lightbox.style.display = 'flex';
+            });
+
+            lightbox.addEventListener('click', function() {
+                lightbox.style.display = 'none';
             });
         });
     </script>
