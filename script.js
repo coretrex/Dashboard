@@ -274,7 +274,7 @@ function initializeFlatpickr() {
         allowInput: true,
         clickOpens: true,
         onClose: function(selectedDates, dateStr, instance) {
-            instance.input.textContent = dateStr;
+            instance.input.innerText = dateStr;
         }
     });
 }
