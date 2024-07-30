@@ -350,3 +350,47 @@ function initializePage() {
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
+
+/*File Manager Code */
+
+// Function to handle file uploads
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('file-input');
+    const uncategorizedFiles = document.getElementById('uncategorized-files');
+
+    fileInput.addEventListener('change', function(event) {
+        const files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const listItem = document.createElement('li');
+            listItem.textContent = file.name;
+            listItem.draggable = true;
+            listItem.id = `file-${new Date().getTime()}`;
+            listItem.ondragstart = drag;
+            uncategorizedFiles.appendChild(listItem);
+        }
+    });
+});
+
+// Function to allow dropping elements
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+// Function to handle drag event
+function drag(event) {
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+// Function to handle drop event
+function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const fileItem = document.getElementById(data);
+    event.target.closest('.folder').querySelector('.file-list').appendChild(fileItem);
+}
+
+// Function to initialize the page
+function initializePage() {
+    // Initialize any specific functionality for this page if needed
+}
