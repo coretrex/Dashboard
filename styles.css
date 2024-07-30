@@ -88,16 +88,14 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     background-color: transparent;
-    width: calc(100% - 40px); /* Ensure the button doesn't take up the entire width */
-    margin: 10px auto; /* Center it within the sidebar with margins */
-    margin-right:5px;
-    margin-left:5px;
+    margin: 10px 10px; /* Add 10px margin on both sides */
     box-sizing: border-box;
 }
 
 .analytics-hub-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
 
 .main-content {
     margin-left: 250px;
