@@ -417,6 +417,10 @@ input[type="text"] {
     font-family: 'Poppins', sans-serif;
 }
 
+.icon-padding {
+    padding-left: 8px; /* Adjust the value to your preference */
+}
+
 /* Other styles */
 .upload-container {
     display: flex;
