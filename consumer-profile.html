@@ -114,6 +114,12 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
 
+            if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg) {
+                console.log('All elements found');
+            } else {
+                console.error('One or more elements not found');
+            }
+
             fileInput.addEventListener('change', function(event) {
                 console.log('File input changed');
                 const file = event.target.files[0];
