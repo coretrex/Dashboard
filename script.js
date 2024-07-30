@@ -301,3 +301,54 @@ function updateTableWidth() {
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html'); // Load the default page (KPIs) on initial load
 });
+
+// Function for strategic roadmap
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('file-input');
+    const imageDisplay = document.getElementById('image-display');
+    const uploadedImage = document.getElementById('uploaded-image');
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImage.src = e.target.result;
+                imageDisplay.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    uploadedImage.addEventListener('click', function() {
+        openLightbox(uploadedImage.src);
+    });
+});
+
+function openLightbox(imageSrc) {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.style.position = 'fixed';
+    lightbox.style.top = '0';
+    lightbox.style.left = '0';
+    lightbox.style.width = '100%';
+    lightbox.style.height = '100%';
+    lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    lightbox.style.display = 'flex';
+    lightbox.style.justifyContent = 'center';
+    lightbox.style.alignItems = 'center';
+    lightbox.style.cursor = 'zoom-out';
+
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.style.maxWidth = '90%';
+    img.style.maxHeight = '90%';
+
+    lightbox.appendChild(img);
+    document.body.appendChild(lightbox);
+
+    lightbox.addEventListener('click', function() {
+        document.body.removeChild(lightbox);
+    });
+}
