@@ -419,7 +419,6 @@ input[type="text"] {
 
 /* styles.css */
 
-
 .upload-container {
     display: flex;
     flex-direction: column;
@@ -480,7 +479,6 @@ input[type="text"] {
     max-width: 90%;
     max-height: 90%;
 }
-
 
 
 /* KPI Specific Page Styles */

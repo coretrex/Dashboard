@@ -304,52 +304,72 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function for strategic roadmap
 
-document.addEventListener('DOMContentLoaded', function() {
+// Function to load content dynamically
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+    
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+            initializePage(); // Initialize the newly loaded content
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
+
+// Initialize page-specific scripts
+function initializePage() {
     const fileInput = document.getElementById('file-input');
     const imageDisplay = document.getElementById('image-display');
     const uploadedImage = document.getElementById('uploaded-image');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                uploadedImage.src = e.target.result;
-                imageDisplay.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg) {
+        console.log('All elements found');
 
-    uploadedImage.addEventListener('click', function() {
-        openLightbox(uploadedImage.src);
-    });
+        fileInput.addEventListener('change', function(event) {
+            console.log('File input changed');
+            const file = event.target.files[0];
+            console.log('Selected file:', file);
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log('File read successfully');
+                    uploadedImage.src = e.target.result;
+                    imageDisplay.style.display = 'flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        uploadedImage.addEventListener('click', function() {
+            console.log('Image clicked');
+            lightboxImg.src = uploadedImage.src;
+            lightbox.style.display = 'flex';
+        });
+
+        lightbox.addEventListener('click', function() {
+            console.log('Lightbox clicked');
+            lightbox.style.display = 'none';
+        });
+    } else {
+        console.error('One or more elements not found');
+    }
+}
+
+// Load the default page (e.g., KPIs) on initial load
+document.addEventListener('DOMContentLoaded', function() {
+    loadContent(new Event('load'), 'kpis.html');
 });
 
-function openLightbox(imageSrc) {
-    const lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.style.position = 'fixed';
-    lightbox.style.top = '0';
-    lightbox.style.left = '0';
-    lightbox.style.width = '100%';
-    lightbox.style.height = '100%';
-    lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    lightbox.style.display = 'flex';
-    lightbox.style.justifyContent = 'center';
-    lightbox.style.alignItems = 'center';
-    lightbox.style.cursor = 'zoom-out';
-
-    const img = document.createElement('img');
-    img.src = imageSrc;
-    img.style.maxWidth = '90%';
-    img.style.maxHeight = '90%';
-
-    lightbox.appendChild(img);
-    document.body.appendChild(lightbox);
-
-    lightbox.addEventListener('click', function() {
-        document.body.removeChild(lightbox);
-    });
-}
 
