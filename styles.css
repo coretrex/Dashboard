@@ -90,6 +90,8 @@ body {
     background-color: transparent;
     width: calc(100% - 40px); /* Ensure the button doesn't take up the entire width */
     margin: 10px auto; /* Center it within the sidebar with margins */
+    margin-right:5px;
+    margin-left:5px;
     box-sizing: border-box;
 }
 
