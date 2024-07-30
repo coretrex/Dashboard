@@ -88,7 +88,8 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     background-color: transparent;
-    margin: 10px 10px; /* Add 10px margin on both sides */
+    width: calc(100% - 20px); /* Full width minus 20px for the margins */
+    margin: 10px; /* 10px margin on all sides */
     box-sizing: border-box;
 }
 
