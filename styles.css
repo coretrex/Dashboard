@@ -106,13 +106,6 @@ body {
     width: calc(100% - 250px);
 }
 
-.header {
-    margin-top: 20px;
-}
-
-.header p.subtext {
-    margin-left:20px;
-}
 
 .header {
     margin-left:20px;
