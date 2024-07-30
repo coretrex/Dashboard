@@ -327,6 +327,29 @@ function loadContent(event, page) {
 }
 
 // Initialize page-specific scripts
+// Function to load content dynamically
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+    
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+            initializePage(); // Initialize the newly loaded content
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
+
+// Initialize page-specific scripts
 function initializePage() {
     const fileInput = document.getElementById('file-input');
     const imageDisplay = document.getElementById('image-display');
@@ -335,11 +358,8 @@ function initializePage() {
     const lightboxImg = document.getElementById('lightbox-img');
     const deleteButton = document.querySelector('.delete-button');
     const fileLabel = document.querySelector('.file-label');
-    const fileLabelText = fileLabel.querySelector('p');
 
-    let isZoomedIn = false;
-
-    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel && fileLabelText) {
+    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel) {
         console.log('All elements found');
 
         fileInput.addEventListener('change', function(event) {
@@ -365,14 +385,10 @@ function initializePage() {
             lightbox.style.display = 'flex';
         });
 
-        lightbox.addEventListener('click', function() {
-            console.log('Lightbox clicked');
-            if (isZoomedIn) {
-                lightbox.classList.remove('zoomed-in');
-                isZoomedIn = false;
-            } else {
-                lightbox.classList.add('zoomed-in');
-                isZoomedIn = true;
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) {
+                console.log('Lightbox clicked outside of image');
+                lightbox.style.display = 'none';
             }
         });
 
@@ -393,6 +409,8 @@ function initializePage() {
 document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
+
+
 
 
 
