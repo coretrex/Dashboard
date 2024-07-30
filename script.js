@@ -1,3 +1,170 @@
+document.addEventListener('DOMContentLoaded', function() {
+    initializePage();
+    loadContent(new Event('load'), 'kpis.html');
+});
+
+// Function to initialize the page
+function initializePage() {
+    initializeFileUploads();
+    initializeFlatpickr();
+}
+
+// Function to handle file uploads
+function initializeFileUploads() {
+    const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
+    const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
+    const uploadedImages = document.querySelectorAll('#uploaded-image, #uploaded-image-annual, #uploaded-image-consumer');
+    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, #lightbox-consumer');
+    const lightboxImgs = document.querySelectorAll('#lightbox-img, #lightbox-img-annual, #lightbox-img-consumer');
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const fileLabels = document.querySelectorAll('.file-label');
+
+    fileInputs.forEach((fileInput, index) => {
+        const imageDisplay = imageDisplays[index];
+        const uploadedImage = uploadedImages[index];
+        const lightbox = lightboxes[index];
+        const lightboxImg = lightboxImgs[index];
+        const deleteButton = deleteButtons[index];
+        const fileLabel = fileLabels[index];
+
+        if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel) {
+            fileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        imageDisplay.style.display = 'flex';
+                        fileLabel.style.display = 'none';
+                        deleteButton.style.display = 'flex';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            uploadedImage.addEventListener('click', function() {
+                lightboxImg.src = uploadedImage.src;
+                lightbox.style.display = 'flex';
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target !== lightboxImg) {
+                    lightbox.style.display = 'none';
+                }
+            });
+
+            deleteButton.addEventListener('click', function() {
+                uploadedImage.src = '#';
+                imageDisplay.style.display = 'none';
+                fileLabel.style.display = 'flex';
+                deleteButton.style.display = 'none';
+                fileInput.value = ''; // Reset the file input
+            });
+        }
+    });
+}
+
+// Function to allow dropping elements
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+// Function to handle drag event
+function drag(event) {
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+// Function to handle drop event
+function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const fileItem = document.getElementById(data);
+    const fileList = event.target.closest('.folder').querySelector('.file-list');
+    fileList.appendChild(fileItem);
+    fileList.classList.remove('empty');
+
+    // Check if "Uncategorized" is now empty
+    const uncategorizedFiles = document.getElementById('uncategorized-files');
+    if (uncategorizedFiles.children.length === 0) {
+        uncategorizedFiles.classList.add('empty');
+    }
+}
+
+// Function to toggle folder expansion
+function toggleFolder(folderId) {
+    const folder = document.getElementById(folderId);
+    folder.classList.toggle('expanded');
+    if (folder.children.length === 0) {
+        folder.classList.add('empty');
+    } else {
+        folder.classList.remove('empty');
+    }
+}
+
+// Function to initialize Flatpickr
+function initializeFlatpickr() {
+    document.querySelectorAll(".date-cell").forEach(cell => {
+        flatpickr(cell, {
+            dateFormat: "m/d/y",
+            allowInput: true,
+            clickOpens: true,
+            onChange: function(selectedDates, dateStr, instance) {
+                cell.innerText = dateStr;
+            }
+        });
+    });
+}
+
+// Function to add a new week column to the KPI table
+function addWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const headerRow = table.rows[0];
+
+    // Insert new header cell after 'Goal' column
+    const newHeaderCell = headerRow.insertCell(2);
+    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
+
+    // Add a new editable cell to each row for the new week
+    for (let i = 1; i < table.rows.length; i++) {
+        const newRowCell = table.rows[i].insertCell(2);
+        newRowCell.contentEditable = "true";
+        newRowCell.innerText = ""; // Ensure the new cell is blank
+    }
+
+    updateTableWidth();
+    initializeFlatpickr();
+}
+
+// Function to update table width and add scroll bar if necessary
+function updateTableWidth() {
+    const tableContainer = document.querySelector('.kpi-table-container');
+    tableContainer.style.overflowX = 'auto';
+    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
+}
+
+// Function to add a new KPI row to the table
+function addKpiRow() {
+    const table = document.getElementById('kpi-table');
+    const newRow = table.insertRow();
+
+    const nameCell = newRow.insertCell(0);
+    nameCell.contentEditable = "true";
+    nameCell.innerText = "New KPI";
+
+    const goalCell = newRow.insertCell(1);
+    goalCell.contentEditable = "true";
+    goalCell.innerText = "Goal";
+
+    for (let i = 2; i < table.rows[0].cells.length; i++) {
+        const newCell = newRow.insertCell(i);
+        newCell.contentEditable = "true";
+        newCell.innerText = "";
+    }
+
+    updateTableWidth();
+    initializeFlatpickr();
+}
+
 // Function to load content dynamically
 function loadContent(event, page) {
     event.preventDefault();
@@ -19,11 +186,6 @@ function loadContent(event, page) {
             console.error('Error loading the page:', error);
         });
 }
-
-// Load the default page (e.g., KPIs) on initial load
-document.addEventListener('DOMContentLoaded', function() {
-    loadContent(new Event('load'), 'kpis.html');
-});
 
 // Growth Calculator functions
 function updateRangeValue(value) {
@@ -223,196 +385,3 @@ document.addEventListener('click', function(event) {
         hideAddTaskModal();
     }
 });
-
-// Function to initialize Flatpickr
-function initializeFlatpickr() {
-    document.querySelectorAll(".date-cell").forEach(cell => {
-        flatpickr(cell, {
-            dateFormat: "m/d/y",
-            allowInput: true,
-            clickOpens: true,
-            onChange: function(selectedDates, dateStr, instance) {
-                cell.textContent = dateStr;
-            }
-        });
-    });
-}
-
-// Function to add a new week column to the KPI table
-function addWeekColumn() {
-    const table = document.getElementById('kpi-table');
-    const headerRow = table.rows[0];
-
-    // Insert new header cell after 'Goal' column
-    const newHeaderCell = headerRow.insertCell(2);
-    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
-
-    // Add a new editable cell to each row for the new week
-    for (let i = 1; i < table.rows.length; i++) {
-        const newRowCell = table.rows[i].insertCell(2);
-        newRowCell.contentEditable = "true";
-        newRowCell.innerText = ""; // Ensure the new cell is blank
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
-// Function to update table width and add scroll bar if necessary
-function updateTableWidth() {
-    const tableContainer = document.querySelector('.kpi-table-container');
-    tableContainer.style.overflowX = 'auto';
-    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-// Function to add a new KPI row to the table
-function addKpiRow() {
-    const table = document.getElementById('kpi-table');
-    const newRow = table.insertRow();
-
-    const nameCell = newRow.insertCell(0);
-    nameCell.contentEditable = "true";
-    nameCell.innerText = "New KPI";
-
-    const goalCell = newRow.insertCell(1);
-    goalCell.contentEditable = "true";
-    goalCell.innerText = "Goal";
-
-    for (let i = 2; i < table.rows[0].cells.length; i++) {
-        const newCell = newRow.insertCell(i);
-        newCell.contentEditable = "true";
-        newCell.innerText = "";
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
-// Function for strategic roadmap & Consumer Profile
-function initializePage() {
-    const fileInput = document.getElementById('file-input');
-    const imageDisplay = document.getElementById('image-display');
-    const uploadedImage = document.getElementById('uploaded-image');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const deleteButton = document.querySelector('.delete-button');
-    const fileLabel = document.querySelector('.file-label');
-
-    if (fileInput && imageDisplay && uploadedImage && lightbox && lightboxImg && deleteButton && fileLabel) {
-        console.log('All elements found');
-
-        fileInput.addEventListener('change', function(event) {
-            console.log('File input changed');
-            const file = event.target.files[0];
-            console.log('Selected file:', file);
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    console.log('File read successfully');
-                    uploadedImage.src = e.target.result;
-                    imageDisplay.style.display = 'flex';
-                    fileLabel.style.display = 'none';
-                    deleteButton.style.display = 'flex';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        uploadedImage.addEventListener('click', function() {
-            console.log('Image clicked');
-            lightboxImg.src = uploadedImage.src;
-            lightbox.style.display = 'flex';
-        });
-
-        lightbox.addEventListener('click', function(e) {
-            if (e.target !== lightboxImg) {
-                console.log('Lightbox clicked outside of image');
-                lightbox.style.display = 'none';
-            }
-        });
-
-        deleteButton.addEventListener('click', function() {
-            console.log('Delete button clicked');
-            uploadedImage.src = '#';
-            imageDisplay.style.display = 'none';
-            fileLabel.style.display = 'flex';
-            deleteButton.style.display = 'none';
-            fileInput.value = ''; // Reset the file input
-        });
-    } else {
-        console.error('One or more elements not found');
-    }
-
-    initializeFlatpickr(); // Initialize Flatpickr for date inputs
-}
-
-// Reinitialize page-specific scripts when new content is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    loadContent(new Event('load'), 'kpis.html');
-});
-
-/*File Manager Code */
-
-// Function to handle file uploads
-document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('file-input');
-    const uncategorizedFiles = document.getElementById('uncategorized-files');
-
-    fileInput.addEventListener('change', function(event) {
-        const files = event.target.files;
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const listItem = document.createElement('li');
-            listItem.textContent = file.name;
-            listItem.draggable = true;
-            listItem.id = `file-${new Date().getTime()}`;
-            listItem.ondragstart = drag;
-            uncategorizedFiles.appendChild(listItem);
-            uncategorizedFiles.classList.remove('empty');
-        }
-    });
-});
-
-// Function to allow dropping elements
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-// Function to handle drag event
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
-}
-
-// Function to handle drop event
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const fileItem = document.getElementById(data);
-    const fileList = event.target.closest('.folder').querySelector('.file-list');
-    fileList.appendChild(fileItem);
-    fileList.classList.remove('empty');
-
-    // Check if "Uncategorized" is now empty
-    const uncategorizedFiles = document.getElementById('uncategorized-files');
-    if (uncategorizedFiles.children.length === 0) {
-        uncategorizedFiles.classList.add('empty');
-    }
-}
-
-// Function to toggle folder expansion
-function toggleFolder(folderId) {
-    const folder = document.getElementById(folderId);
-    folder.classList.toggle('expanded');
-    if (folder.children.length === 0) {
-        folder.classList.add('empty');
-    } else {
-        folder.classList.remove('empty');
-    }
-}
-
-// Function to initialize the page
-function initializePage() {
-    // Initialize any specific functionality for this page if needed
-}
-
-
