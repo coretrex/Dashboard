@@ -625,6 +625,13 @@ input[type="text"] {
     border-radius: 5px;
     cursor: grab; /* Indicates draggable item */
     color: white; /* Ensure text color is white */
+    position: relative;
+}
+
+.goal-item .goal-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .goal-item.on-track {
@@ -691,14 +698,16 @@ input[type="text"] {
 
 
 .status-button {
-    padding: 5px 5px; /* Adjust padding to fit text */
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
     color: white;
-    white-space: nowrap; /* Ensure text stays on one line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .status-button.complete-button {
