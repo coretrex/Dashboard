@@ -657,16 +657,36 @@ input[type="text"] {
 }
 
 .status-dropdown.on-track {
-    background-color: darkgreen;
+    background-color: darkgreen !important;
 }
 
 .status-dropdown.on-hold {
-    background-color: darkorange;
+    background-color: darkorange !important;
 }
 
 .status-dropdown.off-track {
-    background-color: darkred;
+    background-color: darkred !important;
 }
+
+/* Status button styles */
+.status-button.complete-button {
+    background-color: darkgreen; /* Initial color */
+    color: white; /* Ensure icon color is white */
+}
+
+/* Darker colors for statuses */
+.status-dropdown.on-track ~ .complete-button {
+    background-color: #004d00; /* Dark green */
+}
+
+.status-dropdown.on-hold ~ .complete-button {
+    background-color: #cc6600; /* Dark orange */
+}
+
+.status-dropdown.off-track ~ .complete-button {
+    background-color: #800000; /* Dark red */
+}
+
 
 .status-button {
     padding: 5px 5px; /* Adjust padding to fit text */
