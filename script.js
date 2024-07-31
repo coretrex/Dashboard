@@ -182,6 +182,7 @@ function addGoal(goalText) {
                     <option value="off-track">Off-Track</option>
                 </select>
                 <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
+                <button class="status-button delete-button" onclick="deleteGoal(this)"><i class="fas fa-trash"></i></button>
             </div>
         `;
         goalList.appendChild(goalItem);
@@ -220,6 +221,11 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
     button.style.backgroundColor = 'grey';
+}
+
+function deleteGoal(button) {
+    const goalItem = button.closest('.goal-item');
+    goalItem.remove();
 }
 
 // Growth Calculator functions
