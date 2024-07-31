@@ -657,22 +657,18 @@ input[type="text"] {
 }
 
 .status-dropdown.on-track {
-    background-color: darkgreen !important;
+    background-color: darkgreen;
 }
 
 .status-dropdown.on-hold {
-    background-color: darkorange !important;
+    background-color: darkorange;
 }
 
 .status-dropdown.off-track {
-    background-color: darkred !important;
+    background-color: darkred;
 }
 
-/* Status button styles */
-.status-button.complete-button {
-    background-color: darkgreen; /* Initial color */
-    color: white; /* Ensure icon color is white */
-}
+
 
 /* Darker colors for statuses */
 .status-dropdown.on-track ~ .complete-button {
