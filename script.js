@@ -176,16 +176,16 @@ function addGoal(goalText) {
         goalItem.innerHTML = `
             <span class="goal-text">${goalText}</span>
             <div class="goal-status">
-                <select class="status-dropdown" onchange="setGoalStatusDropdown(this)">
+                <select class="status-dropdown on-track" onchange="setGoalStatusDropdown(this)">
                     <option value="on-track" selected>On-Track</option>
                     <option value="on-hold">On-Hold</option>
                     <option value="off-track">Off-Track</option>
                 </select>
                 <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
-                <button class="status-button delete-button" onclick="deleteGoal(this)"><i class="fas fa-trash"></i></button>
             </div>
         `;
         goalList.appendChild(goalItem);
+        updateDropdownColor(goalItem.querySelector('.status-dropdown'), 'on-track');
     }
 }
 
@@ -209,17 +209,6 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
 }
-
-function deleteGoal(button) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.remove();
-}
-
-
-
-
-
-
 
 
 // Growth Calculator functions
