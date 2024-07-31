@@ -619,6 +619,7 @@ input[type="text"] {
     margin-bottom: 10px;
     border: 2px solid;
     border-radius: 5px;
+    cursor: grab; /* Indicates draggable item */
 }
 
 .goal-item.on-track {
@@ -646,13 +647,14 @@ input[type="text"] {
 }
 
 .status-button {
-    padding: 5px 10px;
+    padding: 5px 5px; /* Adjust padding to fit text */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
     color: white;
+    white-space: nowrap; /* Ensure text stays on one line */
 }
 
 .status-button.on-track-button {
@@ -679,6 +681,11 @@ input[type="text"] {
     font-size: 1rem;
     color: white;
 }
+
+.sortable-ghost {
+    opacity: 0.4;
+}
+
 
 
 

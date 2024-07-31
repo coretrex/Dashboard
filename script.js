@@ -126,6 +126,12 @@ function initializeQuarterlyGoalsPage() {
             goalInput.placeholder = 'Deploy A+ across all SKUs...';
         }
     });
+
+    // Initialize sortable for the goal list
+    new Sortable(document.getElementById('goal-list'), {
+        animation: 150,
+        ghostClass: 'sortable-ghost'
+    });
 }
 
 function startCountdown() {
@@ -190,6 +196,7 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
 }
+
 
 
 
