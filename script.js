@@ -14,7 +14,7 @@ function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
     const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
     const uploadedImages = document.querySelectorAll('#uploaded-image, #uploaded-image-annual, #uploaded-image-consumer');
-    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, '#lightbox-consumer');
+    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, #lightbox-consumer');
     const lightboxImgs = document.querySelectorAll('#lightbox-img, #lightbox-img-annual, #lightbox-img-consumer');
     const deleteButtons = document.querySelectorAll('.delete-button');
     const fileLabels = document.querySelectorAll('.file-label');
