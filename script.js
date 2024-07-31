@@ -64,43 +64,6 @@ function initializeFileUploads() {
     });
 }
 
-// Function to allow dropping elements
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-// Function to handle drag event
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
-}
-
-// Function to handle drop event
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const fileItem = document.getElementById(data);
-    const fileList = event.target.closest('.folder').querySelector('.file-list');
-    fileList.appendChild(fileItem);
-    fileList.classList.remove('empty');
-
-    // Check if "Uncategorized" is now empty
-    const uncategorizedFiles = document.getElementById('uncategorized-files');
-    if (uncategorizedFiles.children.length === 0) {
-        uncategorizedFiles.classList.add('empty');
-    }
-}
-
-// Function to toggle folder expansion
-function toggleFolder(folderId) {
-    const folder = document.getElementById(folderId);
-    folder.classList.toggle('expanded');
-    if (folder.children.length === 0) {
-        folder.classList.add('empty');
-    } else {
-        folder.classList.remove('empty');
-    }
-}
-
 // Function to initialize Flatpickr
 function initializeFlatpickr() {
     document.querySelectorAll(".date-cell").forEach(cell => {
@@ -115,61 +78,11 @@ function initializeFlatpickr() {
     });
 }
 
-// Function to add a new week column to the KPI table
-function addWeekColumn() {
-    const table = document.getElementById('kpi-table');
-    const headerRow = table.rows[0];
-
-    // Insert new header cell after 'Goal' column
-    const newHeaderCell = headerRow.insertCell(2);
-    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
-
-    // Add a new editable cell to each row for the new week
-    for (let i = 1; i < table.rows.length; i++) {
-        const newRowCell = table.rows[i].insertCell(2);
-        newRowCell.contentEditable = "true";
-        newRowCell.innerText = ""; // Ensure the new cell is blank
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
-// Function to update table width and add scroll bar if necessary
-function updateTableWidth() {
-    const tableContainer = document.querySelector('.kpi-table-container');
-    tableContainer.style.overflowX = 'auto';
-    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-// Function to add a new KPI row to the table
-function addKpiRow() {
-    const table = document.getElementById('kpi-table');
-    const newRow = table.insertRow();
-
-    const nameCell = newRow.insertCell(0);
-    nameCell.contentEditable = "true";
-    nameCell.innerText = "New KPI";
-
-    const goalCell = newRow.insertCell(1);
-    goalCell.contentEditable = "true";
-    goalCell.innerText = "Goal";
-
-    for (let i = 2; i < table.rows[0].cells.length; i++) {
-        const newCell = newRow.insertCell(i);
-        newCell.contentEditable = "true";
-        newCell.innerText = "";
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
 // Function to load content dynamically
 function loadContent(event, page) {
     event.preventDefault();
     console.log(`Loading content from ${page}`);
-    
+
     fetch(page)
         .then(response => {
             if (!response.ok) {
@@ -180,11 +93,68 @@ function loadContent(event, page) {
         .then(data => {
             console.log(`Content loaded from ${page}`);
             document.getElementById('main-content').innerHTML = data;
-            initializePage(); // Initialize the newly loaded content
+
+            // Re-initialize the page-specific content
+            if (page === 'quarterly-goals.html') {
+                initializeQuarterlyGoalsPage();
+            } else {
+                initializePage(); // Initialize the newly loaded content
+            }
         })
         .catch(error => {
             console.error('Error loading the page:', error);
         });
+}
+
+// Initialize the Quarterly Goals Page
+function initializeQuarterlyGoalsPage() {
+    console.log('Initializing Quarterly Goals Page');
+    startCountdown();
+    document.getElementById('new-goal-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            console.log('Enter key pressed');
+            addGoal(event.target.value);
+            event.target.value = '';
+        }
+    });
+}
+
+function startCountdown() {
+    console.log('Starting countdown');
+    const countdownTimer = document.getElementById('countdown-timer');
+    const countdownText = document.getElementById('countdown-text');
+
+    function updateCountdown() {
+        const now = new Date();
+        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
+        const nextQuarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
+        if (nextQuarterStart <= now) {
+            nextQuarterStart.setFullYear(nextQuarterStart.getFullYear() + 1);
+        }
+
+        const diff = nextQuarterStart - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownText.textContent = `Until the end of Q${currentQuarter}`;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+}
+
+function addGoal(goalText) {
+    console.log('Adding Goal:', goalText);
+    if (goalText.trim() !== '') {
+        const goalList = document.getElementById('goal-list');
+        const goalItem = document.createElement('li');
+        goalItem.textContent = goalText;
+        goalList.appendChild(goalItem);
+    }
 }
 
 // Growth Calculator functions
@@ -385,60 +355,3 @@ document.addEventListener('click', function(event) {
         hideAddTaskModal();
     }
 });
-
-// Timer and goal management
-document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname.includes('quarterly-goals.html')) {
-        initializeQuarterlyGoalsPage();
-    }
-});
-
-function initializeQuarterlyGoalsPage() {
-    console.log('Initializing Quarterly Goals Page');
-    startCountdown();
-    document.getElementById('new-goal-input').addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            console.log('Enter key pressed');
-            addGoal(event.target.value);
-            event.target.value = '';
-        }
-    });
-}
-
-function startCountdown() {
-    const countdownTimer = document.getElementById('countdown-timer');
-    const countdownText = document.getElementById('countdown-text');
-
-    function updateCountdown() {
-        const now = new Date();
-        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
-        const nextQuarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
-        if (nextQuarterStart <= now) {
-            nextQuarterStart.setFullYear(nextQuarterStart.getFullYear() + 1);
-        }
-
-        const diff = nextQuarterStart - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        countdownText.textContent = `Until the end of Q${currentQuarter}`;
-
-        setTimeout(updateCountdown, 1000);
-    }
-
-    updateCountdown();
-}
-
-function addGoal(goalText) {
-    console.log('Adding Goal:', goalText);
-    if (goalText.trim() !== '') {
-        const goalList = document.getElementById('goal-list');
-        const goalItem = document.createElement('li');
-        goalItem.textContent = goalText;
-        goalList.appendChild(goalItem);
-    }
-}
-
