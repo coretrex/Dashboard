@@ -110,11 +110,20 @@ function loadContent(event, page) {
 function initializeQuarterlyGoalsPage() {
     console.log('Initializing Quarterly Goals Page');
     startCountdown();
-    document.getElementById('new-goal-input').addEventListener('keydown', function(event) {
+    const goalInput = document.getElementById('new-goal-input');
+    goalInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             console.log('Enter key pressed');
             addGoal(event.target.value);
             event.target.value = '';
+        }
+    });
+    goalInput.addEventListener('focus', function() {
+        goalInput.placeholder = '';
+    });
+    goalInput.addEventListener('blur', function() {
+        if (goalInput.value.trim() === '') {
+            goalInput.placeholder = 'Deploy A+ across all SKUs...';
         }
     });
 }
@@ -139,10 +148,10 @@ function startCountdown() {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         countdownTimer.innerHTML = `
-            <span class="number">${days}</span><span class="unit">d</span>
-            <span class="number">${hours}</span><span class="unit">h</span>
-            <span class="number">${minutes}</span><span class="unit">m</span>
-            <span class="number">${seconds}</span><span class="unit">s</span>
+            <span class="number">${days}</span><span class="unit">D</span>
+            <span class="number">${hours}</span><span class="unit">H</span>
+            <span class="number">${minutes}</span><span class="unit">M</span>
+            <span class="number">${seconds}</span><span class="unit">S</span>
         `;
         countdownText.textContent = `Until the end of Q${currentQuarter}`;
 
@@ -151,7 +160,6 @@ function startCountdown() {
 
     updateCountdown();
 }
-
 
 function addGoal(goalText) {
     console.log('Adding Goal:', goalText);
