@@ -553,6 +553,19 @@ input[type="text"] {
     font-size: 4rem;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.countdown-timer .number {
+    font-weight: 700; /* Extra bold */
+}
+
+.countdown-timer .unit {
+    font-weight: 300; /* Thin weight */
+    text-transform: uppercase;
 }
 
 .countdown-text {
@@ -597,6 +610,7 @@ input[type="text"] {
     padding: 0;
     font-size: 1.2rem;
 }
+
 
 
 

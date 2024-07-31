@@ -138,7 +138,12 @@ function startCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownTimer.innerHTML = `
+            <span class="number">${days}</span><span class="unit">D</span>
+            <span class="number">${hours}</span><span class="unit">H</span>
+            <span class="number">${minutes}</span><span class="unit">M</span>
+            <span class="number">${seconds}</span><span class="unit">S</span>
+        `;
         countdownText.textContent = `Until the end of Q${currentQuarter}`;
 
         setTimeout(updateCountdown, 1000);
@@ -146,6 +151,7 @@ function startCountdown() {
 
     updateCountdown();
 }
+
 
 function addGoal(goalText) {
     console.log('Adding Goal:', goalText);
