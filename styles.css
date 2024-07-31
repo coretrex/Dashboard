@@ -671,10 +671,6 @@ input[type="text"] {
     background-color: blue;
 }
 
-.status-button.delete-button {
-    background-color: darkred;
-}
-
 .goal-text {
     flex-grow: 1;
 }
@@ -683,6 +679,7 @@ input[type="text"] {
     font-size: 1rem;
     color: white;
 }
+
 
 
 

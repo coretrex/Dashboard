@@ -174,7 +174,6 @@ function addGoal(goalText) {
                 <button class="status-button on-hold-button" onclick="setGoalStatus(this, 'on-hold')">On-Hold</button>
                 <button class="status-button off-track-button" onclick="setGoalStatus(this, 'off-track')">Off-Track</button>
                 <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
-                <button class="status-button delete-button" onclick="deleteGoal(this)"><i class="fas fa-trash"></i></button>
             </div>
         `;
         goalList.appendChild(goalItem);
@@ -192,10 +191,6 @@ function completeGoal(button) {
     goalItem.style.order = '1'; // Move completed items to the bottom
 }
 
-function deleteGoal(button) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.remove();
-}
 
 
 
