@@ -150,8 +150,8 @@ function startCountdown() {
         const diff = nextQuarterStart - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / 60);
+        const seconds = Math.floor((diff % 60));
 
         countdownTimer.innerHTML = `
             <span class="number">${days}</span><span class="unit">d</span>
@@ -419,10 +419,53 @@ function drop(event) {
     }
 }
 
-// Add event listener for document to handle modal close on outside click
-document.addEventListener('click', function(event) {
-    const modal = document.getElementById('add-task-modal');
-    if (event.target === modal) {
-        hideAddTaskModal();
+// Function to add a new week column to the KPI table
+function addWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const headerRow = table.rows[0];
+
+    // Insert new header cell after 'Goal' column
+    const newHeaderCell = headerRow.insertCell(2);
+    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
+
+    // Add a new editable cell to each row for the new week
+    for (let i = 1; i < table.rows.length; i++) {
+        const newRowCell = table.rows[i].insertCell(2);
+        newRowCell.contentEditable = "true";
+        newRowCell.innerText = ""; // Ensure the new cell is blank
     }
-});
+
+    updateTableWidth();
+    initializeFlatpickr();
+}
+
+// Function to add a new KPI row to the KPI table
+function addKpiRow() {
+    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const kpiCell = newRow.insertCell(0);
+    kpiCell.contentEditable = "true";
+    kpiCell.innerText = "New KPI";
+
+    const goalCell = newRow.insertCell(1);
+    goalCell.contentEditable = "true";
+    goalCell.innerText = "New Goal";
+
+    // Add new editable cells for each week column
+    const numOfWeeks = document.getElementById('kpi-table').rows[0].cells.length - 2; // excluding KPI and Goal columns
+    for (let i = 0; i < numOfWeeks; i++) {
+        const weekCell = newRow.insertCell(2 + i);
+        weekCell.contentEditable = "true";
+        weekCell.innerText = "";
+    }
+
+    initializeFlatpickr();
+}
+
+// Function to update table width and add scroll bar if necessary
+function updateTableWidth() {
+    const tableContainer = document.querySelector('.kpi-table-container');
+    tableContainer.style.overflowX = 'auto';
+    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
+}
