@@ -191,6 +191,11 @@ function addGoal(goalText) {
     }
 }
 
+function deleteGoal(button) {
+    const goalItem = button.closest('.goal-item');
+    goalItem.remove();
+}
+
 function setGoalStatusDropdown(select) {
     const goalItem = select.closest('.goal-item');
     goalItem.className = `goal-item ${select.value}`;
@@ -221,11 +226,6 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
     button.style.backgroundColor = 'grey';
-}
-
-function deleteGoal(button) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.remove();
 }
 
 // Growth Calculator functions

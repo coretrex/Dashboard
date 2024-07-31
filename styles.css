@@ -542,6 +542,12 @@ input[type="text"] {
     text-align: left;
 }
 
+.status-button.delete-button {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .quarterly-goals-container {
     padding: 20px;
