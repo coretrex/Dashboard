@@ -617,25 +617,25 @@ input[type="text"] {
     align-items: center;
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid;
     border-radius: 5px;
     cursor: grab; /* Indicates draggable item */
+    color: white; /* Ensure text color is white */
 }
 
 .goal-item.on-track {
-    border-color: green;
+    background-color: green;
 }
 
 .goal-item.on-hold {
-    border-color: orange;
+    background-color: orange;
 }
 
 .goal-item.off-track {
-    border-color: red;
+    background-color: red;
 }
 
 .goal-item.completed {
-    border-color: grey;
+    background-color: grey;
     color: grey;
     background-color: #f0f0f0;
     order: 1;
@@ -685,11 +685,6 @@ input[type="text"] {
 .sortable-ghost {
     opacity: 0.4;
 }
-
-
-
-
-
 
 
 /* Other styles */

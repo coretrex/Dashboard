@@ -201,6 +201,7 @@ function completeGoal(button) {
 
 
 
+
 // Growth Calculator functions
 function updateRangeValue(value) {
     document.getElementById('rangeValue').innerText = parseFloat(value).toFixed(2) + '%';
