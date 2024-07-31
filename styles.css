@@ -633,6 +633,13 @@ input[type="text"] {
     border-color: red;
 }
 
+.goal-item.completed {
+    border-color: grey;
+    color: grey;
+    background-color: #f0f0f0;
+    order: 1;
+}
+
 .goal-status {
     display: flex;
     gap: 5px;
@@ -660,12 +667,17 @@ input[type="text"] {
     background-color: red;
 }
 
+.status-button.complete-button {
+    background-color: grey;
+}
 
+.status-button.delete-button {
+    background-color: darkred;
+}
 
-
-
-
-
+.goal-text {
+    flex-grow: 1;
+}
 
 
 
