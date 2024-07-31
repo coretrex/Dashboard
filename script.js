@@ -394,9 +394,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeQuarterlyGoalsPage() {
+    console.log('Initializing Quarterly Goals Page');
     startCountdown();
     document.getElementById('new-goal-input').addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
+            console.log('Enter key pressed');
             addGoal(event.target.value);
             event.target.value = '';
         }
@@ -431,6 +433,7 @@ function startCountdown() {
 }
 
 function addGoal(goalText) {
+    console.log('Adding Goal:', goalText);
     if (goalText.trim() !== '') {
         const goalList = document.getElementById('goal-list');
         const goalItem = document.createElement('li');
@@ -438,3 +441,4 @@ function addGoal(goalText) {
         goalList.appendChild(goalItem);
     }
 }
+
