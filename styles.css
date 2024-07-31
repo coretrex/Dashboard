@@ -762,6 +762,10 @@ input[type="text"] {
     cursor: pointer;
 }
 
+.status-button.delete-button:hover {
+    background-color: #333; /* Very dark grey on hover */
+}
+
 #lightbox {
     display: none;
     position: fixed;
