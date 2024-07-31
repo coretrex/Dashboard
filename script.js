@@ -176,9 +176,11 @@ function addGoal(goalText) {
         goalItem.innerHTML = `
             <span class="goal-text">${goalText}</span>
             <div class="goal-status">
-                <button class="status-button on-track-button" onclick="setGoalStatus(this, 'on-track')">On-Track</button>
-                <button class="status-button on-hold-button" onclick="setGoalStatus(this, 'on-hold')">On-Hold</button>
-                <button class="status-button off-track-button" onclick="setGoalStatus(this, 'off-track')">Off-Track</button>
+                <select class="status-dropdown" onchange="setGoalStatusDropdown(this)">
+                    <option value="on-track" selected>On-Track</option>
+                    <option value="on-hold">On-Hold</option>
+                    <option value="off-track">Off-Track</option>
+                </select>
                 <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
             </div>
         `;
@@ -186,9 +188,9 @@ function addGoal(goalText) {
     }
 }
 
-function setGoalStatus(button, status) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.className = `goal-item ${status}`;
+function setGoalStatusDropdown(select) {
+    const goalItem = select.closest('.goal-item');
+    goalItem.className = `goal-item ${select.value}`;
 }
 
 function completeGoal(button) {
@@ -196,6 +198,7 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
 }
+
 
 
 

@@ -646,6 +646,17 @@ input[type="text"] {
     gap: 5px;
 }
 
+.status-dropdown {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    color: white;
+    background-color: #333;
+}
+
 .status-button {
     padding: 5px 5px; /* Adjust padding to fit text */
     border: none;
@@ -655,18 +666,6 @@ input[type="text"] {
     font-size: 0.8rem;
     color: white;
     white-space: nowrap; /* Ensure text stays on one line */
-}
-
-.status-button.on-track-button {
-    background-color: green;
-}
-
-.status-button.on-hold-button {
-    background-color: orange;
-}
-
-.status-button.off-track-button {
-    background-color: red;
 }
 
 .status-button.complete-button {
@@ -685,6 +684,7 @@ input[type="text"] {
 .sortable-ghost {
     opacity: 0.4;
 }
+
 
 
 /* Other styles */
