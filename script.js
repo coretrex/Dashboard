@@ -186,6 +186,7 @@ function addGoal(goalText) {
         `;
         goalList.appendChild(goalItem);
         updateDropdownColor(goalItem.querySelector('.status-dropdown'), 'on-track');
+        adjustDoneButtonColor(goalItem.querySelector('.complete-button'), 'on-track');
     }
 }
 
@@ -193,6 +194,7 @@ function setGoalStatusDropdown(select) {
     const goalItem = select.closest('.goal-item');
     goalItem.className = `goal-item ${select.value}`;
     updateDropdownColor(select, select.value);
+    adjustDoneButtonColor(goalItem.querySelector('.complete-button'), select.value);
 }
 
 function updateDropdownColor(select, status) {
@@ -204,12 +206,21 @@ function updateDropdownColor(select, status) {
     select.style.backgroundColor = colorMap[status];
 }
 
+function adjustDoneButtonColor(button, status) {
+    const darkerColorMap = {
+        'on-track': '#004d00', // Dark green
+        'on-hold': '#cc6600',  // Dark orange
+        'off-track': '#800000' // Dark red
+    };
+    button.style.backgroundColor = darkerColorMap[status];
+}
+
 function completeGoal(button) {
     const goalItem = button.closest('.goal-item');
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
+    button.style.backgroundColor = 'grey';
 }
-
 
 // Growth Calculator functions
 function updateRangeValue(value) {
