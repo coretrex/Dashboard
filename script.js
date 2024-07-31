@@ -148,10 +148,10 @@ function startCountdown() {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         countdownTimer.innerHTML = `
-            <span class="number">${days}</span><span class="unit">D</span>
-            <span class="number">${hours}</span><span class="unit">H</span>
-            <span class="number">${minutes}</span><span class="unit">M</span>
-            <span class="number">${seconds}</span><span class="unit">S</span>
+            <span class="number">${days}</span><span class="unit">d</span>
+            <span class="number">${hours}</span><span class="unit">h</span>
+            <span class="number">${minutes}</span><span class="unit">m</span>
+            <span class="number">${seconds}</span><span class="unit">s</span>
         `;
         countdownText.textContent = `Until the end of Q${currentQuarter}`;
 
