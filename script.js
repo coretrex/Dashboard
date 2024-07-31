@@ -385,3 +385,56 @@ document.addEventListener('click', function(event) {
         hideAddTaskModal();
     }
 });
+
+// Timer and goal management
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.includes('quarterly-goals.html')) {
+        initializeQuarterlyGoalsPage();
+    }
+});
+
+function initializeQuarterlyGoalsPage() {
+    startCountdown();
+    document.getElementById('new-goal-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            addGoal(event.target.value);
+            event.target.value = '';
+        }
+    });
+}
+
+function startCountdown() {
+    const countdownTimer = document.getElementById('countdown-timer');
+    const countdownText = document.getElementById('countdown-text');
+
+    function updateCountdown() {
+        const now = new Date();
+        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
+        const nextQuarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
+        if (nextQuarterStart <= now) {
+            nextQuarterStart.setFullYear(nextQuarterStart.getFullYear() + 1);
+        }
+
+        const diff = nextQuarterStart - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownText.textContent = `Until the end of Q${currentQuarter}`;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+}
+
+function addGoal(goalText) {
+    if (goalText.trim() !== '') {
+        const goalList = document.getElementById('goal-list');
+        const goalItem = document.createElement('li');
+        goalItem.textContent = goalText;
+        goalList.appendChild(goalItem);
+    }
+}
