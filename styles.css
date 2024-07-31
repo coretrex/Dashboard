@@ -749,10 +749,10 @@ input[type="text"] {
 .delete-button {
     position: absolute;
     top: 0px;
-    right: 10px;
+    right: 6px;
     width: 30px;
     height: 30px;
-    background-color: grey
+    background-color: grey;
     color: white;
     border: none;
     border-radius: 50%;
