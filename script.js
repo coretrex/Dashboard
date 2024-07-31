@@ -14,7 +14,7 @@ function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
     const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
     const uploadedImages = document.querySelectorAll('#uploaded-image, #uploaded-image-annual, #uploaded-image-consumer');
-    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, #lightbox-consumer');
+    const lightboxes = document.querySelectorAll('#lightbox, #lightbox-annual, '#lightbox-consumer');
     const lightboxImgs = document.querySelectorAll('#lightbox-img, #lightbox-img-annual, #lightbox-img-consumer');
     const deleteButtons = document.querySelectorAll('.delete-button');
     const fileLabels = document.querySelectorAll('.file-label');
@@ -182,6 +182,7 @@ function addGoal(goalText) {
                     <option value="off-track">Off-Track</option>
                 </select>
                 <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
+                <button class="status-button delete-button" onclick="deleteGoal(this)"><i class="fas fa-trash"></i></button>
             </div>
         `;
         goalList.appendChild(goalItem);
@@ -191,6 +192,16 @@ function addGoal(goalText) {
 function setGoalStatusDropdown(select) {
     const goalItem = select.closest('.goal-item');
     goalItem.className = `goal-item ${select.value}`;
+    updateDropdownColor(select, select.value);
+}
+
+function updateDropdownColor(select, status) {
+    const colorMap = {
+        'on-track': 'darkgreen',
+        'on-hold': 'darkorange',
+        'off-track': 'darkred'
+    };
+    select.style.backgroundColor = colorMap[status];
 }
 
 function completeGoal(button) {
@@ -198,6 +209,12 @@ function completeGoal(button) {
     goalItem.className = 'goal-item completed';
     goalItem.style.order = '1'; // Move completed items to the bottom
 }
+
+function deleteGoal(button) {
+    const goalItem = button.closest('.goal-item');
+    goalItem.remove();
+}
+
 
 
 
