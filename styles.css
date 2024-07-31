@@ -640,7 +640,7 @@ input[type="text"] {
 .goal-status {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Adjust the gap as needed */
 }
 
 .status-dropdown {
@@ -652,6 +652,8 @@ input[type="text"] {
     font-size: 0.8rem;
     color: white;
     background-color: darkgreen; /* Initial color for On-Track */
+    height: 30px; /* Ensure dropdown has consistent height */
+    line-height: 30px; /* Center text vertically */
 }
 
 .status-dropdown.on-track {
@@ -692,6 +694,7 @@ input[type="text"] {
 .status-button i {
     font-size: 1rem;
     color: white;
+    line-height: 1; /* Ensure icons are centered */
 }
 
 .sortable-ghost {
