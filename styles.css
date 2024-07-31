@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -95,7 +94,6 @@ body {
     box-sizing: border-box;
 }
 
-
 .analytics-hub-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -105,7 +103,6 @@ body {
     padding: 20px;
     width: calc(100% - 250px);
 }
-
 
 .header {
     margin-left:20px;
@@ -542,13 +539,6 @@ input[type="text"] {
     text-align: left;
 }
 
-.status-button.delete-button {
-    background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .quarterly-goals-container {
     padding: 20px;
     text-align: center;
@@ -628,12 +618,6 @@ input[type="text"] {
     position: relative;
 }
 
-.goal-item .goal-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .goal-item.on-track {
     background-color: green;
 }
@@ -655,7 +639,8 @@ input[type="text"] {
 
 .goal-status {
     display: flex;
-    gap: 15px; /* Increased padding */
+    align-items: center;
+    gap: 10px;
 }
 
 .status-dropdown {
@@ -681,22 +666,6 @@ input[type="text"] {
     background-color: darkred;
 }
 
-
-
-/* Darker colors for statuses */
-.status-dropdown.on-track ~ .complete-button {
-    background-color: #004d00; /* Dark green */
-}
-
-.status-dropdown.on-hold ~ .complete-button {
-    background-color: #cc6600; /* Dark orange */
-}
-
-.status-dropdown.off-track ~ .complete-button {
-    background-color: #800000; /* Dark red */
-}
-
-
 .status-button {
     padding: 5px;
     border: none;
@@ -705,17 +674,18 @@ input[type="text"] {
     font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
     color: white;
+    background-color: darkgreen; /* Initial color for the complete button */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.status-button.complete-button {
-    background-color: darkgreen;
-}
-
-.goal-text {
-    flex-grow: 1;
+.status-button.delete-button {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .status-button i {
@@ -726,9 +696,6 @@ input[type="text"] {
 .sortable-ghost {
     opacity: 0.4;
 }
-
-
-
 
 /* Other styles */
 .upload-container {
@@ -813,8 +780,6 @@ input[type="text"] {
     transform: scale(2);
 }
 
-
-
 /* KPI Specific Page Styles */
 .header .subtext {
     font-size: 14px;
@@ -822,8 +787,6 @@ input[type="text"] {
     margin-top: -10px;
     color: #cccccc; /* Light color for contrast */
 }
-
-
 
 .kpi-container {
     padding: 20px;
