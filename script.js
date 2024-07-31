@@ -148,10 +148,10 @@ function startCountdown() {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         countdownTimer.innerHTML = `
-            <span class="number">${days}</span><span class="unit">d</span>
-            <span class="number">${hours}</span><span class="unit">h</span>
-            <span class="number">${minutes}</span><span class="unit">m</span>
-            <span class="number">${seconds}</span><span class="unit">s</span>
+            <span class="number">${days}</span><span class="unit">D</span>
+            <span class="number">${hours}</span><span class="unit">H</span>
+            <span class="number">${minutes}</span><span class="unit">M</span>
+            <span class="number">${seconds}</span><span class="unit">S</span>
         `;
         countdownText.textContent = `Until the end of Q${currentQuarter}`;
 
@@ -166,10 +166,24 @@ function addGoal(goalText) {
     if (goalText.trim() !== '') {
         const goalList = document.getElementById('goal-list');
         const goalItem = document.createElement('li');
-        goalItem.textContent = goalText;
+        goalItem.className = 'goal-item on-track'; // Default status
+        goalItem.innerHTML = `
+            <span class="goal-text">${goalText}</span>
+            <div class="goal-status">
+                <button class="status-button on-track-button" onclick="setGoalStatus(this, 'on-track')">On-Track</button>
+                <button class="status-button on-hold-button" onclick="setGoalStatus(this, 'on-hold')">On-Hold</button>
+                <button class="status-button off-track-button" onclick="setGoalStatus(this, 'off-track')">Off-Track</button>
+            </div>
+        `;
         goalList.appendChild(goalItem);
     }
 }
+
+function setGoalStatus(button, status) {
+    const goalItem = button.closest('.goal-item');
+    goalItem.className = `goal-item ${status}`;
+}
+
 
 // Growth Calculator functions
 function updateRangeValue(value) {
