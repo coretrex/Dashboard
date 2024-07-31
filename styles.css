@@ -565,7 +565,6 @@ input[type="text"] {
 
 .countdown-timer .unit {
     font-weight: 300; /* Thin weight */
-    text-transform: uppercase;
 }
 
 .countdown-text {
