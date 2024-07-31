@@ -585,7 +585,7 @@ input[type="text"] {
     border: none;
     border-bottom: 2px solid lightgrey;
     background: transparent;
-    color: white;
+    color: white !important; /* Ensure text color is white */
     font-family: 'Poppins', sans-serif;
     text-align: center;
     outline: none;
@@ -610,6 +610,7 @@ input[type="text"] {
     padding: 0;
     font-size: 1.2rem;
 }
+
 
 
 
