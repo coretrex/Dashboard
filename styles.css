@@ -678,6 +678,8 @@ input[type="text"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30px; /* Ensure all buttons have the same height */
+    width: 30px; /* Ensure all buttons have the same width */
 }
 
 .status-button.delete-button {
