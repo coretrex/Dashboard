@@ -788,6 +788,10 @@ input[type="text"] {
     background-color: #0056b3;
 }
 
+.left-justified {
+    justify-content: flex-start;
+}
+
 #lightbox {
     display: none;
     position: fixed;
