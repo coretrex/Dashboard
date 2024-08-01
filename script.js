@@ -134,38 +134,7 @@ function initializeQuarterlyGoalsPage() {
     });
 }
 
-function startCountdown() {
-    console.log('Starting countdown');
-    const countdownTimer = document.getElementById('countdown-timer');
-    const countdownText = document.getElementById('countdown-text');
-
-    function updateCountdown() {
-        const now = new Date();
-        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
-        const nextQuarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
-        if (nextQuarterStart <= now) {
-            nextQuarterStart.setFullYear(nextQuarterStart.getFullYear() + 1);
-        }
-
-        const diff = nextQuarterStart - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / 60);
-        const seconds = Math.floor((diff % 60));
-
-        countdownTimer.innerHTML = `
-            <span class="number">${days}</span><span class="unit">d</span>
-            <span class="number">${hours}</span><span class="unit">h</span>
-            <span class="number">${minutes}</span><span class="unit">m</span>
-            <span class="number">${seconds}</span><span class="unit">s</span>
-        `;
-        countdownText.textContent = `Until the end of Q${currentQuarter}`;
-
-        setTimeout(updateCountdown, 1000);
-    }
-
-    updateCountdown();
-}
+ 
 
 function addGoal(goalText) {
     console.log('Adding Goal:', goalText);
