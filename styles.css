@@ -903,88 +903,82 @@ input[type="text"] {
     background: #0056b3;
 }
 
-/* Vision & Values CSS*/
+/* Vision CSS */
+/* styles.css */
+.vision-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
 
-.card {
+.vision-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vision-module {
     background-color: #ffffff;
     color: #000000;
-    width: 100%;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.card h3 {
+.vision-module h2 {
+    margin-top: 0;
+}
+
+.editable-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.editable-list li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    padding: 5px 0;
 }
 
-.edit-icon {
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.add-icon {
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.content {
-    margin-top: 10px;
-}
-
-.edit-section {
-    margin-top: 20px;
-}
-
-.data-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.core-value-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.core-value-input, .description-input {
+.editable-list li span {
     flex: 1;
     margin-right: 10px;
+}
+
+.editable-list li button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     padding: 5px;
+}
+
+.editable-list li button:hover {
+    background-color: #0056b3;
+}
+
+.editable-item h3 {
+    margin: 10px 0 5px;
+}
+
+.editable-item p {
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: text;
 }
 
-.remove-icon {
-    cursor: pointer;
-    color: red;
-}
-
-.add-core-value, .save-core-value {
-    display: block;
+input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    cursor: pointer;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    text-align: center;
-}
-
-.add-core-value {
-    background-color: #007bff;
-    color: white;
-}
-
-.save-core-value {
-    background-color: #28a745;
-    color: white;
 }
 
 

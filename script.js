@@ -471,72 +471,37 @@ function updateTableWidth() {
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
 
+// Vision Scripting
+
+// script.js
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize any additional functionality here if needed
+    initializePage();
+    loadContent(new Event('load'), 'kpis.html');
 });
 
-function editRow(element) {
-    const row = element.parentElement;
-    const inputs = row.querySelectorAll('input');
-    if (inputs.length === 0) {
-        const textContent = row.textContent.trim();
-        const strongText = row.querySelector('strong').textContent;
-        row.innerHTML = `
-            <input type="text" value="${strongText}" class="core-value-input">
-            <input type="text" value="${textContent.replace(strongText, '').trim()}" class="description-input">
-            <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
-        `;
-    } else {
-        const coreValue = row.querySelector('.core-value-input').value;
-        const description = row.querySelector('.description-input').value;
-        row.innerHTML = `
-            <strong>${coreValue}:</strong> ${description}
-            <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-            <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
-        `;
+function handleAddItem(event, listId, inputId) {
+    if (event.key === 'Enter') {
+        const input = document.getElementById(inputId);
+        const value = input.value.trim();
+        if (value) {
+            addItemToList(listId, value);
+            input.value = '';
+        }
     }
 }
 
-function addCoreValue() {
-    const editSection = document.getElementById('core-values-edit');
-    const newRow = document.createElement('div');
-    newRow.classList.add('core-value-row');
-    newRow.innerHTML = `
-        <input type="text" placeholder="Core Value" class="core-value-input">
-        <input type="text" placeholder="Description" class="description-input">
-        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
-    `;
-    editSection.insertBefore(newRow, editSection.querySelector('.save-core-value'));
-    editSection.style.display = "block";
+function addItemToList(listId, value) {
+    const list = document.getElementById(listId);
+    const listItem = document.createElement('li');
+    const span = document.createElement('span');
+    span.textContent = value;
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = function() {
+        list.removeChild(listItem);
+    };
+    listItem.appendChild(span);
+    listItem.appendChild(deleteButton);
+    list.appendChild(listItem);
 }
-
-function removeRow(element) {
-    element.parentElement.remove();
-}
-
-function saveCoreValues() {
-    const coreValues = [];
-    document.querySelectorAll('.core-value-row').forEach(row => {
-        const coreValue = row.querySelector('.core-value-input').value;
-        const description = row.querySelector('.description-input').value;
-        if (coreValue && description) {
-            coreValues.push({ coreValue, description });
-        }
-    });
-
-    const content = document.getElementById('core-values');
-    content.innerHTML = '';
-    coreValues.forEach(item => {
-        const valueItem = document.createElement('div');
-        valueItem.classList.add('data-row');
-        valueItem.innerHTML = `
-            <strong>${item.coreValue}:</strong> ${item.description}
-            <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-            <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
-        `;
-        content.appendChild(valueItem);
-    });
-
-    toggleEdit('core-values');
-}
-

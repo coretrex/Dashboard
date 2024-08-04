@@ -3,90 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreTrex Vision</title>
+    <title>Vision</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="main-content">
-        <div class="header">
-            <h1>Vision</h1>
-            <h2>Define and communicate our core values, purpose, niche, and go-to-market strategy.</h2>
+    <div class="header">
+        <h1>Vision</h1>
+    </div>
+    <div class="vision-container">
+        <div class="vision-column">
+            <div class="vision-module" id="core-values">
+                <h2>Core Values</h2>
+                <ul class="editable-list" id="core-values-list"></ul>
+                <input type="text" id="core-values-input" placeholder="Add Core Value" onkeypress="handleAddItem(event, 'core-values-list', 'core-values-input')">
+            </div>
+            <div class="vision-module" id="purpose-cause-passion">
+                <h2>Purpose/Cause/Passion</h2>
+                <ul class="editable-list" id="purpose-cause-passion-list"></ul>
+                <input type="text" id="purpose-cause-passion-input" placeholder="Add Purpose, Cause, Passion" onkeypress="handleAddItem(event, 'purpose-cause-passion-list', 'purpose-cause-passion-input')">
+            </div>
+            <div class="vision-module" id="niche">
+                <h2>Niche</h2>
+                <ul class="editable-list" id="niche-list"></ul>
+                <input type="text" id="niche-input" placeholder="Add Niche" onkeypress="handleAddItem(event, 'niche-list', 'niche-input')">
+            </div>
         </div>
-        <div class="container">
-            <div class="card">
-                <h3>Core Values</h3>
-                <div id="core-values" class="content">
-                    <div class="data-row">
-                        <strong>Integrity:</strong> Acting with honesty and honor without compromising the truth.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
-                    </div>
+        <div class="vision-column">
+            <div class="vision-module" id="go-to-market-strategy">
+                <h2>Go to Market Strategy</h2>
+                <div class="editable-item">
+                    <h3>Target Market</h3>
+                    <p contenteditable="true">Edit Target Market</p>
                 </div>
-                <div id="core-values-edit" class="edit-section" style="display:none;">
-                    <div class="core-value-row">
-                        <input type="text" placeholder="Core Value" class="core-value-input">
-                        <input type="text" placeholder="Description" class="description-input">
-                        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
-                    </div>
-                    <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
+                <div class="editable-item">
+                    <h3>Unique Value Proposition</h3>
+                    <p contenteditable="true">Edit Unique Value Proposition</p>
                 </div>
-            </div>
-            <div class="card">
-                <h3>Purpose/Cause/Passion</h3>
-                <div id="purpose" class="content">
-                    <div class="data-row">
-                        <strong>Customer Satisfaction:</strong> Ensuring customers are satisfied with our services.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
-                    </div>
+                <div class="editable-item">
+                    <h3>Proven Process</h3>
+                    <p contenteditable="true">Edit Proven Process</p>
                 </div>
-                <div id="purpose-edit" class="edit-section" style="display:none;">
-                    <div class="core-value-row">
-                        <input type="text" placeholder="Purpose" class="core-value-input">
-                        <input type="text" placeholder="Description" class="description-input">
-                        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
-                    </div>
-                    <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Niche</h3>
-                <div id="niche" class="content">
-                    <div class="data-row">
-                        We serve craft consumers.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
-                    </div>
-                </div>
-                <div id="niche-edit" class="edit-section" style="display:none;">
-                    <div class="core-value-row">
-                        <input type="text" placeholder="Niche" class="core-value-input">
-                        <input type="text" placeholder="Description" class="description-input">
-                        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
-                    </div>
-                    <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Go to Market Strategy</h3>
-                <div id="market-strategy" class="content">
-                    <div class="data-row">
-                        <strong>Target Market:</strong> Small and medium-sized enterprises.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                    </div>
-                    <div class="data-row">
-                        <strong>Unique Value Proposition:</strong> Offering the best customer service.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                    </div>
-                    <div class="data-row">
-                        <strong>Proven Process:</strong> A streamlined process to ensure quality.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                    </div>
-                    <div class="data-row">
-                        <strong>Guarantee:</strong> Satisfaction guaranteed or your money back.
-                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
-                    </div>
+                <div class="editable-item">
+                    <h3>Guarantee</h3>
+                    <p contenteditable="true">Edit Guarantee</p>
                 </div>
             </div>
         </div>
