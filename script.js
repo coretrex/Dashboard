@@ -506,6 +506,7 @@ function addItemToList(listId, value) {
     span.textContent = value;
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteButton.classList.add('delete-icon');
     deleteButton.onclick = function() {
         list.removeChild(listItem);
     };
@@ -522,6 +523,7 @@ function clearText(element) {
         element.textContent = "";
     }
 }
+
 
 
 
