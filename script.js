@@ -477,8 +477,12 @@ function updateTableWidth() {
 
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
-    loadContent(new Event('load'), 'kpis.html');
+    // loadContent(new Event('load'), 'kpis.html'); // Uncomment if needed for loading additional content
 });
+
+function initializePage() {
+    // Initialize any other page-specific content here
+}
 
 function handleAddItem(event, listId, inputId) {
     if (event.key === 'Enter') {
