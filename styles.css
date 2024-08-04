@@ -949,22 +949,24 @@ input[type="text"] {
 }
 
 .editable-list li span {
-    color: #025698; /* Grey color for contrast */
+    color: #000000; /* Black color for regular text */
     word-break: break-word; /* Ensure long words break correctly */
 }
 
 .editable-list li span:first-child {
-    margin-right: 0;
-    display: inline-block;
+    color: #025698; /* Color for bold text */
+    font-weight: bold;
+    padding-left: 20px; /* Padding left for bold text */
+    margin-right: 5px; /* Reduced margin */
 }
 
 .editable-list li span:last-child {
-    margin-left: 5px;
     flex: 1;
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
+    right: 0; /* Fixed to the right side */
     display: inline-block;
 }
 
@@ -1065,6 +1067,7 @@ input[type="text"] {
 .vision-editable-list-container h3 {
     margin: 10px 0 5px; /* Reduced margin for tighter spacing */
 }
+
 
 
 /* Media queries to adjust the input sizes */
