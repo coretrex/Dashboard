@@ -504,14 +504,38 @@ function addItemToList(listId, value) {
     const listItem = document.createElement('li');
     const span = document.createElement('span');
     span.textContent = value;
-    const deleteButton = document.createElement('button');
-    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-    deleteButton.classList.add('delete-icon');
-    deleteButton.onclick = function() {
+    const dropdown = document.createElement('div');
+    dropdown.classList.add('dropdown');
+    
+    const dropdownButton = document.createElement('button');
+    dropdownButton.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+    dropdownButton.classList.add('dropdown-icon');
+
+    const dropdownContent = document.createElement('div');
+    dropdownContent.classList.add('dropdown-content');
+
+    const editOption = document.createElement('a');
+    editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
+    editOption.onclick = function() {
+        const newValue = prompt("Edit value:", value);
+        if (newValue) {
+            span.textContent = newValue;
+        }
+    };
+
+    const deleteOption = document.createElement('a');
+    deleteOption.innerHTML = '<i class="fas fa-trash"></i> Delete';
+    deleteOption.onclick = function() {
         list.removeChild(listItem);
     };
+
+    dropdownContent.appendChild(editOption);
+    dropdownContent.appendChild(deleteOption);
+    dropdown.appendChild(dropdownButton);
+    dropdown.appendChild(dropdownContent);
+
     listItem.appendChild(span);
-    listItem.appendChild(deleteButton);
+    listItem.appendChild(dropdown);
     list.appendChild(listItem);
 }
 
