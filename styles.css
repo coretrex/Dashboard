@@ -943,21 +943,24 @@ input[type="text"] {
 
 .editable-list li {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 5px 0;
     position: relative;
 }
 
 .editable-list li span {
-    flex: 1;
-    margin-right: 10px;
+    color: #025698; /* Grey color for contrast */
     word-break: break-word; /* Ensure long words break correctly */
 }
 
-.editable-list li b {
-    color: #025698;
-    padding-left:20px;
+.editable-list li span:first-child {
+    margin-right: 0;
+    display: inline-block;
+}
+
+.editable-list li span:last-child {
+    margin-left: 5px;
+    flex: 1;
 }
 
 .dropdown {
@@ -1010,10 +1013,6 @@ input[type="text"] {
     padding-bottom: 0; /* Ensure padding bottom is zero */
 }
 
-.vision-editable-list-container h3 {
-    margin: 10px 0 0; /* Reduce the margin between the header and the list items */
-}
-
 input[type="text"] {
     flex: 1;
     padding: 10px;
@@ -1063,7 +1062,9 @@ input[type="text"] {
     color: #0056b3;
 }
 
-
+.vision-editable-list-container h3 {
+    margin: 10px 0 5px; /* Reduced margin for tighter spacing */
+}
 
 
 /* Media queries to adjust the input sizes */
