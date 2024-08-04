@@ -998,11 +998,12 @@ input[type="text"] {
     cursor: text;
 }
 
-.input-container {
+.vision-input-container {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    padding-bottom: 0; /* Ensure padding bottom is zero */
 }
 
 input[type="text"] {
