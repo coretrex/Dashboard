@@ -981,6 +981,7 @@ input[type="text"] {
 .input-container {
     display: flex;
     align-items: center;
+    gap: 10px;
     margin-top: 10px;
 }
 
@@ -989,7 +990,6 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 10px;
 }
 
 .subtext {
@@ -1006,11 +1006,15 @@ input[type="text"] {
     border-radius: 50%;
     cursor: pointer;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-icon:hover {
     background-color: #0056b3;
 }
+
 
 
 
