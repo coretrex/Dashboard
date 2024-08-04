@@ -957,6 +957,7 @@ input[type="text"] {
 
 .editable-list li b {
     color: #025698;
+    padding-left:20px;
 }
 
 .dropdown {
