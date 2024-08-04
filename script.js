@@ -476,7 +476,6 @@ function updateTableWidth() {
 
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
-    // loadContent(new Event('load'), 'kpis.html'); // Uncomment if needed for loading additional content
 });
 
 function initializePage() {
@@ -502,7 +501,7 @@ function addItemToList(listId, value) {
     const list = document.getElementById(listId);
     const listItem = document.createElement('li');
     const span = document.createElement('span');
-    span.textContent = value;
+    span.innerHTML = value;
 
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown');
@@ -516,17 +515,19 @@ function addItemToList(listId, value) {
 
     const editOption = document.createElement('a');
     editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
-    editOption.onclick = function() {
+    editOption.href = '#';
+    editOption.onclick = function () {
         span.contentEditable = true;
         span.focus();
-        span.onblur = function() {
+        span.onblur = function () {
             span.contentEditable = false;
         };
     };
 
     const deleteOption = document.createElement('a');
     deleteOption.innerHTML = '<i class="fas fa-trash"></i> Delete';
-    deleteOption.onclick = function() {
+    deleteOption.href = '#';
+    deleteOption.onclick = function () {
         list.removeChild(listItem);
     };
 
@@ -538,6 +539,20 @@ function addItemToList(listId, value) {
     listItem.appendChild(span);
     listItem.appendChild(dropdown);
     list.appendChild(listItem);
+}
+
+function editField(element) {
+    const span = element.closest('li').querySelector('span');
+    span.contentEditable = true;
+    span.focus();
+    span.onblur = function() {
+        span.contentEditable = false;
+    };
+}
+
+function deleteField(element) {
+    const listItem = element.closest('li');
+    listItem.parentNode.removeChild(listItem);
 }
 
 function clearText(element) {
