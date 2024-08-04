@@ -978,12 +978,18 @@ input[type="text"] {
     cursor: text;
 }
 
-input[type="text"] {
-    width: calc(100% - 40px); /* Adjust width to fit with button */
-    padding: 10px;
+.input-container {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-right: 10px;
 }
 
 .subtext {
@@ -994,9 +1000,6 @@ input[type="text"] {
 }
 
 .add-icon {
-    position: absolute;
-    top: 50px; /* Adjust position as needed */
-    right: 10px; /* Adjust position as needed */
     background-color: #007bff;
     color: white;
     border: none;
@@ -1008,6 +1011,7 @@ input[type="text"] {
 .add-icon:hover {
     background-color: #0056b3;
 }
+
 
 
 
