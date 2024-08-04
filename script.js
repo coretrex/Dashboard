@@ -472,7 +472,6 @@ function updateTableWidth() {
 }
 
 // Vision Scripting
-
 // script.js
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -504,9 +503,10 @@ function addItemToList(listId, value) {
     const listItem = document.createElement('li');
     const span = document.createElement('span');
     span.textContent = value;
+
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown');
-    
+
     const dropdownButton = document.createElement('button');
     dropdownButton.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
     dropdownButton.classList.add('dropdown-icon');
@@ -517,10 +517,11 @@ function addItemToList(listId, value) {
     const editOption = document.createElement('a');
     editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
     editOption.onclick = function() {
-        const newValue = prompt("Edit value:", value);
-        if (newValue) {
-            span.textContent = newValue;
-        }
+        span.contentEditable = true;
+        span.focus();
+        span.onblur = function() {
+            span.contentEditable = false;
+        };
     };
 
     const deleteOption = document.createElement('a');
