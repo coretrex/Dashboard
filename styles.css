@@ -947,20 +947,12 @@ input[type="text"] {
     align-items: center;
     padding: 5px 0;
     position: relative;
-    word-break: normal; /* Ensure the text doesn't break into single characters */
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
-    overflow: hidden; /* Ensure content stays within the list item */
 }
 
 .editable-list li span {
     flex: 1;
     margin-right: 10px;
-    word-break: normal; /* Ensure long words break correctly */
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
-    overflow: hidden; /* Ensure content stays within the span */
-    text-overflow: ellipsis; /* Add ellipsis if the content overflows */
-    display: inline-block; /* Ensure the span takes the correct space */
-    vertical-align: middle; /* Vertically center the content */
+    word-break: break-word; /* Ensure long words break correctly */
 }
 
 .dropdown {
@@ -1053,12 +1045,14 @@ input[type="text"] {
     border: none;
     cursor: pointer;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dropdown-icon:hover {
     color: #0056b3;
 }
-
 
 
 
