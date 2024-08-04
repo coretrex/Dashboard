@@ -924,6 +924,7 @@ input[type="text"] {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure fields stay within the module */
 }
 
 .vision-module h2 {
@@ -974,11 +975,18 @@ input[type="text"] {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: calc(100% - 20px); /* Ensure the input field stays within the module */
     padding: 10px;
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.subtext {
+    font-size: 16px;
+    color: #cccccc;
+    margin-top: -10px;
+    margin-bottom: 20px;
 }
 
 
