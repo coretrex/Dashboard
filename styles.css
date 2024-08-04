@@ -955,6 +955,10 @@ input[type="text"] {
     word-break: break-word; /* Ensure long words break correctly */
 }
 
+.editable-list li b {
+    color: grey; /* Set the color of the labels to grey */
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -1005,6 +1009,10 @@ input[type="text"] {
     padding-bottom: 0; /* Ensure padding bottom is zero */
 }
 
+.vision-editable-list-container h3 {
+    margin: 10px 0 0; /* Reduce the margin between the header and the list items */
+}
+
 input[type="text"] {
     flex: 1;
     padding: 10px;
@@ -1053,6 +1061,7 @@ input[type="text"] {
 .dropdown-icon:hover {
     color: #0056b3;
 }
+
 
 
 
