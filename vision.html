@@ -15,9 +15,13 @@
         </div>
         <div class="container">
             <div class="card">
-                <h3>Core Values <i class="fas fa-pencil-alt edit-icon" onclick="toggleEdit('core-values')"></i></h3>
+                <h3>Core Values</h3>
                 <div id="core-values" class="content">
-                    <!-- Editable content will go here -->
+                    <div class="data-row">
+                        <strong>Integrity:</strong> Acting with honesty and honor without compromising the truth.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
+                    </div>
                 </div>
                 <div id="core-values-edit" class="edit-section" style="display:none;">
                     <div class="core-value-row">
@@ -25,31 +29,64 @@
                         <input type="text" placeholder="Description" class="description-input">
                         <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
                     </div>
-                    <button class="add-core-value" onclick="addCoreValue()">+</button>
                     <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
                 </div>
             </div>
             <div class="card">
-                <h3>Purpose/Cause/Passion <i class="fas fa-pencil-alt edit-icon" onclick="toggleEdit('purpose')"></i></h3>
-                <div id="purpose" contenteditable="false" class="content">
-                    <!-- Editable content will go here -->
+                <h3>Purpose/Cause/Passion</h3>
+                <div id="purpose" class="content">
+                    <div class="data-row">
+                        <strong>Customer Satisfaction:</strong> Ensuring customers are satisfied with our services.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
+                    </div>
+                </div>
+                <div id="purpose-edit" class="edit-section" style="display:none;">
+                    <div class="core-value-row">
+                        <input type="text" placeholder="Purpose" class="core-value-input">
+                        <input type="text" placeholder="Description" class="description-input">
+                        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
+                    </div>
+                    <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
                 </div>
             </div>
             <div class="card">
-                <h3>Niche <i class="fas fa-pencil-alt edit-icon" onclick="toggleEdit('niche')"></i></h3>
-                <div id="niche" contenteditable="false" class="content">
-                    We serve craft consumers.
+                <h3>Niche</h3>
+                <div id="niche" class="content">
+                    <div class="data-row">
+                        We serve craft consumers.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                        <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
+                    </div>
+                </div>
+                <div id="niche-edit" class="edit-section" style="display:none;">
+                    <div class="core-value-row">
+                        <input type="text" placeholder="Niche" class="core-value-input">
+                        <input type="text" placeholder="Description" class="description-input">
+                        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
+                    </div>
+                    <button class="save-core-value" onclick="saveCoreValues()">&#10003;</button>
                 </div>
             </div>
             <div class="card">
-                <h3>Go to Market Strategy <i class="fas fa-pencil-alt edit-icon" onclick="toggleEdit('market-strategy')"></i></h3>
-                <div id="market-strategy" contenteditable="false" class="content">
-                    <ul>
-                        <li>Target Market</li>
-                        <li>Unique Value Proposition</li>
-                        <li>Proven Process</li>
-                        <li>Guarantee</li>
-                    </ul>
+                <h3>Go to Market Strategy</h3>
+                <div id="market-strategy" class="content">
+                    <div class="data-row">
+                        <strong>Target Market:</strong> Small and medium-sized enterprises.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                    </div>
+                    <div class="data-row">
+                        <strong>Unique Value Proposition:</strong> Offering the best customer service.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                    </div>
+                    <div class="data-row">
+                        <strong>Proven Process:</strong> A streamlined process to ensure quality.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                    </div>
+                    <div class="data-row">
+                        <strong>Guarantee:</strong> Satisfaction guaranteed or your money back.
+                        <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+                    </div>
                 </div>
             </div>
         </div>

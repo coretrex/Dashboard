@@ -475,13 +475,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize any additional functionality here if needed
 });
 
-function toggleEdit(sectionId) {
-    const content = document.getElementById(sectionId);
-    const editSection = document.getElementById(sectionId + '-edit');
-    if (editSection.style.display === "none") {
-        editSection.style.display = "block";
+function editRow(element) {
+    const row = element.parentElement;
+    const inputs = row.querySelectorAll('input');
+    if (inputs.length === 0) {
+        const textContent = row.textContent.trim();
+        const strongText = row.querySelector('strong').textContent;
+        row.innerHTML = `
+            <input type="text" value="${strongText}" class="core-value-input">
+            <input type="text" value="${textContent.replace(strongText, '').trim()}" class="description-input">
+            <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
+        `;
     } else {
-        editSection.style.display = "none";
+        const coreValue = row.querySelector('.core-value-input').value;
+        const description = row.querySelector('.description-input').value;
+        row.innerHTML = `
+            <strong>${coreValue}:</strong> ${description}
+            <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+            <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
+        `;
     }
 }
 
@@ -494,7 +506,8 @@ function addCoreValue() {
         <input type="text" placeholder="Description" class="description-input">
         <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
     `;
-    editSection.insertBefore(newRow, editSection.querySelector('.add-core-value'));
+    editSection.insertBefore(newRow, editSection.querySelector('.save-core-value'));
+    editSection.style.display = "block";
 }
 
 function removeRow(element) {
@@ -515,7 +528,12 @@ function saveCoreValues() {
     content.innerHTML = '';
     coreValues.forEach(item => {
         const valueItem = document.createElement('div');
-        valueItem.innerHTML = `<strong>${item.coreValue}:</strong> ${item.description}`;
+        valueItem.classList.add('data-row');
+        valueItem.innerHTML = `
+            <strong>${item.coreValue}:</strong> ${item.description}
+            <i class="fas fa-pencil-alt edit-icon" onclick="editRow(this)"></i>
+            <i class="fas fa-plus add-icon" onclick="addCoreValue()"></i>
+        `;
         content.appendChild(valueItem);
     });
 
