@@ -500,8 +500,13 @@ function addItem(listId, inputId) {
 function addItemToList(listId, value) {
     const list = document.getElementById(listId);
     const listItem = document.createElement('li');
-    const span = document.createElement('span');
-    span.innerHTML = value;
+
+    const labelSpan = document.createElement('span');
+    labelSpan.innerHTML = value.split(":")[0] + ":";
+
+    const editableSpan = document.createElement('span');
+    editableSpan.contentEditable = true;
+    editableSpan.textContent = value.split(":")[1] || ' ';
 
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown');
@@ -517,10 +522,10 @@ function addItemToList(listId, value) {
     editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
     editOption.href = '#';
     editOption.onclick = function () {
-        span.contentEditable = true;
-        span.focus();
-        span.onblur = function () {
-            span.contentEditable = false;
+        editableSpan.contentEditable = true;
+        editableSpan.focus();
+        editableSpan.onblur = function () {
+            editableSpan.contentEditable = false;
         };
     };
 
@@ -536,13 +541,14 @@ function addItemToList(listId, value) {
     dropdown.appendChild(dropdownButton);
     dropdown.appendChild(dropdownContent);
 
-    listItem.appendChild(span);
+    listItem.appendChild(labelSpan);
+    listItem.appendChild(editableSpan);
     listItem.appendChild(dropdown);
     list.appendChild(listItem);
 }
 
 function editField(element) {
-    const span = element.closest('li').querySelector('span');
+    const span = element.closest('li').querySelector('span[contenteditable]');
     span.contentEditable = true;
     span.focus();
     span.onblur = function() {
@@ -555,14 +561,6 @@ function deleteField(element) {
     listItem.parentNode.removeChild(listItem);
 }
 
-function clearText(element) {
-    if (element.textContent === "Edit Target Market" ||
-        element.textContent === "Edit Unique Value Proposition" ||
-        element.textContent === "Edit Proven Process" ||
-        element.textContent === "Edit Guarantee") {
-        element.textContent = "";
-    }
-}
 
 
 
