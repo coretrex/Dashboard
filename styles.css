@@ -903,6 +903,80 @@ input[type="text"] {
     background: #0056b3;
 }
 
+/* Vision & Values CSS*/
+
+/* styles.css */
+
+.card {
+    background-color: #ffffff;
+    color: #000000;
+    width: 48%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.edit-icon {
+    cursor: pointer;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+.edit-section {
+    margin-top: 20px;
+}
+
+.core-value-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.core-value-input, .description-input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.remove-icon {
+    cursor: pointer;
+    color: red;
+}
+
+.add-core-value, .save-core-value {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.add-core-value {
+    background-color: #007bff;
+    color: white;
+}
+
+.save-core-value {
+    background-color: #28a745;
+    color: white;
+}
+
+
 /* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
     .input-container {

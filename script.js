@@ -470,3 +470,55 @@ function updateTableWidth() {
     tableContainer.style.overflowX = 'auto';
     tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize any additional functionality here if needed
+});
+
+function toggleEdit(sectionId) {
+    const content = document.getElementById(sectionId);
+    const editSection = document.getElementById(sectionId + '-edit');
+    if (editSection.style.display === "none") {
+        editSection.style.display = "block";
+    } else {
+        editSection.style.display = "none";
+    }
+}
+
+function addCoreValue() {
+    const editSection = document.getElementById('core-values-edit');
+    const newRow = document.createElement('div');
+    newRow.classList.add('core-value-row');
+    newRow.innerHTML = `
+        <input type="text" placeholder="Core Value" class="core-value-input">
+        <input type="text" placeholder="Description" class="description-input">
+        <i class="fas fa-times remove-icon" onclick="removeRow(this)"></i>
+    `;
+    editSection.insertBefore(newRow, editSection.querySelector('.add-core-value'));
+}
+
+function removeRow(element) {
+    element.parentElement.remove();
+}
+
+function saveCoreValues() {
+    const coreValues = [];
+    document.querySelectorAll('.core-value-row').forEach(row => {
+        const coreValue = row.querySelector('.core-value-input').value;
+        const description = row.querySelector('.description-input').value;
+        if (coreValue && description) {
+            coreValues.push({ coreValue, description });
+        }
+    });
+
+    const content = document.getElementById('core-values');
+    content.innerHTML = '';
+    coreValues.forEach(item => {
+        const valueItem = document.createElement('div');
+        valueItem.innerHTML = `<strong>${item.coreValue}:</strong> ${item.description}`;
+        content.appendChild(valueItem);
+    });
+
+    toggleEdit('core-values');
+}
+
