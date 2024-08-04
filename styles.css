@@ -956,7 +956,7 @@ input[type="text"] {
 }
 
 .editable-list li b {
-    color: grey; /* Set the color of the labels to grey */
+    color: #025698;
 }
 
 .dropdown {
