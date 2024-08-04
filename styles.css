@@ -905,7 +905,6 @@ input[type="text"] {
 
 /* Vision CSS */
 /* styles.css */
-/* styles.css */
 .vision-container {
     display: flex;
     gap: 20px;
@@ -952,6 +951,7 @@ input[type="text"] {
 .editable-list li span {
     flex: 1;
     margin-right: 10px;
+    word-break: break-word; /* Ensure long words break correctly */
 }
 
 .editable-list li button {
@@ -991,6 +991,7 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .subtext {
@@ -1018,6 +1019,7 @@ input[type="text"] {
 .add-icon:hover {
     background-color: #0056b3;
 }
+
 
 
 
