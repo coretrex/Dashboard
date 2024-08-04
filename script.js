@@ -482,12 +482,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function handleAddItem(event, listId, inputId) {
     if (event.key === 'Enter') {
-        const input = document.getElementById(inputId);
-        const value = input.value.trim();
-        if (value) {
-            addItemToList(listId, value);
-            input.value = '';
-        }
+        addItem(listId, inputId);
+    }
+}
+
+function addItem(listId, inputId) {
+    const input = document.getElementById(inputId);
+    const value = input.value.trim();
+    if (value) {
+        addItemToList(listId, value);
+        input.value = '';
     }
 }
 
@@ -497,7 +501,7 @@ function addItemToList(listId, value) {
     const span = document.createElement('span');
     span.textContent = value;
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.onclick = function() {
         list.removeChild(listItem);
     };
@@ -505,3 +509,13 @@ function addItemToList(listId, value) {
     listItem.appendChild(deleteButton);
     list.appendChild(listItem);
 }
+
+function clearText(element) {
+    if (element.textContent === "Edit Target Market" ||
+        element.textContent === "Edit Unique Value Proposition" ||
+        element.textContent === "Edit Proven Process" ||
+        element.textContent === "Edit Guarantee") {
+        element.textContent = "";
+    }
+}
+
