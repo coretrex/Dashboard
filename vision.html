@@ -44,11 +44,12 @@
                 <h2><i class="fas fa-rocket"></i> Go to Market Strategy</h2>
                 <div class="vision-editable-list-container">
                     <h3>Target Market</h3>
-                    <ul class="editable-list" id="target-market-list"></ul>
-                    <div class="vision-input-container">
-                        <input type="text" id="target-market-input" placeholder="Add Target Market" onkeypress="handleAddItem(event, 'target-market-list', 'target-market-input')">
-                        <button class="add-icon" onclick="addItem('target-market-list', 'target-market-input')"><i class="fas fa-plus"></i></button>
-                    </div>
+                    <ul class="editable-list" id="target-market-list">
+                        <li><span contenteditable="true"><b>Age:</b> Enter Age</span><button class="dropdown-icon" onclick="toggleDropdown(this)"><i class="fas fa-ellipsis-h"></i></button></li>
+                        <li><span contenteditable="true"><b>Sex:</b> Enter Sex</span><button class="dropdown-icon" onclick="toggleDropdown(this)"><i class="fas fa-ellipsis-h"></i></button></li>
+                        <li><span contenteditable="true"><b>Household Income:</b> Enter Household Income</span><button class="dropdown-icon" onclick="toggleDropdown(this)"><i class="fas fa-ellipsis-h"></i></button></li>
+                        <li><span contenteditable="true"><b>Location:</b> Enter Location</span><button class="dropdown-icon" onclick="toggleDropdown(this)"><i class="fas fa-ellipsis-h"></i></button></li>
+                    </ul>
                 </div>
                 <div class="vision-editable-list-container">
                     <h3>Unique Value Proposition</h3>
