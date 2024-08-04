@@ -1009,6 +1009,9 @@ input[type="text"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
 }
 
 .add-icon:hover {
