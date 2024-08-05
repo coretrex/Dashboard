@@ -1019,7 +1019,6 @@ input[type="text"] {
     flex: 1;
     padding: 10px;
     bottom-border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
 }
 
