@@ -3,13 +3,83 @@ document.addEventListener('DOMContentLoaded', function() {
     loadContent(new Event('load'), 'kpis.html');
 });
 
-// Function to initialize the page
 function initializePage() {
     initializeFileUploads();
     initializeFlatpickr();
+    initializeDropdownMenus();
 }
 
-// Function to handle file uploads
+// Function to load content dynamically and initialize specific page content
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+
+            // Re-initialize the page-specific content
+            initializePage();
+            if (page === 'goals.html') {
+                initializeGoalsPage();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
+
+function initializeGoalsPage() {
+    initializeFlatpickr();
+    initializeDropdownMenus();
+}
+
+function initializeFlatpickr() {
+    document.querySelectorAll(".future-date").forEach(input => {
+        flatpickr(input, {
+            dateFormat: "m/d/y",
+            allowInput: true,
+            clickOpens: true
+        });
+    });
+}
+
+function initializeDropdownMenus() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.addEventListener('click', function(event) {
+            event.stopPropagation();
+            dropdown.querySelector('.dropdown-content').classList.toggle('show');
+        });
+    });
+
+    window.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown-content').forEach(content => {
+            content.classList.remove('show');
+        });
+    });
+}
+
+function editField(element) {
+    const span = element.closest('li').querySelector('span[contenteditable]');
+    span.contentEditable = true;
+    span.focus();
+    span.onblur = function() {
+        span.contentEditable = false;
+    };
+}
+
+function deleteField(element) {
+    const listItem = element.closest('li');
+    listItem.remove();
+}
+
 function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
     const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
@@ -62,171 +132,6 @@ function initializeFileUploads() {
             });
         }
     });
-}
-
-// Function to initialize Flatpickr
-function initializeFlatpickr() {
-    document.querySelectorAll(".date-cell, .future-date").forEach(input => {
-        flatpickr(input, {
-            dateFormat: "m/d/y",
-            allowInput: true,
-            clickOpens: true,
-            onChange: function(selectedDates, dateStr, instance) {
-                input.innerText = dateStr;
-            }
-        });
-    });
-}
-
-// Function to load content dynamically
-function loadContent(event, page) {
-    event.preventDefault();
-    console.log(`Loading content from ${page}`);
-
-    fetch(page)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log(`Content loaded from ${page}`);
-            document.getElementById('main-content').innerHTML = data;
-
-            // Re-initialize the page-specific content
-            if (page === 'quarterly-goals.html') {
-                initializeQuarterlyGoalsPage();
-            } else {
-                initializePage(); // Initialize the newly loaded content
-            }
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-        });
-}
-
-// Initialize the Quarterly Goals Page
-function initializeQuarterlyGoalsPage() {
-    console.log('Initializing Quarterly Goals Page');
-    startCountdown();
-    const goalInput = document.getElementById('new-goal-input');
-    goalInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            console.log('Enter key pressed');
-            addGoal(event.target.value);
-            event.target.value = '';
-        }
-    });
-    goalInput.addEventListener('focus', function() {
-        goalInput.placeholder = '';
-    });
-    goalInput.addEventListener('blur', function() {
-        if (goalInput.value.trim() === '') {
-            goalInput.placeholder = 'Deploy A+ across all SKUs...';
-        }
-    });
-
-    // Initialize sortable for the goal list
-    new Sortable(document.getElementById('goal-list'), {
-        animation: 150,
-        ghostClass: 'sortable-ghost'
-    });
-}
-
-// Function to start the countdown timer
-function startCountdown() {
-    console.log('Starting countdown');
-    const countdownTimer = document.getElementById('countdown-timer');
-    const countdownText = document.getElementById('countdown-text');
-
-    function updateCountdown() {
-        const now = new Date();
-        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
-        const nextQuarterStart = new Date(now.getFullYear(), currentQuarter * 3, 1);
-        if (nextQuarterStart <= now) {
-            nextQuarterStart.setMonth(nextQuarterStart.getMonth() + 3);
-        }
-
-        const diff = nextQuarterStart - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        countdownTimer.innerHTML = `
-            <span class="number">${days}</span><span class="unit">d</span>
-            <span class="number">${hours}</span><span class="unit">h</span>
-            <span class="number">${minutes}</span><span class="unit">m</span>
-            <span class="number">${seconds}</span><span class="unit">s</span>
-        `;
-        countdownText.textContent = `Until the end of Q${currentQuarter}`;
-
-        setTimeout(updateCountdown, 1000);
-    }
-
-    updateCountdown();
-}
-
-function addGoal(goalText) {
-    console.log('Adding Goal:', goalText);
-    if (goalText.trim() !== '') {
-        const goalList = document.getElementById('goal-list');
-        const goalItem = document.createElement('li');
-        goalItem.className = 'goal-item on-track'; // Default status
-        goalItem.innerHTML = `
-            <span class="goal-text">${goalText}</span>
-            <div class="goal-status">
-                <select class="status-dropdown on-track" onchange="setGoalStatusDropdown(this)">
-                    <option value="on-track" selected>On-Track</option>
-                    <option value="on-hold">On-Hold</option>
-                    <option value="off-track">Off-Track</option>
-                </select>
-                <button class="status-button complete-button" onclick="completeGoal(this)"><i class="fas fa-check"></i></button>
-                <button class="status-button delete-button" onclick="deleteGoal(this)"><i class="fas fa-trash"></i></button>
-            </div>
-        `;
-        goalList.appendChild(goalItem);
-        updateDropdownColor(goalItem.querySelector('.status-dropdown'), 'on-track');
-        adjustDoneButtonColor(goalItem.querySelector('.complete-button'), 'on-track');
-    }
-}
-
-function setGoalStatusDropdown(select) {
-    const goalItem = select.closest('.goal-item');
-    goalItem.className = `goal-item ${select.value}`;
-    updateDropdownColor(select, select.value);
-    adjustDoneButtonColor(goalItem.querySelector('.complete-button'), select.value);
-}
-
-function updateDropdownColor(select, status) {
-    const colorMap = {
-        'on-track': 'darkgreen',
-        'on-hold': 'darkorange',
-        'off-track': 'darkred'
-    };
-    select.style.backgroundColor = colorMap[status];
-}
-
-function adjustDoneButtonColor(button, status) {
-    const darkerColorMap = {
-        'on-track': '#004d00', // Dark green
-        'on-hold': '#cc6600',  // Dark orange
-        'off-track': '#800000' // Dark red
-    };
-    button.style.backgroundColor = darkerColorMap[status];
-}
-
-function completeGoal(button) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.className = 'goal-item completed';
-    goalItem.style.order = '1'; // Move completed items to the bottom
-    button.style.backgroundColor = 'grey';
-}
-
-function deleteGoal(button) {
-    const goalItem = button.closest('.goal-item');
-    goalItem.remove();
 }
 
 // Growth Calculator functions
