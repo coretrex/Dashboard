@@ -1069,9 +1069,9 @@ input[type="text"] {
 }
 
 .italic-preview {
-    font-style: italic;
-    color: #000000; /* Black color for regular text */
     flex: 1;
+    color: #000000; /* Black color for regular text */
+    font-weight: normal; /* Regular font weight */
 }
 
 
