@@ -472,14 +472,15 @@ function updateTableWidth() {
 }
 
 // Vision Scripting
-// script.js
-
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
 });
 
 function initializePage() {
     // Initialize any other page-specific content here
+    document.querySelectorAll('.editable-list span[contenteditable]').forEach(span => {
+        span.addEventListener('focus', clearSampleText);
+    });
 }
 
 function handleAddItem(event, listId, inputId) {
@@ -506,6 +507,9 @@ function addItemToList(listId, value) {
     }
     span.contentEditable = true;
     span.textContent = value;
+    
+    // Add focus event listener to clear sample text
+    span.addEventListener('focus', clearSampleText);
 
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown');
@@ -543,6 +547,14 @@ function addItemToList(listId, value) {
     listItem.appendChild(span);
     listItem.appendChild(dropdown);
     list.appendChild(listItem);
+}
+
+function clearSampleText(event) {
+    const span = event.target;
+    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location') {
+        span.textContent = '';
+    }
+    span.removeEventListener('focus', clearSampleText);
 }
 
 function editField(element) {
