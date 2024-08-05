@@ -1086,28 +1086,24 @@ input[type="text"] {
 
 /* Goals Page */
 
-.goals-container, .vision-container {
+.goals-container {
     display: flex;
     justify-content: space-around;
     padding: 20px;
 }
 
-.goal-column, .vision-column {
+.goal-column {
     background-color: #002752;
     padding: 20px;
     border-radius: 8px;
     width: 30%;
 }
 
-.goal-module, .vision-module {
+.goal-item {
     margin-bottom: 20px;
 }
 
-.goal-item, .vision-module .vision-input-container {
-    margin-bottom: 20px;
-}
-
-.goal-item label, .vision-module h2 {
+.goal-item label {
     display: block;
     margin-bottom: 5px;
     font-size: 16px;
@@ -1115,7 +1111,7 @@ input[type="text"] {
     color: #ffffff;
 }
 
-.editable-field, .vision-module input[type="text"], .vision-module .italic-preview {
+.editable-field {
     background-color: #004085;
     padding: 10px;
     border-radius: 5px;
@@ -1123,18 +1119,6 @@ input[type="text"] {
     min-height: 40px;
     color: #ffffff;
 }
-
-.goal-module input[type="text"], .vision-module input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #004085;
-    color: #ffffff;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-}
-
 
 
 
