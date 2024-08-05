@@ -572,6 +572,47 @@ function deleteField(element) {
 }
 
 
+// Goals Script
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializePage();
+    loadContent(new Event('load'), 'goals.html');
+});
+
+function initializePage() {
+    initializeFlatpickr();
+}
+
+function initializeFlatpickr() {
+    document.querySelectorAll(".future-date").forEach(input => {
+        flatpickr(input, {
+            dateFormat: "m/d/y",
+            allowInput: true,
+            clickOpens: true,
+        });
+    });
+}
+
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+            initializePage(); // Initialize the newly loaded content
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
 
 
 

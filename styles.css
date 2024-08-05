@@ -1084,6 +1084,43 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
+/* Goals Page */
+
+.goals-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.goal-column {
+    background-color: #002752;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+}
+
+.goal-item {
+    margin-bottom: 20px;
+}
+
+.goal-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.editable-field {
+    background-color: #004085;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-height: 40px;
+    color: #ffffff;
+}
+
+
 
 /* Brand Analytics Button */
 
