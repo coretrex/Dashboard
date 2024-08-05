@@ -1089,6 +1089,7 @@ input[type="text"] {
 
 
 
+
 /* Media queries to adjust the input sizes */
 @media (max-width: 768px) {
     .input-container {

@@ -500,13 +500,10 @@ function addItem(listId, inputId) {
 function addItemToList(listId, value) {
     const list = document.getElementById(listId);
     const listItem = document.createElement('li');
-
-    const labelSpan = document.createElement('span');
-    labelSpan.innerHTML = value.split(":")[0] + ":";
-
-    const editableSpan = document.createElement('span');
-    editableSpan.contentEditable = true;
-    editableSpan.textContent = value.split(":")[1] || ' ';
+    const span = document.createElement('span');
+    span.classList.add(listId === 'unique-value-proposition-list' ? 'italic-preview' : '');
+    span.contentEditable = true;
+    span.textContent = listId === 'unique-value-proposition-list' ? value : `${value}`;
 
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown');
@@ -522,10 +519,10 @@ function addItemToList(listId, value) {
     editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
     editOption.href = '#';
     editOption.onclick = function () {
-        editableSpan.contentEditable = true;
-        editableSpan.focus();
-        editableSpan.onblur = function () {
-            editableSpan.contentEditable = false;
+        span.contentEditable = true;
+        span.focus();
+        span.onblur = function () {
+            span.contentEditable = false;
         };
     };
 
@@ -541,8 +538,7 @@ function addItemToList(listId, value) {
     dropdown.appendChild(dropdownButton);
     dropdown.appendChild(dropdownContent);
 
-    listItem.appendChild(labelSpan);
-    listItem.appendChild(editableSpan);
+    listItem.appendChild(span);
     listItem.appendChild(dropdown);
     list.appendChild(listItem);
 }
@@ -560,6 +556,7 @@ function deleteField(element) {
     const listItem = element.closest('li');
     listItem.parentNode.removeChild(listItem);
 }
+
 
 
 
