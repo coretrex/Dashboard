@@ -501,7 +501,9 @@ function addItemToList(listId, value) {
     const list = document.getElementById(listId);
     const listItem = document.createElement('li');
     const span = document.createElement('span');
-    span.classList.add(listId === 'unique-value-proposition-list' || listId === 'guarantee-list' ? 'italic-preview' : '');
+    if (listId === 'unique-value-proposition-list' || listId === 'guarantee-list') {
+        span.classList.add('italic-preview');
+    }
     span.contentEditable = true;
     span.textContent = value;
 
