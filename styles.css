@@ -965,8 +965,7 @@ input[type="text"] {
 }
 
 .dropdown {
-    position: absolute;
-    right: 0; /* Fixed to the right side */
+    position: relative;
     display: inline-block;
 }
 
@@ -1084,6 +1083,7 @@ input[type="text"] {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 
 
 
