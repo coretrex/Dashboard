@@ -551,7 +551,7 @@ function addItemToList(listId, value) {
 
 function clearSampleText(event) {
     const span = event.target;
-    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location') {
+    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location' || span.textContent === 'Enter Education') {
         span.textContent = '';
     }
     span.removeEventListener('focus', clearSampleText);
