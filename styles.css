@@ -1114,25 +1114,26 @@ input[type="text"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #ccc;
 }
 
 .editable-list span {
     flex: 1;
     padding: 5px;
-    margin-right: 10px;
+    margin-left: 5px;
     border-radius: 4px;
-}
-
-.editable-list .future-date {
-    width: 200px; /* Adjust width if needed */
+    outline: none;
 }
 
 .editable-list span[contenteditable="true"] {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 5px;
+    background-color: transparent;
+    border: none;
+    width: calc(100% - 5px);
+}
+
+.editable-list .future-date {
+    width: 200px;
 }
 
 .dropdown {
@@ -1172,6 +1173,7 @@ input[type="text"] {
 .dropdown:hover .dropdown-icon {
     background-color: #3e8e41;
 }
+
 
 
 /* Brand Analytics Button */
