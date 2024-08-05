@@ -55,12 +55,13 @@ function deleteField(element) {
 
 function initializeCountdownTimer() {
     const countdownElement = document.getElementById('countdown-timer');
-    if (!countdownElement) return; // Exit if the countdown timer is not on the page
+    if (!countdownElement) return;
 
-    const endDate = new Date('2024-12-31T23:59:59'); // Set the desired end date and time
+    const endOfQuarter = getEndOfNearestQuarter();
+
     function updateCountdown() {
         const now = new Date();
-        const timeRemaining = endDate - now;
+        const timeRemaining = endOfQuarter - now;
 
         if (timeRemaining <= 0) {
             countdownElement.innerHTML = "Time's up!";
@@ -78,8 +79,29 @@ function initializeCountdownTimer() {
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000); // Update the countdown every second
+    setInterval(updateCountdown, 1000);
 }
+
+function getEndOfNearestQuarter() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const quarters = [
+        new Date(year, 2, 31),  // Q1
+        new Date(year, 5, 30),  // Q2
+        new Date(year, 8, 30),  // Q3
+        new Date(year, 11, 31)  // Q4
+    ];
+
+    for (const quarterEnd of quarters) {
+        if (now <= quarterEnd) {
+            return quarterEnd;
+        }
+    }
+
+    // If no quarter end found in the current year, return Q4 of the next year
+    return new Date(year + 1, 11, 31);
+}
+
 
 function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
