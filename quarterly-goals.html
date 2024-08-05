@@ -21,10 +21,12 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
             initializePage();
         });
 
         function initializePage() {
+            console.log('Initializing Page');
             initializeCountdownTimer();
             initializeQuarterlyGoals();
         }
@@ -90,6 +92,7 @@
                     }
                 }
             });
+            console.log('Quarterly goals initialized'); // Log initialization
         }
 
         function addQuarterlyGoal(goalText) {
