@@ -1,25 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
+    loadContent(new Event('load'), 'kpis.html');
 });
 
 function initializePage() {
     initializeFileUploads();
     initializeFlatpickr();
     initializeDropdownMenus();
-    initializeCountdownTimer();
-    initializeGrowthCalculator();
-    showPageContent();
+}
+
+// Function to load content dynamically and initialize specific page content
+function loadContent(event, page) {
+    event.preventDefault();
+    console.log(`Loading content from ${page}`);
+
+    fetch(page)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Content loaded from ${page}`);
+            document.getElementById('main-content').innerHTML = data;
+
+            // Re-initialize the page-specific content
+            initializePage();
+            if (page === 'goals.html') {
+                initializeGoalsPage();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading the page:', error);
+        });
+}
+
+function initializeGoalsPage() {
+    initializeFlatpickr();
+    initializeDropdownMenus();
 }
 
 function initializeFlatpickr() {
-    document.querySelectorAll(".date-cell, .future-date").forEach(input => {
+    document.querySelectorAll(".future-date").forEach(input => {
         flatpickr(input, {
             dateFormat: "m/d/y",
             allowInput: true,
-            clickOpens: true,
-            onChange: function(selectedDates, dateStr, instance) {
-                input.innerText = dateStr;
-            }
+            clickOpens: true
         });
     });
 }
@@ -51,34 +78,6 @@ function editField(element) {
 function deleteField(element) {
     const listItem = element.closest('li');
     listItem.remove();
-}
-
-function initializeCountdownTimer() {
-    const countdownElement = document.getElementById('countdown-timer');
-    if (!countdownElement) return; // Exit if the countdown timer is not on the page
-
-    const endDate = new Date('2024-12-31T23:59:59'); // Set the desired end date and time
-    function updateCountdown() {
-        const now = new Date();
-        const timeRemaining = endDate - now;
-
-        if (timeRemaining <= 0) {
-            countdownElement.innerHTML = "Time's up!";
-            document.getElementById('countdown-text').innerHTML = "";
-            return;
-        }
-
-        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        document.getElementById('countdown-text').innerHTML = "remaining until the end of the quarter.";
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000); // Update the countdown every second
 }
 
 function initializeFileUploads() {
@@ -135,175 +134,7 @@ function initializeFileUploads() {
     });
 }
 
-// Function to add a new week column to the KPI table
-function addWeekColumn() {
-    const table = document.getElementById('kpi-table');
-    const headerRow = table.rows[0];
-
-    // Insert new header cell after 'Goal' column
-    const newHeaderCell = headerRow.insertCell(2);
-    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
-
-    // Add a new editable cell to each row for the new week
-    for (let i = 1; i < table.rows.length; i++) {
-        const newRowCell = table.rows[i].insertCell(2);
-        newRowCell.contentEditable = "true";
-        newRowCell.innerText = ""; // Ensure the new cell is blank
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
-// Function to add a new KPI row to the KPI table
-function addKpiRow() {
-    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
-
-    const kpiCell = newRow.insertCell(0);
-    kpiCell.contentEditable = "true";
-    kpiCell.innerText = "New KPI";
-
-    const goalCell = newRow.insertCell(1);
-    goalCell.contentEditable = "true";
-    goalCell.innerText = "New Goal";
-
-    // Add new editable cells for each week column
-    const numOfWeeks = document.getElementById('kpi-table').rows[0].cells.length - 2; // excluding KPI and Goal columns
-    for (let i = 0; i < numOfWeeks; i++) {
-        const weekCell = newRow.insertCell(2 + i);
-        weekCell.contentEditable = "true";
-        weekCell.innerText = "";
-    }
-
-    initializeFlatpickr();
-}
-
-// Function to update table width and add scroll bar if necessary
-function updateTableWidth() {
-    const tableContainer = document.querySelector('.kpi-table-container');
-    tableContainer.style.overflowX = 'auto';
-    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-// Function to show the page content
-function showPageContent() {
-    document.querySelectorAll('body > div').forEach(div => {
-        div.style.display = 'block';
-    });
-}
-
-// Vision Scripting
-document.addEventListener('DOMContentLoaded', function() {
-    initializePage();
-});
-
-function handleAddItem(event, listId, inputId) {
-    if (event.key === 'Enter') {
-        addItem(listId, inputId);
-    }
-}
-
-function addItem(listId, inputId) {
-    const input = document.getElementById(inputId);
-    const value = input.value.trim();
-    if (value) {
-        addItemToList(listId, value);
-        input.value = '';
-    }
-}
-
-function addItemToList(listId, value) {
-    const list = document.getElementById(listId);
-    const listItem = document.createElement('li');
-    const span = document.createElement('span');
-    if (listId === 'unique-value-proposition-list' || listId === 'guarantee-list') {
-        span.classList.add('italic-preview');
-    }
-    span.contentEditable = true;
-    span.textContent = value;
-    
-    // Add focus event listener to clear sample text
-    span.addEventListener('focus', clearSampleText);
-
-    const dropdown = document.createElement('div');
-    dropdown.classList.add('dropdown');
-
-    const dropdownButton = document.createElement('button');
-    dropdownButton.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-    dropdownButton.classList.add('dropdown-icon');
-
-    const dropdownContent = document.createElement('div');
-    dropdownContent.classList.add('dropdown-content');
-
-    const editOption = document.createElement('a');
-    editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
-    editOption.href = '#';
-    editOption.onclick = function () {
-        span.contentEditable = true;
-        span.focus();
-        span.onblur = function () {
-            span.contentEditable = false;
-        };
-    };
-
-    const deleteOption = document.createElement('a');
-    deleteOption.innerHTML = '<i class="fas fa-trash"></i> Delete';
-    deleteOption.href = '#';
-    deleteOption.onclick = function () {
-        list.removeChild(listItem);
-    };
-
-    dropdownContent.appendChild(editOption);
-    dropdownContent.appendChild(deleteOption);
-    dropdown.appendChild(dropdownButton);
-    dropdown.appendChild(dropdownContent);
-
-    listItem.appendChild(span);
-    listItem.appendChild(dropdown);
-    list.appendChild(listItem);
-}
-
-function clearSampleText(event) {
-    const span = event.target;
-    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location' || span.textContent === 'Enter Education') {
-        span.textContent = '';
-    }
-    span.removeEventListener('focus', clearSampleText);
-}
-
-function editField(element) {
-    const span = element.closest('li').querySelector('span[contenteditable]');
-    span.contentEditable = true;
-    span.focus();
-    span.onblur = function() {
-        span.contentEditable = false;
-    };
-}
-
-function deleteField(element) {
-    const listItem = element.closest('li');
-    listItem.parentNode.removeChild(listItem);
-}
-
 // Growth Calculator functions
-function initializeGrowthCalculator() {
-    document.querySelectorAll('input[type="range"]').forEach(input => {
-        input.addEventListener('input', function() {
-            const value = this.value;
-            if (this.id === 'rangeInput') {
-                updateRangeValue(value);
-            } else if (this.id === 'organicInput') {
-                updateOrganicValue(value);
-            } else if (this.id === 'adsConversionInput') {
-                updateAdsConversionValue(value);
-            }
-        });
-    });
-
-    document.getElementById('calculatePageViewsBtn').addEventListener('click', calculatePageViews);
-}
-
 function updateRangeValue(value) {
     document.getElementById('rangeValue').innerText = parseFloat(value).toFixed(2) + '%';
 }
@@ -492,4 +323,155 @@ function drop(event) {
     } else if (event.target.closest('.task-bucket')) {
         event.target.closest('.task-bucket').querySelector('.task-list').appendChild(taskItem);
     }
+}
+
+// Function to add a new week column to the KPI table
+function addWeekColumn() {
+    const table = document.getElementById('kpi-table');
+    const headerRow = table.rows[0];
+
+    // Insert new header cell after 'Goal' column
+    const newHeaderCell = headerRow.insertCell(2);
+    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
+
+    // Add a new editable cell to each row for the new week
+    for (let i = 1; i < table.rows.length; i++) {
+        const newRowCell = table.rows[i].insertCell(2);
+        newRowCell.contentEditable = "true";
+        newRowCell.innerText = ""; // Ensure the new cell is blank
+    }
+
+    updateTableWidth();
+    initializeFlatpickr();
+}
+
+// Function to add a new KPI row to the KPI table
+function addKpiRow() {
+    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const kpiCell = newRow.insertCell(0);
+    kpiCell.contentEditable = "true";
+    kpiCell.innerText = "New KPI";
+
+    const goalCell = newRow.insertCell(1);
+    goalCell.contentEditable = "true";
+    goalCell.innerText = "New Goal";
+
+    // Add new editable cells for each week column
+    const numOfWeeks = document.getElementById('kpi-table').rows[0].cells.length - 2; // excluding KPI and Goal columns
+    for (let i = 0; i < numOfWeeks; i++) {
+        const weekCell = newRow.insertCell(2 + i);
+        weekCell.contentEditable = "true";
+        weekCell.innerText = "";
+    }
+
+    initializeFlatpickr();
+}
+
+// Function to update table width and add scroll bar if necessary
+function updateTableWidth() {
+    const tableContainer = document.querySelector('.kpi-table-container');
+    tableContainer.style.overflowX = 'auto';
+    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
+}
+
+// Vision Scripting
+document.addEventListener('DOMContentLoaded', function() {
+    initializePage();
+});
+
+function initializePage() {
+    // Initialize any other page-specific content here
+    document.querySelectorAll('.editable-list span[contenteditable]').forEach(span => {
+        span.addEventListener('focus', clearSampleText);
+    });
+}
+
+function handleAddItem(event, listId, inputId) {
+    if (event.key === 'Enter') {
+        addItem(listId, inputId);
+    }
+}
+
+function addItem(listId, inputId) {
+    const input = document.getElementById(inputId);
+    const value = input.value.trim();
+    if (value) {
+        addItemToList(listId, value);
+        input.value = '';
+    }
+}
+
+function addItemToList(listId, value) {
+    const list = document.getElementById(listId);
+    const listItem = document.createElement('li');
+    const span = document.createElement('span');
+    if (listId === 'unique-value-proposition-list' || listId === 'guarantee-list') {
+        span.classList.add('italic-preview');
+    }
+    span.contentEditable = true;
+    span.textContent = value;
+    
+    // Add focus event listener to clear sample text
+    span.addEventListener('focus', clearSampleText);
+
+    const dropdown = document.createElement('div');
+    dropdown.classList.add('dropdown');
+
+    const dropdownButton = document.createElement('button');
+    dropdownButton.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+    dropdownButton.classList.add('dropdown-icon');
+
+    const dropdownContent = document.createElement('div');
+    dropdownContent.classList.add('dropdown-content');
+
+    const editOption = document.createElement('a');
+    editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
+    editOption.href = '#';
+    editOption.onclick = function () {
+        span.contentEditable = true;
+        span.focus();
+        span.onblur = function () {
+            span.contentEditable = false;
+        };
+    };
+
+    const deleteOption = document.createElement('a');
+    deleteOption.innerHTML = '<i class="fas fa-trash"></i> Delete';
+    deleteOption.href = '#';
+    deleteOption.onclick = function () {
+        list.removeChild(listItem);
+    };
+
+    dropdownContent.appendChild(editOption);
+    dropdownContent.appendChild(deleteOption);
+    dropdown.appendChild(dropdownButton);
+    dropdown.appendChild(dropdownContent);
+
+    listItem.appendChild(span);
+    listItem.appendChild(dropdown);
+    list.appendChild(listItem);
+}
+
+function clearSampleText(event) {
+    const span = event.target;
+    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location' || span.textContent === 'Enter Education') {
+        span.textContent = '';
+    }
+    span.removeEventListener('focus', clearSampleText);
+}
+
+function editField(element) {
+    const span = element.closest('li').querySelector('span[contenteditable]');
+    span.contentEditable = true;
+    span.focus();
+    span.onblur = function() {
+        span.contentEditable = false;
+    };
+}
+
+function deleteField(element) {
+    const listItem = element.closest('li');
+    listItem.parentNode.removeChild(listItem);
 }
