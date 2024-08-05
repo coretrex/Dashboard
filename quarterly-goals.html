@@ -83,6 +83,7 @@
             newGoalInput.addEventListener('keypress', function(event) {
                 if (event.key === 'Enter') {
                     const goalText = newGoalInput.value.trim();
+                    console.log('Entered goal:', goalText); // Log entered goal
                     if (goalText !== '') {
                         addQuarterlyGoal(goalText);
                         newGoalInput.value = '';
@@ -92,6 +93,7 @@
         }
 
         function addQuarterlyGoal(goalText) {
+            console.log('Adding goal:', goalText); // Log goal being added
             const goalList = document.getElementById('goal-list');
             const listItem = document.createElement('li');
             listItem.textContent = goalText;
