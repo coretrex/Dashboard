@@ -66,13 +66,13 @@ function initializeFileUploads() {
 
 // Function to initialize Flatpickr
 function initializeFlatpickr() {
-    document.querySelectorAll(".date-cell").forEach(cell => {
-        flatpickr(cell, {
+    document.querySelectorAll(".date-cell, .future-date").forEach(input => {
+        flatpickr(input, {
             dateFormat: "m/d/y",
             allowInput: true,
             clickOpens: true,
             onChange: function(selectedDates, dateStr, instance) {
-                cell.innerText = dateStr;
+                input.innerText = dateStr;
             }
         });
     });
@@ -134,6 +134,7 @@ function initializeQuarterlyGoalsPage() {
     });
 }
 
+// Function to start the countdown timer
 function startCountdown() {
     console.log('Starting countdown');
     const countdownTimer = document.getElementById('countdown-timer');
@@ -166,7 +167,6 @@ function startCountdown() {
 
     updateCountdown();
 }
-
 
 function addGoal(goalText) {
     console.log('Adding Goal:', goalText);
@@ -570,54 +570,3 @@ function deleteField(element) {
     const listItem = element.closest('li');
     listItem.parentNode.removeChild(listItem);
 }
-
-
-// Goals Script
-
-document.addEventListener('DOMContentLoaded', function() {
-    initializePage();
-    loadContent(new Event('load'), 'goals.html');
-});
-
-function initializePage() {
-    initializeFlatpickr();
-}
-
-function initializeFlatpickr() {
-    document.querySelectorAll(".future-date").forEach(input => {
-        flatpickr(input, {
-            dateFormat: "m/d/y",
-            allowInput: true,
-            clickOpens: true,
-        });
-    });
-}
-
-function loadContent(event, page) {
-    event.preventDefault();
-    console.log(`Loading content from ${page}`);
-
-    fetch(page)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log(`Content loaded from ${page}`);
-            document.getElementById('main-content').innerHTML = data;
-            initializePage(); // Initialize the newly loaded content
-        })
-        .catch(error => {
-            console.error('Error loading the page:', error);
-        });
-}
-
-
-
-
-
-
-
-
