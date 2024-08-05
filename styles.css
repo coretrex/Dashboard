@@ -1104,40 +1104,74 @@ input[type="text"] {
     color: #000000;
 }
 
-.goal-item {
-    margin-bottom: 15px;
+.editable-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-.goal-item label {
+.editable-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.editable-list span {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.editable-list .future-date {
+    width: 200px; /* Adjust width if needed */
+}
+
+.editable-list span[contenteditable="true"] {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
 }
 
-.editable-field {
-    background-color: #f0f0f0;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: calc(100% - 16px);
-    color: #000000;
-    min-height: 40px;
-    box-sizing: border-box;
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
 }
 
-.goal-item input[type="text"] {
-    width: calc(100% - 16px);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #000000;
-    box-sizing: border-box;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-
+.dropdown:hover .dropdown-icon {
+    background-color: #3e8e41;
+}
 
 
 /* Brand Analytics Button */
