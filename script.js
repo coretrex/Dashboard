@@ -103,6 +103,7 @@ function getEndOfNearestQuarter() {
     return new Date(year + 1, 11, 31);
 }
 
+
 function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
     const imageDisplays = document.querySelectorAll('#image-display, #image-display-annual, #image-display-consumer');
