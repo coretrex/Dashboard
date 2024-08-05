@@ -102,27 +102,6 @@ function getEndOfNearestQuarter() {
     return new Date(year + 1, 11, 31);
 }
 
-function initializeQuarterlyGoals() {
-    const newGoalInput = document.getElementById('new-goal-input');
-    newGoalInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            const goalText = newGoalInput.value.trim();
-            if (goalText !== '') {
-                addQuarterlyGoal(goalText);
-                newGoalInput.value = '';
-            }
-        }
-    });
-}
-
-function addQuarterlyGoal(goalText) {
-    const goalList = document.getElementById('goal-list');
-    const listItem = document.createElement('li');
-    listItem.textContent = goalText;
-    goalList.appendChild(listItem);
-}
-
-
 
 function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
