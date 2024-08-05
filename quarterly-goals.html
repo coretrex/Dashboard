@@ -3,95 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quarterly Goals</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.13.0/Sortable.min.js"></script>
+    <title>Test Input to List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .goal-input-container {
+            margin-bottom: 20px;
+        }
+        .goal-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .committed-goals {
+            margin-top: 20px;
+        }
+        #goal-list li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="quarterly-goals-container">
-        <div id="countdown-timer" class="countdown-timer"></div>
-        <div id="countdown-text" class="countdown-text"></div>
-        <div class="goal-input-container">
-            <input type="text" id="new-goal-input" class="goal-input" placeholder="Deploy A+ across all SKUs...">
-        </div>
-        <div class="committed-goals">
-            <h2>Committed Quarterly Goals</h2>
-            <ul id="goal-list"></ul>
-        </div>
+    <div class="goal-input-container">
+        <input type="text" id="new-goal-input" class="goal-input" placeholder="Enter a new goal...">
+    </div>
+    <div class="committed-goals">
+        <h2>Committed Goals</h2>
+        <ul id="goal-list"></ul>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
+            console.log('DOM fully loaded and parsed');
+            initializeInputListener();
         });
 
-        function initializePage() {
-            initializeCountdownTimer();
-            initializeQuarterlyGoals();
-        }
-
-        function initializeCountdownTimer() {
-            const countdownElement = document.getElementById('countdown-timer');
-            if (!countdownElement) return;
-
-            const endOfQuarter = getEndOfNearestQuarter();
-
-            function updateCountdown() {
-                const now = new Date();
-                const timeRemaining = endOfQuarter - now;
-
-                if (timeRemaining <= 0) {
-                    countdownElement.innerHTML = "Time's up!";
-                    document.getElementById('countdown-text').innerHTML = "";
-                    return;
-                }
-
-                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                document.getElementById('countdown-text').innerHTML = "remaining until the end of the quarter.";
-            }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
-
-        function getEndOfNearestQuarter() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const quarters = [
-                new Date(year, 2, 31),  // Q1
-                new Date(year, 5, 30),  // Q2
-                new Date(year, 8, 30),  // Q3
-                new Date(year, 11, 31)  // Q4
-            ];
-
-            for (const quarterEnd of quarters) {
-                if (now <= quarterEnd) {
-                    return quarterEnd;
-                }
-            }
-
-            // If no quarter end found in the current year, return Q4 of the next year
-            return new Date(year + 1, 11, 31);
-        }
-
-        function initializeQuarterlyGoals() {
+        function initializeInputListener() {
             const newGoalInput = document.getElementById('new-goal-input');
             newGoalInput.addEventListener('keypress', function(event) {
+                console.log('Key pressed:', event.key); // Log key press
                 if (event.key === 'Enter') {
                     const goalText = newGoalInput.value.trim();
+                    console.log('Entered goal:', goalText); // Log entered goal
                     if (goalText !== '') {
-                        addQuarterlyGoal(goalText);
+                        addGoalToList(goalText);
                         newGoalInput.value = '';
                     }
                 }
             });
+            console.log('Input listener initialized'); // Log initialization
         }
 
-        function addQuarterlyGoal(goalText) {
+        function addGoalToList(goalText) {
+            console.log('Adding goal to list:', goalText); // Log goal being added
             const goalList = document.getElementById('goal-list');
             const listItem = document.createElement('li');
             listItem.textContent = goalText;
