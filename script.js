@@ -9,99 +9,8 @@ function initializePage() {
     initializeCountdownTimer();
     initializeGrowthCalculator();
     showPageContent();
+    clearSampleTextOnFocus();
 }
-
-function initializeFlatpickr() {
-    document.querySelectorAll(".date-cell, .future-date").forEach(input => {
-        flatpickr(input, {
-            dateFormat: "m/d/y",
-            allowInput: true,
-            clickOpens: true,
-            onChange: function(selectedDates, dateStr, instance) {
-                input.innerText = dateStr;
-            }
-        });
-    });
-}
-
-function initializeDropdownMenus() {
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-        dropdown.addEventListener('click', function(event) {
-            event.stopPropagation();
-            dropdown.querySelector('.dropdown-content').classList.toggle('show');
-        });
-    });
-
-    window.addEventListener('click', function() {
-        document.querySelectorAll('.dropdown-content').forEach(content => {
-            content.classList.remove('show');
-        });
-    });
-}
-
-function editField(element) {
-    const span = element.closest('li').querySelector('span[contenteditable]');
-    span.contentEditable = true;
-    span.focus();
-    span.onblur = function() {
-        span.contentEditable = false;
-    };
-}
-
-function deleteField(element) {
-    const listItem = element.closest('li');
-    listItem.remove();
-}
-
-function initializeCountdownTimer() {
-    const countdownElement = document.getElementById('countdown-timer');
-    if (!countdownElement) return;
-
-    const endOfQuarter = getEndOfNearestQuarter();
-
-    function updateCountdown() {
-        const now = new Date();
-        const timeRemaining = endOfQuarter - now;
-
-        if (timeRemaining <= 0) {
-            countdownElement.innerHTML = "Time's up!";
-            document.getElementById('countdown-text').innerHTML = "";
-            return;
-        }
-
-        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        document.getElementById('countdown-text').innerHTML = "remaining until the end of the quarter.";
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
-function getEndOfNearestQuarter() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const quarters = [
-        new Date(year, 2, 31),  // Q1
-        new Date(year, 5, 30),  // Q2
-        new Date(year, 8, 30),  // Q3
-        new Date(year, 11, 31)  // Q4
-    ];
-
-    for (const quarterEnd of quarters) {
-        if (now <= quarterEnd) {
-            return quarterEnd;
-        }
-    }
-
-    // If no quarter end found in the current year, return Q4 of the next year
-    return new Date(year + 1, 11, 31);
-}
-
 
 function initializeFileUploads() {
     const fileInputs = document.querySelectorAll('#file-input, #file-input-annual, #file-input-consumer');
@@ -157,155 +66,35 @@ function initializeFileUploads() {
     });
 }
 
-// Function to add a new week column to the KPI table
-function addWeekColumn() {
-    const table = document.getElementById('kpi-table');
-    const headerRow = table.rows[0];
-
-    // Insert new header cell after 'Goal' column
-    const newHeaderCell = headerRow.insertCell(2);
-    newHeaderCell.outerHTML = `<th class="date-cell">MM/DD/YY</th>`;
-
-    // Add a new editable cell to each row for the new week
-    for (let i = 1; i < table.rows.length; i++) {
-        const newRowCell = table.rows[i].insertCell(2);
-        newRowCell.contentEditable = "true";
-        newRowCell.innerText = ""; // Ensure the new cell is blank
-    }
-
-    updateTableWidth();
-    initializeFlatpickr();
-}
-
-// Function to add a new KPI row to the KPI table
-function addKpiRow() {
-    const table = document.getElementById('kpi-table').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
-
-    const kpiCell = newRow.insertCell(0);
-    kpiCell.contentEditable = "true";
-    kpiCell.innerText = "New KPI";
-
-    const goalCell = newRow.insertCell(1);
-    goalCell.contentEditable = "true";
-    goalCell.innerText = "New Goal";
-
-    // Add new editable cells for each week column
-    const numOfWeeks = document.getElementById('kpi-table').rows[0].cells.length - 2; // excluding KPI and Goal columns
-    for (let i = 0; i < numOfWeeks; i++) {
-        const weekCell = newRow.insertCell(2 + i);
-        weekCell.contentEditable = "true";
-        weekCell.innerText = "";
-    }
-
-    initializeFlatpickr();
-}
-
-// Function to update table width and add scroll bar if necessary
-function updateTableWidth() {
-    const tableContainer = document.querySelector('.kpi-table-container');
-    tableContainer.style.overflowX = 'auto';
-    tableContainer.scrollLeft = tableContainer.scrollWidth; // Scroll to the end when a new column is added
-}
-
-// Function to show the page content
-function showPageContent() {
-    document.querySelectorAll('body > div').forEach(div => {
-        div.style.display = 'block';
+function clearSampleTextOnFocus() {
+    document.querySelectorAll('.editable-list span[contenteditable="true"]').forEach(span => {
+        const defaultText = span.textContent;
+        span.addEventListener('focus', function() {
+            if (span.textContent === defaultText) {
+                span.textContent = '';
+            }
+        });
+        span.addEventListener('blur', function() {
+            if (span.textContent.trim() === '') {
+                span.textContent = defaultText;
+            }
+        });
     });
 }
 
-// Function to dynamically load content
-function loadContent(event, url) {
-    event.preventDefault();
-    fetch(url)
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('main-content').innerHTML = html;
-            initializePage(); // Re-initialize the page to ensure all scripts work on the newly loaded content
-        })
-        .catch(error => {
-            console.error('Error loading content:', error);
+function initializeDropdownMenus() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.addEventListener('click', function(event) {
+            event.stopPropagation();
+            dropdown.querySelector('.dropdown-content').classList.toggle('show');
         });
-}
+    });
 
-// Vision Scripting
-document.addEventListener('DOMContentLoaded', function() {
-    initializePage();
-});
-
-function handleAddItem(event, listId, inputId) {
-    if (event.key === 'Enter') {
-        addItem(listId, inputId);
-    }
-}
-
-function addItem(listId, inputId) {
-    const input = document.getElementById(inputId);
-    const value = input.value.trim();
-    if (value) {
-        addItemToList(listId, value);
-        input.value = '';
-    }
-}
-
-function addItemToList(listId, value) {
-    const list = document.getElementById(listId);
-    const listItem = document.createElement('li');
-    const span = document.createElement('span');
-    if (listId === 'unique-value-proposition-list' || listId === 'guarantee-list') {
-        span.classList.add('italic-preview');
-    }
-    span.contentEditable = true;
-    span.textContent = value;
-    
-    // Add focus event listener to clear sample text
-    span.addEventListener('focus', clearSampleText);
-
-    const dropdown = document.createElement('div');
-    dropdown.classList.add('dropdown');
-
-    const dropdownButton = document.createElement('button');
-    dropdownButton.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-    dropdownButton.classList.add('dropdown-icon');
-
-    const dropdownContent = document.createElement('div');
-    dropdownContent.classList.add('dropdown-content');
-
-    const editOption = document.createElement('a');
-    editOption.innerHTML = '<i class="fas fa-edit"></i> Edit';
-    editOption.href = '#';
-    editOption.onclick = function () {
-        span.contentEditable = true;
-        span.focus();
-        span.onblur = function () {
-            span.contentEditable = false;
-        };
-    };
-
-    const deleteOption = document.createElement('a');
-    deleteOption.innerHTML = '<i class="fas fa-trash"></i> Delete';
-    deleteOption.href = '#';
-    deleteOption.onclick = function () {
-        list.removeChild(listItem);
-    };
-
-    dropdownContent.appendChild(editOption);
-    dropdownContent.appendChild(deleteOption);
-    dropdown.appendChild(dropdownButton);
-    dropdown.appendChild(dropdownContent);
-
-    listItem.appendChild(span);
-    listItem.appendChild(dropdown);
-    list.appendChild(listItem);
-}
-
-function clearSampleText(event) {
-    const span = event.target;
-    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location' || span.textContent === 'Enter Education') {
-        span.textContent = '';
-    }
-    span.removeEventListener('focus', clearSampleText);
+    window.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown-content').forEach(content => {
+            content.classList.remove('show');
+        });
+    });
 }
 
 function editField(element) {
@@ -319,10 +108,9 @@ function editField(element) {
 
 function deleteField(element) {
     const listItem = element.closest('li');
-    listItem.parentNode.removeChild(listItem);
+    listItem.remove();
 }
 
-// Growth Calculator functions
 function initializeGrowthCalculator() {
     document.querySelectorAll('input[type="range"]').forEach(input => {
         input.addEventListener('input', function() {
@@ -429,103 +217,84 @@ function formatCurrency(input) {
         input.value = '';
     }
 }
+// script.js
+function loadContent(event, url) {
+    event.preventDefault();
+    console.log(`Loading content from ${url}...`);
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            const mainContent = document.getElementById('main-content');
+            mainContent.innerHTML = html;
+            console.log(`Content from ${url} loaded.`);
 
-// Function to show the modal
-function showAddTaskModal() {
-    console.log('Showing Add Task Modal');
-    document.getElementById('add-task-modal').style.display = 'flex';
-    document.body.classList.add('modal-open');
+            // Manually trigger script execution
+            const scripts = mainContent.getElementsByTagName('script');
+            for (let i = 0; i < scripts.length; i++) {
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                if (scripts[i].src) {
+                    script.src = scripts[i].src;
+                } else {
+                    script.text = scripts[i].text;
+                }
+                document.head.appendChild(script).parentNode.removeChild(script);
+            }
+
+            // Delay initialization to ensure content is loaded
+            setTimeout(() => {
+                if (url.includes('quarterly-goals.html')) {
+                    // Manually trigger initialization for quarterly goals
+                    console.log('Initializing quarterly goals...');
+                    initializeGoalInput();
+                    initializeQuarterlyCountdownTimer();
+                } else {
+                    initializePage();
+                }
+            }, 100);
+        })
+        .catch(error => {
+            console.error('Error loading content:', error);
+        });
 }
 
-// Function to hide the modal
-function hideAddTaskModal() {
-    console.log('Hiding Add Task Modal');
-    document.getElementById('add-task-modal').style.display = 'none';
-    document.body.classList.remove('modal-open');
-}
+document.addEventListener('DOMContentLoaded', function() {
+    initializePage();
+});
 
-// Function to handle adding a task when Enter key is pressed
-function handleAddTask(event) {
-    if (event.key === 'Enter') {
-        console.log('Enter key pressed');
-        const taskText = document.getElementById('new-task-input').value;
-        if (taskText.trim() !== '') {
-            addTask(taskText);
-            document.getElementById('new-task-input').value = '';
-            hideAddTaskModal();
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('focusin', function(event) {
+        if (event.target.classList.contains('editable-field')) {
+            if (event.target.textContent === event.target.getAttribute('data-default')) {
+                event.target.textContent = '';
+            }
         }
-    }
-}
+    });
 
-// Function to add a new task to the active tasks list
-function addTask(taskText) {
-    console.log('Adding Task:', taskText);
-    const taskList = document.getElementById('active-task-list');
-    const taskItem = document.createElement('li');
-    taskItem.className = 'task-item';
-    taskItem.draggable = true;
-    taskItem.id = `task-${new Date().getTime()}`; // unique id
-    taskItem.ondragstart = drag;
-    taskItem.innerHTML = `
-        <span>${taskText}</span>
-        <div class="task-actions">
-            <button class="on-hold-btn" onclick="moveToOnHold(this)"><i class="fas fa-hand-paper"></i></button>
-            <button class="done-btn" onclick="markAsCompleted(this)"><i class="fas fa-check"></i></button>
-            <button class="delete-task-btn" onclick="deleteTask(this)"><i class="fas fa-times"></i></button>
-        </div>
-    `;
-    taskList.appendChild(taskItem);
-}
 
-// Function to delete a task
-function deleteTask(button) {
-    const taskItem = button.parentElement.parentElement;
-    taskItem.remove();
-}
+    document.body.addEventListener('focusout', function(event) {
+        if (event.target.classList.contains('editable-field')) {
+            if (event.target.textContent.trim() === '') {
+                event.target.textContent = event.target.getAttribute('data-default');
+            }
+        }
+    });
+});
 
-// Function to move a task to the on-hold list
-function moveToOnHold(button) {
-    const taskItem = button.parentElement.parentElement;
-    document.getElementById('onhold-task-list').appendChild(taskItem);
-}
-
-// Function to mark a task as completed
-function markAsCompleted(button) {
-    const taskItem = button.parentElement.parentElement;
-    taskItem.classList.add('completed');
-    document.getElementById('completed-task-list').appendChild(taskItem);
-    console.log('Task marked as completed, launching confetti...');
-    launchConfetti();
-}
-
-// Function to launch confetti explosion
-function launchConfetti() {
-    console.log('Launching confetti...');
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
+function showPageContent() {
+    document.querySelectorAll('body > div').forEach(div => {
+        div.style.display = 'block';
     });
 }
 
-// Function to allow dropping elements
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-// Function to handle drag event
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
-}
-
-// Function to handle drop event
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const taskItem = document.getElementById(data);
-    if (event.target.tagName === 'UL') {
-        event.target.appendChild(taskItem);
-    } else if (event.target.closest('.task-bucket')) {
-        event.target.closest('.task-bucket').querySelector('.task-list').appendChild(taskItem);
+function clearSampleText(event) {
+    const span = event.target;
+    if (span.textContent === 'Enter Age' || span.textContent === 'Enter Sex' || span.textContent === 'Enter Household Income' || span.textContent === 'Enter Location' || span.textContent === 'Enter Education') {
+        span.textContent = '';
     }
+    span.removeEventListener('focus', clearSampleText);
 }
+
+
+

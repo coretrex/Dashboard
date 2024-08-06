@@ -7,15 +7,15 @@
     <div class="input-container">
         <div class="input-box">
             <label for="revenueGoal">Annual Revenue Goal ($):</label>
-            <input type="text" id="revenueGoal" placeholder="$1,000,000" oninput="formatCurrency(this)">
+            <input type="text" id="revenueGoal" class="growth-input" placeholder="$1,000,000" oninput="formatCurrency(this)">
         </div>
         <div class="input-box">
             <label for="aov">Average Order Value ($):</label>
-            <input type="text" id="aov" placeholder="$50" oninput="formatCurrency(this)">
+            <input type="text" id="aov" class="growth-input" placeholder="$50" oninput="formatCurrency(this)">
         </div>
         <div class="input-box">
             <label for="conversionRate">Conversion Rate (%):</label>
-            <input type="range" id="conversionRate" min="0.25" max="50" step="0.25" value="1" oninput="updateRangeValue(this.value)">
+            <input type="range" id="conversionRate" class="growth-input" min="0.25" max="50" step="0.25" value="1" oninput="updateRangeValue(this.value)">
             <div class="range-value" id="rangeValue">1.00%</div>
         </div>
     </div>
@@ -29,16 +29,16 @@
     <div class="input-container" id="marketingMetrics" style="display:none;">
         <div class="input-box">
             <label for="organicRate">Organic Page Views (%):</label>
-            <input type="range" id="organicRate" min="0" max="100" step="1" value="70" oninput="updateOrganicValue(this.value)">
+            <input type="range" id="organicRate" class="growth-input" min="0" max="100" step="1" value="70" oninput="updateOrganicValue(this.value)">
             <div class="range-value" id="organicValue">70%</div>
         </div>
         <div class="input-box">
             <label for="cpc">Estimated CPC ($):</label>
-            <input type="number" id="cpc" placeholder="$1.00" step="0.01">
+            <input type="number" id="cpc" class="growth-input" placeholder="$1.00" step="0.01">
         </div>
         <div class="input-box">
             <label for="adsConversionRate">Ads Conversion Rate (%):</label>
-            <input type="range" id="adsConversionRate" min="0.25" max="50" step="0.25" value="2" oninput="updateAdsConversionValue(this.value)">
+            <input type="range" id="adsConversionRate" class="growth-input" min="0.25" max="50" step="0.25" value="2" oninput="updateAdsConversionValue(this.value)">
             <div class="range-value" id="adsConversionValue">2.00%</div>
         </div>
     </div>
